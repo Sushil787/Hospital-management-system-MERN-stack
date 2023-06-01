@@ -19,7 +19,6 @@ const signup = async (req, res) => {
     }
     try {
 
-       const new_user =  ;
     
     } catch (e) {
         /// 409 conflict
