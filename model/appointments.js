@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 const appintments_schema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,

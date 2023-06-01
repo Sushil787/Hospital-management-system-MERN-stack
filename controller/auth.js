@@ -18,7 +18,7 @@ const signup = async (req, res) => {
         return res.status(204).json({ message: "incomplete content" });
     }
     try {
-       const new_user = await ;
+
     
     } catch (e) {
         /// 409 conflict
