@@ -1,7 +1,7 @@
 import React from 'react'
-import {AppBar,Toolbar,IconButton,Tabs,Tab,Box,Button,useTheme,useMediaQuery} from  '@mui/material'
+import {AppBar,Toolbar,IconButton,Tabs,Tab,Box,Button,useTheme,useMediaQuery,Typography} from  '@mui/material'
 import Drawor from './Drawor'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 
 import logo from  "./logo.png"
@@ -49,8 +49,11 @@ const Navbar = () => {
  sx={{ml:"50px",flexGrow:1,justifyContent:'center',display:'flex'}}
  
 >
-  <Tab  label="Home" component={Link}  to='/'  />
-  <Tab  label="Contact us" />
+   
+    <Tab  label="Home" component={NavLink} to='/'  exact activeClassName="Mui-selected"/>
+   
+ 
+  <Tab  label="Contact us" component={NavLink} to='/contact'  />
   <Tab  label="About us" />
   <Tab  label="Doctors" />
 </Tabs>
