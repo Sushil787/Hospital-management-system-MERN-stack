@@ -1,7 +1,11 @@
 import {Grid,Box} from '@mui/material'
 import Navbar from './Components/Navbar'
+import {Routes,Route} from 'react-router-dom'
 
 import './App.css';
+import LoginForm from './Components/Login';
+import SignUpForm from './Components/Signin';
+import Home from './Components/Home'
 
 
 function App() {
@@ -11,8 +15,12 @@ function App() {
   <Navbar/>
   </Grid>
   <Grid item>
-    <Box>
-     body
+    <Box sx={{maxHeight:'80vh', marginTop:'20px'}}>
+     <Routes>
+      <Route to="/" exact Component={Home}/>
+      <Route path='/login' Component={LoginForm}/>
+      <Route path='/SignUp' Component={SignUpForm}/>
+     </Routes>
     </Box>
   </Grid>
   <Grid item>

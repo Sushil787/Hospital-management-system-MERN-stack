@@ -1,6 +1,7 @@
 import React from 'react'
 import {AppBar,Toolbar,IconButton,Tabs,Tab,Box,Button,useTheme,useMediaQuery} from  '@mui/material'
 import Drawor from './Drawor'
+import { Link } from 'react-router-dom'
 
 
 import logo from  "./logo.png"
@@ -20,7 +21,7 @@ const Navbar = () => {
    
   return (
     <>
-    <AppBar sx={{background:"#edf0ed"}} >
+    <AppBar sx={{background:"#edf0ed"}} position='relative' >
         <Toolbar>
         <IconButton
       size="large"
@@ -28,6 +29,8 @@ const Navbar = () => {
       aria-controls="menu-appbar"
       aria-haspopup="true"
       color="primary"
+      component={Link}
+      to="/"
     >
         <img src={logo} alt="logo" />
     
@@ -46,14 +49,14 @@ const Navbar = () => {
  sx={{ml:"50px",flexGrow:1,justifyContent:'center',display:'flex'}}
  
 >
-  <Tab  label="Home" />
+  <Tab  label="Home" component={Link}  to='/'  />
   <Tab  label="Contact us" />
   <Tab  label="About us" />
   <Tab  label="Doctors" />
 </Tabs>
 <Box sx={{marginLeft:"auto"}}>
-<Button variant="outlined" color="secondary">Login</Button>
-<Button variant="outlined" color="secondary" sx={{marginLeft:"20px"}}>Sign in</Button>
+<Button variant="outlined" color="secondary" component={Link} to='/Login'>Login</Button>
+<Button variant="outlined" color="secondary" sx={{marginLeft:"20px"}}  component={Link} to='/SignUp'>Sign in</Button>
 </Box>
 </>
 

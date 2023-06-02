@@ -5,6 +5,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Link } from 'react-router-dom';
 
 
 
@@ -40,12 +41,12 @@ const Drawor = () => {
        </List>
        <Divider/>
        <List>
-    <ListItemButton>
+    <ListItemButton component={Link} to='/login'>
         <ListItemText>
             Login
         </ListItemText>
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to='/SignUp'>
         <ListItemText>
             Sign up
         </ListItemText>
