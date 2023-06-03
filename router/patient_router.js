@@ -1,11 +1,10 @@
-
 const express = require("express");
 const patient_router = express.Router();
-
-
-
-patient_router.get("/",(req, res)=>{
-  res.send("<h1> my name is sushil </h1>");
-
-});
+const auth_middleware = require("../middleware/auth");
+const auth_controller = require("../controller/auth");
+const role_check = require("../middleware/role");
+patient_router.get("/login",auth_middleware,role_check,auth_controller.signin);
+patient_router.get("/patient/:id", auth_middleware, role_check, );
+patient_router.post("/patient/appointment",auth_middleware,role_check,);
+patient_router.put("/");
 module.exports = patient_router;
