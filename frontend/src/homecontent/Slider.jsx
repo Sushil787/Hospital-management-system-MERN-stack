@@ -61,7 +61,7 @@ const Screen = () => {
   return (
     <StyledSliderArea>
       <div className="slider-active">
-        {/* Single Slider */}
+       
         <StyledSingleSlider>
           <Container>
             <Grid container>
@@ -73,7 +73,7 @@ const Screen = () => {
                       color: "black",
                       fontSize: "40px",
                       fontWeight: "bold",
-                      textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)", // Adding a text shadow for more clarity
+                      textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)", 
                     }}
                   >
                     Committed to success
