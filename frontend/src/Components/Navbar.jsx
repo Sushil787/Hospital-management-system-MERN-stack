@@ -54,8 +54,9 @@ const Navbar = () => {
    
  
   <Tab  label="Contact us" component={NavLink} to='/contact'  />
-  <Tab  label="About us" />
-  <Tab  label="Doctors" />
+  <Tab  label="About us" component={NavLink} to='/about'  />
+  <Tab  label="Doctors" component={NavLink} to='/doctor'  />
+  <Tab  label="Our Services" component={NavLink} to='/services'  />
 </Tabs>
 <Box sx={{marginLeft:"auto"}}>
 <Button variant="outlined" color="secondary" component={Link} to='/Login'>Login</Button>

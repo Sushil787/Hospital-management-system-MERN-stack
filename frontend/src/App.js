@@ -8,21 +8,25 @@ import LoginForm from './Components/Login';
 import SignUpForm from './Components/Signin';
 import Screen from './Components/Homepage'
 import Contact from './Components/Contact';
+import Services from './Components/Services';
+import About from './Components/About'
 
 
 function App() {
   return (
- <Grid Container  sx={{marginTop:'0px',gap:0}}>
+ <Grid Container  sx={{marginTop:'0px',gap:0,display:'flex' ,flexDirection:'column'}}>
   <Grid item>
   <Navbar/>
   </Grid>
-  <Grid item>
-    <Box sx={{maxHeight:'80vh'}}>
+  <Grid   style={{flexGrow:1 ,minHeight:'80vh'}} item>
+    <Box >
      <Routes>
       <Route path="/" Component={Screen}/>
       <Route path='/contact' Component={Contact}/>
       <Route path='/login' Component={LoginForm}/>
       <Route path='/SignUp' Component={SignUpForm}/>
+      <Route path='/services' Component={Services}/>
+      <Route path='/about' Component={About}/>
      </Routes>
     </Box>
   </Grid>
