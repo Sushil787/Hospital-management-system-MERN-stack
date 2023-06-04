@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
-import { TextField, Button, Grid, Typography, Container, FormControlLabel, Checkbox } from '@mui/material';
+import React, { useState } from "react";
+import {
+  TextField,
+  Button,
+  Grid,
+  Typography,
+  Container,
+  FormControlLabel,
+  Checkbox,
+ 
+} from "@mui/material";
+import axios from "axios";
+
 
 function SignUpForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [is_admin, setIsAdmin] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+  };
+  const handleusernameChange = (e) => {
+    setUsername(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -18,12 +33,56 @@ function SignUpForm() {
     setIsAdmin(e.target.checked);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your login logic here
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('isAdmin:', isAdmin);
+    try {
+      let isValid = true;
+      const errors = {};
+
+      if (!username.trim()) {
+        errors.username = "Username is required";
+        isValid = false;
+      }
+
+      if (!email.trim()) {
+        errors.email = "Email is required";
+        isValid = false;
+      }
+
+      if (!password.trim()) {
+        errors.password = "Password is required";
+        isValid = false;
+      } else if (password.length < 8) {
+        errors.password = "Password must be at least 8 characters long";
+        isValid = false;
+      }
+
+      if (!isValid) {
+        const errorMessages = Object.values(errors).join("\n");
+        window.alert(`\n${errorMessages}`);
+       
+        return;
+      }
+      const userData = {
+        username,
+        email,
+        password,
+        is_admin,
+      };
+      const response = await axios.post(
+        "http://192.168.1.68:8080/signup",
+        userData
+      );
+      // window.alert(`${response.data}`)
+      console.log(response.data)
+
+      setEmail("");
+      setUsername("");
+      setPassword("");
+      setIsAdmin(false);
+    } catch (error) {
+      window.alert(`${error}`)
+    }
   };
 
   return (
@@ -33,14 +92,14 @@ function SignUpForm() {
       </Typography>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
-        <Grid item xs={12}>
+          <Grid item xs={12}>
             <TextField
               type="text"
               label="Username"
               variant="outlined"
               fullWidth
-              value={email}
-              onChange={handleEmailChange}
+              value={username}
+              onChange={handleusernameChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -65,7 +124,9 @@ function SignUpForm() {
           </Grid>
           <Grid item xs={12}>
             <FormControlLabel
-              control={<Checkbox checked={isAdmin} onChange={handleIsAdminChange} />}
+              control={
+                <Checkbox checked={is_admin} onChange={handleIsAdminChange} />
+              }
               label="Is Admin"
             />
           </Grid>

@@ -10,6 +10,7 @@ import Screen from './Components/Homepage'
 import Contact from './Components/Contact';
 import Services from './Components/Services';
 import About from './Components/About'
+import Doctor from './Components/Doctor';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
       <Route path='/SignUp' Component={SignUpForm}/>
       <Route path='/services' Component={Services}/>
       <Route path='/about' Component={About}/>
+      <Route path='/doctor' Component={Doctor}/>
      </Routes>
     </Box>
   </Grid>
