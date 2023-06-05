@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { TextField, Button, Grid, Typography, Container, FormControlLabel, Checkbox } from '@mui/material';
-import axios from 'axios'
+import React, { useState } from "react";
+import { TextField, Button, Grid, Typography, Container } from "@mui/material";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  
+  const Navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [Error, setError] = useState("");
 
   const handleEmailChange = (e) => {
     setUsername(e.target.value);
@@ -15,18 +17,14 @@ function LoginForm() {
     setPassword(e.target.value);
   };
 
- 
-
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       let isValid = true;
       const errors = {};
 
-     
-
       if (!username.trim()) {
-        errors.email = "Email is required";
+        errors.username = "Username is required";
         isValid = false;
       }
 
@@ -38,39 +36,41 @@ function LoginForm() {
         isValid = false;
       }
 
-     
+      if (!isValid) {
+        const errorMessages = Object.values(errors).join("\n");
+        window.alert(`\n${errorMessages}`);
+
+        return;
+      }
       const userData = {
-      
         username,
         password,
-        
       };
-      const response = await axios.post(
-        "http://192.168.1.68:8080/signin",
+
+      const { data } = await axios.post(
+        "http://localhost:8080/signin",
         userData
       );
- 
-      // window.alert(`${response.data}`)
-      const authorizationHeader = response.headers['authorization'];
-      console.log(authorizationHeader);
-      // console.log(authorizationHeader);
-      // const token = authorizationHeader?.split(' ');
-      // console.log(token)
-      // const jwtToken = token[0];
-      // console.log(jwtToken);
-  
-      // Store the JWT token in localStorage or state
-      // localStorage.setItem('jwtToken', jwtToken);
 
-     setUsername("")
-      
+      const token = data.message;
+      const tokenParts = token.split(".");
+      const secondPart = tokenParts[1];
+      localStorage.setItem("token", secondPart);
+
+      Navigate("/");
+
+      setUsername("");
       setPassword("");
-     
     } catch (error) {
-      window.alert(`${error}`)
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+        alert(Error);
+      }
     }
-  
- 
   };
 
   return (
@@ -80,7 +80,7 @@ function LoginForm() {
       </Typography>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
-        <Grid item xs={12}>
+          <Grid item xs={12}>
             <TextField
               type="text"
               label="Username"
@@ -90,7 +90,6 @@ function LoginForm() {
               onChange={handleEmailChange}
             />
           </Grid>
-         
           <Grid item xs={12}>
             <TextField
               type="password"
@@ -101,7 +100,6 @@ function LoginForm() {
               onChange={handlePasswordChange}
             />
           </Grid>
-          
           <Grid item xs={12}>
             <Button type="submit" variant="contained" color="primary" fullWidth>
               Login

@@ -11,9 +11,11 @@ import Contact from './Components/Contact';
 import Services from './Components/Services';
 import About from './Components/About/About'
 import Doctor from './Components/Doctor';
+import PrivateRoutes from './Privateroutes';
 
 
 function App() {
+  
   return (
  <Grid Container  sx={{marginTop:'0px',gap:0,display:'flex' ,flexDirection:'column'}}>
   <Grid item>
@@ -22,13 +24,15 @@ function App() {
   <Grid   style={{flexGrow:1 ,minHeight:'80vh'}} item>
     <Box >
      <Routes>
+     <Route  Component={PrivateRoutes}>
       <Route path="/" Component={Screen}/>
       <Route path='/contact' Component={Contact}/>
-      <Route path='/login' Component={LoginForm}/>
       <Route path='/SignUp' Component={SignUpForm}/>
       <Route path='/services' Component={Services}/>
       <Route path='/about' Component={About}/>
       <Route path='/doctor' Component={Doctor}/>
+      </Route>
+      <Route path='/login' Component={LoginForm}/>
      </Routes>
     </Box>
   </Grid>

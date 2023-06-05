@@ -10,9 +10,12 @@ import {
  
 } from "@mui/material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 function SignUpForm() {
+  const [error,setError]=useState("")
+  const Navigate=useNavigate()
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -69,20 +72,32 @@ function SignUpForm() {
         password,
         is_admin,
       };
-      const response = await axios.post(
-        "http://192.168.1.68:8080/signup",
+       await axios.post(
+        "http://localhost:8080/signup",
         userData
       );
-      // window.alert(`${response.data}`)
-      console.log(response.data)
+     
+      
+        Navigate("/login")
+      
+     
 
       setEmail("");
       setUsername("");
       setPassword("");
       setIsAdmin(false);
     } catch (error) {
-      window.alert(`${error}`)
+      if (
+				error.response &&
+				error.response.status >= 400 &&
+				error.response.status <= 500
+			) {
+				setError(error.response.data.message);
+        alert(error)
+        
+			}
     }
+    
   };
 
   return (
