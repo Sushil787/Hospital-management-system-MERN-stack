@@ -2,13 +2,13 @@
 
 # dependencies
 
-/.pnp
+.pnp
 .pnp.js
 
 node_modules
 build
 # testing
-/coverage
+coverage
 
 # production
 build

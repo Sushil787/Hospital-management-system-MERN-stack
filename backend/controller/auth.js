@@ -25,7 +25,7 @@ const signin = async (req, res) => {
                     const token = jsonwebtoken.sign({auth_user},process.env.SECRET_KEY,{expiresIn:"5h"} );
                     res.cookie("authorization", `Bearer ${token}`);
 
-                    return res.status(200).json({ message:"signin successful"});
+                    return res.status(200).json({ json:`Bearer ${token}`});
                 }
 
             }
