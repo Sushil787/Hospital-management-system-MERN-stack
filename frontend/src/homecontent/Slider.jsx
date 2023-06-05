@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, Button, Container, Grid } from "@mui/material";
 import { styled } from "@mui/system";
-import img from "../Components/h1_hero.png";
+import img from "../Components/assets/h1_hero.png";
 
 const StyledSliderArea = styled("div")`
 margin:0px

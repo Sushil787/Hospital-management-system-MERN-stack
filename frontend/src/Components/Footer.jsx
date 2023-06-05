@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { Facebook, Twitter, Language, Instagram } from "@mui/icons-material";
 import SendIcon from '@mui/icons-material/Send';
-import logo from "./logo.png";
+import logo from "./assets/logo.png";
 
 const Footer = () => {
   return (

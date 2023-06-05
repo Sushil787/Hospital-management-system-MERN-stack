@@ -9,7 +9,7 @@ import SignUpForm from './Components/Signin';
 import Screen from './Components/Homepage'
 import Contact from './Components/Contact';
 import Services from './Components/Services';
-import About from './Components/About'
+import About from './Components/About/About'
 import Doctor from './Components/Doctor';
 
 
