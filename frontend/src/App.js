@@ -12,6 +12,7 @@ import Services from './Components/Services';
 import About from './Components/About/About'
 import Doctor from './Components/Doctor';
 import PrivateRoutes from './Privateroutes';
+import Form from './Components/Form';
 
 
 function App() {
@@ -24,15 +25,19 @@ function App() {
   <Grid   style={{flexGrow:1 ,minHeight:'80vh'}} item>
     <Box >
      <Routes>
-     <Route  Component={PrivateRoutes}>
+     
       <Route path="/" Component={Screen}/>
       <Route path='/contact' Component={Contact}/>
       <Route path='/SignUp' Component={SignUpForm}/>
       <Route path='/services' Component={Services}/>
       <Route path='/about' Component={About}/>
       <Route path='/doctor' Component={Doctor}/>
-      </Route>
+      
       <Route path='/login' Component={LoginForm}/>
+      <Route Component={PrivateRoutes }>
+
+        <Route path='/form' Component={Form}/>
+      </Route>
      </Routes>
     </Box>
   </Grid>

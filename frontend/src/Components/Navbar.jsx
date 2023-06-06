@@ -1,80 +1,142 @@
-import React from 'react'
-import {AppBar,Toolbar,IconButton,Tabs,Tab,Box,Button,useTheme,useMediaQuery,Typography} from  '@mui/material'
-import Drawor from './Drawor'
-import { Link, NavLink } from 'react-router-dom'
+import React from "react";
+import { useEffect } from "react";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Tabs,
+  Tab,
+  Box,
+  Button,
+  useTheme,
+  useMediaQuery,
+  Typography,
+  Avatar,
+  Menu,
+  MenuItem
+} from "@mui/material";
+import Drawor from "./Drawor";
+import { Link, NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-
-import logo from  "./assets/logo.png"
-
-
-
-
-
+import logo from "./assets/logo.png";
 
 const Navbar = () => {
-    const theme=useTheme()
-    const [value,setValue]=React.useState()
+  const item = localStorage.getItem("jwt");
 
-    const ismatch=useMediaQuery(theme.breakpoints.down('md'))
-  
-   
-   
+  const theme = useTheme();
+  const [value, setValue] = React.useState();
+ 
+ 
+  const ismatch = useMediaQuery(theme.breakpoints.down("md"));
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+    localStorage.removeItem('jwt');
+  };
+
   return (
     <>
-    <AppBar sx={{background:"#edf0ed"}} position='relative' >
+      <AppBar sx={{ background: "#edf0ed" }} position="relative">
         <Toolbar>
-        <IconButton
-      size="large"
-      aria-label="account of current user"
-      aria-controls="menu-appbar"
-      aria-haspopup="true"
-      color="primary"
-      component={Link}
-      to="/"
-    >
-        <img src={logo} alt="logo" />
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            color="primary"
+            component={Link}
+            to="/"
+          >
+            <img src={logo} alt="logo" />
+          </IconButton>
+
+          {ismatch ? (
+            <Drawor />
+          ) : (
+            <>
+              <Tabs
+                value={value}
+                onChange={(e, value) => setValue(value)}
+                textColor="secondary"
+                indicatorColor="secondary"
+                sx={{
+                  ml: "50px",
+                  flexGrow: 1,
+                  justifyContent: "center",
+                  display: "flex",
+                }}
+              >
+                <Tab
+                  label="Home"
+                  component={NavLink}
+                  to="/"
+                  exact
+                  activeClassName="Mui-selected"
+                />
+
+                <Tab label="Contact us" component={NavLink} to="/contact" />
+                <Tab label="About us" component={NavLink} to="/about" />
+                <Tab label="Doctors" component={NavLink} to="/doctor" />
+                <Tab label="Our Services" component={NavLink} to="/services" />
+              </Tabs>
+              <Box sx={{ marginLeft: "auto" }}>
+  {item ? (
+    <>
+    <Button
+    id="basic-button"
+    aria-controls={open ? 'basic-menu' : undefined}
+    aria-haspopup="true"
+    aria-expanded={open ? 'true' : undefined}
+    onClick={handleClick}
+  >
+    <Avatar/>
+  </Button>
+  <Menu
+    id="basic-menu"
+    anchorEl={anchorEl}
+    open={open}
+    onClose={handleClose}
+    MenuListProps={{
+      'aria-labelledby': 'basic-button',
+    }}
+  >
     
-   
-    </IconButton>
-        
-       
-    {ismatch?( <Drawor/>):(
-        <>
-        
-  <Tabs
-  value={value}
-  onChange={(e,value)=>setValue(value)}
-  textColor="secondary"
-  indicatorColor="secondary"
- sx={{ml:"50px",flexGrow:1,justifyContent:'center',display:'flex'}}
- 
->
-   
-    <Tab  label="Home" component={NavLink} to='/'  exact activeClassName="Mui-selected"/>
-   
- 
-  <Tab  label="Contact us" component={NavLink} to='/contact'  />
-  <Tab  label="About us" component={NavLink} to='/about'  />
-  <Tab  label="Doctors" component={NavLink} to='/doctor'  />
-  <Tab  label="Our Services" component={NavLink} to='/services'  />
-</Tabs>
-<Box sx={{marginLeft:"auto"}}>
-<Button variant="outlined" color="secondary" component={Link} to='/Login'>Login</Button>
-<Button variant="outlined" color="secondary" sx={{marginLeft:"20px"}}  component={Link} to='/SignUp'>Sign in</Button>
-</Box>
-</>
-
-    )}
-
-
-
-  
-
-        </Toolbar>
-       
-    </AppBar>
+    <MenuItem onClick={handleClose } >Logout</MenuItem>
+  </Menu>
+  </>
+  ) : (
+    <>
+      <Button
+        variant="outlined"
+        color="secondary"
+        component={Link}
+        to="/Login"
+      >
+        Login
+      </Button>
+      <Button
+        variant="outlined"
+        color="secondary"
+        sx={{ marginLeft: "20px" }}
+        component={Link}
+        to="/SignUp"
+      >
+        Sign Up
+      </Button>
     </>
-  )
-}
+  )}
+</Box>
+            </>
+          )}
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+};
 
-export default Navbar
+export default Navbar;

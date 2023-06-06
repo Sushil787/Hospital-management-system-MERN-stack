@@ -4,32 +4,38 @@ import axios from "axios";
 import DoctorCard from "./Doctorcard";
 import { Grid, Typography } from "@mui/material";
 import Loading from './Loading'
+import  {getdoctor}  from "../slices/getDoctor";
+import { useDispatch ,useSelector} from "react-redux";
 
 
 const Doctor = () => {
-  const [data, setData] = useState();
-  const [isloading,setIsloading]=useState(false)
+  const dispatch=useDispatch()
+  const datas=useSelector((state)=>state.doctor)
+ const {doctor,isLoading,error}=datas
+
+ 
 
   useEffect(() => {
-    const fetchdata = async () => {
-      setIsloading(true)
-      try {
-        const { data } = await axios.get("http://localhost:8080/doctor");
-        setData(data);
-      } catch (error) {
-        console.log(error.msg);
-      } finally
-      {
-        setIsloading(false)
-      }
-    };
-    fetchdata();
+    dispatch(getdoctor())
+    // const fetchdata = async () => {
+    //   setIsloading(true)
+    //   try {
+    //     const { data } = await axios.get("http://localhost:8080/doctor");
+    //     setData(data);
+    //   } catch (error) {
+    //     console.log(error.msg);
+    //   } finally
+    //   {
+    //     setIsloading(false)
+    //   }
+    // };
+    // fetchdata();
   }, []);
-  console.log(data);
+
 
   return (
     <>
-    <Loading isloading={isloading}/>
+    <Loading isloading={isLoading}/>
       <Grid container sx={{display:'flex', marginTop:'30px'}} >
         <Grid item xs={12} >
             <Typography sx={{
@@ -42,7 +48,7 @@ const Doctor = () => {
                 OUR DOCTORS
             </Typography>
         </Grid>
-  {data?.doctors?.map((item) => {
+  {doctor?.doctors?.map((item) => {
    
     return (
         <Grid item  sx={{padding:'30px', }}   xs={12} sm={6} md={3} direction="row">
