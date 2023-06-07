@@ -6,10 +6,14 @@ const appintments_schema = mongoose.Schema({
         ref: "user",
         required: true,
     },
+    doctor:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"doctor",
+        required:true,
+    },
     status: {
         type: String,
         default: "unchecked",
-        required: true,
     },
     invoice: {
         type: Number,

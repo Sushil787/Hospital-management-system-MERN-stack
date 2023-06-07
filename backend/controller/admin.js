@@ -31,7 +31,7 @@ const delete_doctor = async(req, res)=>{
                 const new_doctor = await doctor.deleteOne({name, image});
                 return res.json({message:"doctor deleted"});
             }
-            return res.status(404).json({message:"doctor doesnot found"});
+            return res.status(404).json({message:"no doctor found found"});
         }
 
     }catch(e){
