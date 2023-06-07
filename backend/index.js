@@ -19,7 +19,7 @@ app.use("/public",public_router);
 app.use(auth_router);
 app.use(admin_router);
 app.use(patient_router);
-app.use("/public",public_route)
+app.use("/public",public_router)
 
 // {
 //     origin:"www.xyz.com",
