@@ -10,7 +10,10 @@ export const loginAsync = createAsyncThunk(
     async (credentials,{ rejectWithValue }) => {
         try {
             const response = await axios.post("http://localhost:8080/signin", credentials);
-            localStorage.setItem("jwt",response.data.message)
+            if(response.data.message!==undefined){
+              localStorage.setItem("jwt",response.data.message)
+            }
+           
             return response.data.message
             
            

@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import {Link} from 'react-router-dom'
 
 export default function DoctorCard({item}) {
-    const {expertise,name,image}=item
+    const {expertise,name,image,_id}=item
     console.log(item)
     
   return (
@@ -34,7 +34,7 @@ export default function DoctorCard({item}) {
       </CardContent>
       <CardActions>
 
-        <Button size="small" as={Link} to={`/form/${item.name}`} >Appointment</Button>
+        <Button size="small" as={Link} to={`/form/${item._id}`} >Appointment</Button>
         
       </CardActions>
     </Card>
