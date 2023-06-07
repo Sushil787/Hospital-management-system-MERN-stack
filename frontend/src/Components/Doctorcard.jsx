@@ -5,9 +5,12 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import {Link} from 'react-router-dom'
 
 export default function DoctorCard({item}) {
     const {expertise,name,image}=item
+    console.log(item)
+    
   return (
     <Card sx={{ maxWidth: 300,
      }}>
@@ -30,8 +33,9 @@ export default function DoctorCard({item}) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+
+        <Button size="small" as={Link} to={`/form/${item.name}`} >Appointment</Button>
+        
       </CardActions>
     </Card>
   );

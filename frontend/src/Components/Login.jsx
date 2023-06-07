@@ -3,11 +3,23 @@ import { TextField, Button, Grid, Typography, Container } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import { useDispatch ,useSelector} from "react-redux";
+import { loginAsync } from "../slices/Loginslice";
+import { useEffect } from "react";
+
 function LoginForm() {
-  const Navigate = useNavigate();
+  
+  const dispatch=useDispatch()
+  const navigate=useNavigate()
+  const data=useSelector((state)=>state.login)
+  
+  
+ 
+ 
+ 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [Error, setError] = useState("");
+
 
   const handleEmailChange = (e) => {
     setUsername(e.target.value);
@@ -17,63 +29,65 @@ function LoginForm() {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async(e) => {
+    
     e.preventDefault();
-    try {
-      let isValid = true;
-      const errors = {};
-
-      if (!username.trim()) {
-        errors.username = "Username is required";
-        isValid = false;
-      }
-
-      if (!password.trim()) {
-        errors.password = "Password is required";
-        isValid = false;
-      } else if (password.length < 8) {
-        errors.password = "Password must be at least 8 characters long";
-        isValid = false;
-      }
-
-      if (!isValid) {
-        const errorMessages = Object.values(errors).join("\n");
-        window.alert(`\n${errorMessages}`);
-
-        return;
-      }
-      const userData = {
-        username,
-        password,
-      };
-
-      const { data } = await axios.post(
-        "http://localhost:8080/signin",
-        userData
-      );
-
-      const token = data.message;
-      const tokenParts = token.split(".");
-      const secondPart = tokenParts[1];
-      localStorage.setItem("token", secondPart);
-
-      Navigate("/");
-
-      setUsername("");
-      setPassword("");
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.message);
-        alert(Error);
-      }
+    
+    let isValid = true;
+    const errors = {};
+  
+    if (!username.trim()) {
+      errors.username = "Username is required";
+      isValid = false;
     }
-  };
+  
+    if (!password.trim()) {
+      errors.password = "Password is required";
+      isValid = false;
+    } else if (password.length < 8) {
+      errors.password = "Password must be at least 8 characters long";
+      isValid = false;
+    }
+  
+    if (!isValid) {
+      const errorMessages = Object.values(errors).join("\n");
+      window.alert(`\n${errorMessages}`);
+    } 
+      const users={username,password}
+      try {
+        await dispatch(loginAsync(users));
+        const token = localStorage.getItem("jwt");
+        if (token) {
+          navigate("/");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+      
+        
+
+    
+      
+      
+     
+      
+      
+     
+      
+       
+      
+  
+ 
+  
+  
+
+  
 
   return (
+    <>
+    
+
     <Container maxWidth="xs">
       <Typography variant="h4" align="center" gutterBottom>
         Login
@@ -108,6 +122,7 @@ function LoginForm() {
         </Grid>
       </form>
     </Container>
+    </>
   );
 }
 
