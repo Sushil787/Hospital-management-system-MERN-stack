@@ -36,7 +36,7 @@ function App() {
       <Route path='/login' Component={LoginForm}/>
       <Route Component={PrivateRoutes }>
 
-        <Route path='/form' Component={Form}/>
+        <Route path='/form/:id' Component={Form}/>
       </Route>
      </Routes>
     </Box>

@@ -17,19 +17,7 @@ const Doctor = () => {
 
   useEffect(() => {
     dispatch(getdoctor())
-    // const fetchdata = async () => {
-    //   setIsloading(true)
-    //   try {
-    //     const { data } = await axios.get("http://localhost:8080/doctor");
-    //     setData(data);
-    //   } catch (error) {
-    //     console.log(error.msg);
-    //   } finally
-    //   {
-    //     setIsloading(false)
-    //   }
-    // };
-    // fetchdata();
+    
   }, []);
 
 

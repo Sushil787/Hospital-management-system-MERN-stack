@@ -5,11 +5,16 @@ import { useNavigate } from "react-router-dom";
 
 import { useDispatch ,useSelector} from "react-redux";
 import { loginAsync } from "../slices/Loginslice";
+import { useEffect } from "react";
 
 function LoginForm() {
+  
   const dispatch=useDispatch()
   const navigate=useNavigate()
   const data=useSelector((state)=>state.login)
+  
+  
+ 
  
  
   const [username, setUsername] = useState("");
@@ -24,8 +29,10 @@ function LoginForm() {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
+    
     e.preventDefault();
+    
     let isValid = true;
     const errors = {};
   
@@ -45,19 +52,36 @@ function LoginForm() {
     if (!isValid) {
       const errorMessages = Object.values(errors).join("\n");
       window.alert(`\n${errorMessages}`);
-    } else {
-      dispatch(loginAsync({ username, password }))
-      if(data?.token)
-      {
-        localStorage.setItem("jwt",data.token)
-        
+    } 
+      const users={username,password}
+      try {
+        await dispatch(loginAsync(users));
+        const token = localStorage.getItem("jwt");
+        if (token) {
+          navigate("/");
+        }
+      } catch (error) {
+        console.log(error);
       }
-      navigate("/")
+    };
+      
+        
+
+    
+      
+      
+     
+      
+      
+     
       
        
       
-  };
-}
+  
+ 
+  
+  
+
   
 
   return (
