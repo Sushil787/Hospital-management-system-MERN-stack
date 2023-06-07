@@ -72,10 +72,12 @@ function SignUpForm() {
         password,
         is_admin,
       };
-       await axios.post(
+       const response= await axios.post(
         "http://localhost:8080/signup",
+
         userData
       );
+      console.log(response.data)
      
       
         Navigate("/login")

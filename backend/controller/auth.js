@@ -8,11 +8,11 @@ const signin = async (req, res) => {
     try {
         const { username, password } = req.body;
         if (!username | !password) {
-            return res.status(204).json({ message: "incomplete content" });
+           return  res.status(204).json({ message: "incomplete content" });
         } else {
             auth_user = await user.findOne({ username });
             if (!auth_user) {
-                return res
+                  return  res
                     .status(401)
                     .json({ message: `user with ${username} no found` });
             } else {
@@ -25,7 +25,7 @@ const signin = async (req, res) => {
                     const token = jsonwebtoken.sign({auth_user},process.env.SECRET_KEY,{expiresIn:"5h"} );
                     res.cookie("authorization", `Bearer ${token}`);
 
-                    return res.status(200).json({ json:`Bearer ${token}`});
+                    return res.status(200).json({ message:`Bearer ${token}`});
                 }
 
             }
@@ -52,9 +52,9 @@ const signup = async (req, res) => {
             if (!new_user) {
                 hashed_password = await bcryptjs.hash(password, 8);
                 await user.create({ username, password: hashed_password, email, is_admin });
-                return res.status(200).json("user created");
+                return res.status(200).json({message:'user created'});
             } else {
-                return res.status(202).json("user already exists");
+                return res.status(409).json({message:"user already exist"});
             }
 
         }
