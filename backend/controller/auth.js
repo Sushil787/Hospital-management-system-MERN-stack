@@ -8,9 +8,10 @@ const signin = async (req, res) => {
     try {
         const { username, password } = req.body;
         if (!username | !password) {
-           return  res.status(204).json({ message: "incomplete content" });
+           return  res.status(202).json({ message: "incomplete content" });
         } else {
             auth_user = await user.findOne({ username });
+            console.log(auth_user);
             if (!auth_user) {
                   return  res
                     .status(401)
@@ -23,9 +24,8 @@ const signin = async (req, res) => {
             .json({ message: "username or password incorrect" });
                 }else{
                     const token = jsonwebtoken.sign({auth_user},process.env.SECRET_KEY,{expiresIn:"5h"} );
-                    // res.cookie("authorization", `Bearer ${token}`);
-
-                    return res.status(200).json({ message:`Bearer ${token}`});
+                    res.cookie("authorization", `Bearer ${token}`);
+                    return res.status(200).json({ token:`Bearer ${token}`, user:auth_user});
                 }
 
             }
@@ -44,14 +44,14 @@ const signin = async (req, res) => {
 
 const signup = async (req, res) => {
     try {
-        const { username, password, email, is_admin } = req.body;
-        if (!username | !password | !email | is_admin === undefined) {
+        const { username, password, email } = req.body;
+        if (!username | !password | !email ) {
             return res.status(204).json({ message: "incomplete content" });
         } else {
             const new_user = await user.findOne({ username, email });
             if (!new_user) {
                 hashed_password = await bcryptjs.hash(password, 8);
-                await user.create({ username, password: hashed_password, email, is_admin });
+                await user.create({ username, password: hashed_password, email});
                 return res.status(200).json({message:'user created'});
             } else {
                 return res.status(409).json({message:"user already exist"});

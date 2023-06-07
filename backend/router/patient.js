@@ -1,12 +1,10 @@
 const express = require("express");
+const patient_controller = require("../controller/patient");
+const role_check = require("../middleware/role");
+const auth_middleware = require("../middleware/auth");
 const patient_router = express.Router();
 // const auth_middleware = require("../middleware/auth");
-const auth_controller = require("../controller/auth");
-// const role_check = require("../middleware/role");
-// patient_router.get("/login",auth_middleware,role_check,auth_controller.signin);
-patient_router.post("/signup",auth_controller.signup);
-patient_router.post("/signin", auth_controller.signin);
-// patient_router.get("/patient/:id", auth_middleware, role_check, );
-// patient_router.post("/patient/appointment",auth_middleware,role_check,);
-// patient_router.put("/");
+patient_router.get("/patient/:id", auth_middleware, role_check,patient_controller.all_appointments );
+patient_router.post("/patient/appointment",auth_middleware,role_check,patient_controller.create_appointments);
+
 module.exports = patient_router;

@@ -11,7 +11,7 @@ const seed = async () => {
     const user_name = process.env.USER_NAME;
     const email = process.env.EMAIL;
     const is_admin = true;
-    const ad_user = await user.find({});
+    const ad_user = await user.find({email});
     if(ad_user){
         return console.log("user already exist");
     }

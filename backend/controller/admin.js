@@ -38,17 +38,10 @@ const delete_doctor = async(req, res)=>{
         return res.status(400).json({message:e.message});
     }
 }
-const get_doctor= async(req, res)=>{
-    try{
-        const doctors = await doctor.find().select("-_id");
-        return res.status(200).json({doctors});
-    }catch(e){
-        return res.status(400).json({message:e.message});
-    }
-}
+
 
 
 
 module.exports = {
-    add_doctor,delete_doctor, get_doctor
+    add_doctor,delete_doctor
 };
