@@ -13,9 +13,12 @@ import About from './Components/About/About'
 import Doctor from './Components/Doctor';
 import PrivateRoutes from './Privateroutes';
 import Form from './Components/Form';
+import { useSelector } from 'react-redux';
 
 
 function App() {
+  const data=useSelector((state)=>state.login)
+  
   
   return (
  <Grid Container  sx={{marginTop:'0px',gap:0,display:'flex' ,flexDirection:'column'}}>
@@ -24,21 +27,25 @@ function App() {
   </Grid>
   <Grid   style={{flexGrow:1 ,minHeight:'80vh'}} item>
     <Box >
-     <Routes>
+      {data.role?<h1>hello</h1>:(
+        <Routes>
      
-      <Route path="/" Component={Screen}/>
-      <Route path='/contact' Component={Contact}/>
-      <Route path='/SignUp' Component={SignUpForm}/>
-      <Route path='/services' Component={Services}/>
-      <Route path='/about' Component={About}/>
-      <Route path='/doctor' Component={Doctor}/>
-      
-      <Route path='/login' Component={LoginForm}/>
-      <Route Component={PrivateRoutes }>
-
-        <Route path='/form/:id' Component={Form}/>
-      </Route>
-     </Routes>
+        <Route path="/" Component={Screen}/>
+        <Route path='/contact' Component={Contact}/>
+        <Route path='/SignUp' Component={SignUpForm}/>
+        <Route path='/services' Component={Services}/>
+        <Route path='/about' Component={About}/>
+        <Route path='/doctor' Component={Doctor}/>
+        
+        <Route path='/login' Component={LoginForm}/>
+        <Route Component={PrivateRoutes }>
+  
+          <Route path='/form/:id' Component={Form}/>
+        </Route>
+       </Routes>
+      )
+      }
+     
     </Box>
   </Grid>
   <Grid item>

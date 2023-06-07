@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button, Grid, Typography, Container } from "@mui/material";
+import { TextField, Button, Grid, Typography, Container, FormControlLabel, RadioGroup, FormControl, Radio } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +14,7 @@ function LoginForm() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  // const [role,setRole]=useState("")
   const handleEmailChange = (e) => {
     setUsername(e.target.value);
   };
@@ -82,6 +82,27 @@ function LoginForm() {
                 value={password}
                 onChange={handlePasswordChange}
               />
+            </Grid>
+            <Grid>
+            
+
+  {/* <FormControl>
+  <RadioGroup
+    aria-labelledby="demo-radio-buttons-group-label"
+    value={role}
+  onChange={(event) => setRole(event.target.value)}
+    name="radio-buttons-group"
+    sx={{
+      direction:'row'
+    }}
+    
+  >
+    <FormControlLabel value="User" control={<Radio />} label="User" />
+    <FormControlLabel value="Admin" control={<Radio />} label="Admin" />
+    
+  </RadioGroup>
+  </FormControl> */}
+
             </Grid>
             <Grid item xs={12}>
               <Button

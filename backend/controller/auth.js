@@ -23,7 +23,7 @@ const signin = async (req, res) => {
             .json({ message: "username or password incorrect" });
                 }else{
                     const token = jsonwebtoken.sign({auth_user},process.env.SECRET_KEY,{expiresIn:"5h"} );
-                    res.cookie("authorization", `Bearer ${token}`);
+                    // res.cookie("authorization", `Bearer ${token}`);
 
                     return res.status(200).json({ message:`Bearer ${token}`});
                 }
