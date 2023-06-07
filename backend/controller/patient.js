@@ -5,7 +5,7 @@ const user = require('../model/user');
 
 const all_appointments = async(req, res)=>{
     try{
-        const id = req.params.id;
+        const id = req.id;
         if (!id) {
             return  res.status(202).json({ message: "incomplete content" });
          }else{
@@ -26,7 +26,8 @@ const all_appointments = async(req, res)=>{
 
 const create_appointments = async(req, res)=>{
     try{
-        const {user, doctor, disease,date  } = req.body;
+        const { doctor, disease,date} = req.body;
+        const user =  req.id;
         if (!user | !doctor |!disease | !date) {
             return  res.status(202).json({ message: "incomplete content" });
          }else{
