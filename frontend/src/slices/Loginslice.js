@@ -75,9 +75,9 @@ export const loginAsync = createAsyncThunk(
     try {
       const response = await axios.post("http://localhost:8080/signin", credentials);
       console.log(response);
-      if (response.data.message.token !== undefined) {
+      if (response.data.message !== undefined) {
         const expirationTime = new Date().getTime() + TOKEN_EXPIRATION_TIME;
-        localStorage.setItem("jwt", response.data.message.token);
+        localStorage.setItem("jwt", response.data.message);
         localStorage.setItem("jwtExpiration", expirationTime);
       }
 
@@ -111,9 +111,9 @@ const loginSlice = createSlice({
     },
     [loginAsync.fulfilled]: (state, action) => {
       state.isLoading = false;
-      const { token, role } = action.payload;
-      state.token = action.payload.token;
-      state.role = action.payload.role;
+     
+      state.token = action.payload
+      
     },
     [loginAsync.rejected]: (state, action) => {
       state.isLoading = false;

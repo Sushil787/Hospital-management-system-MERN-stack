@@ -17,7 +17,7 @@ import { useSelector } from 'react-redux';
 
 
 function App() {
-  const data=useSelector((state)=>state.login)
+ 
   
   
   return (
@@ -27,7 +27,7 @@ function App() {
   </Grid>
   <Grid   style={{flexGrow:1 ,minHeight:'80vh'}} item>
     <Box >
-      {data.role?<h1>hello</h1>:(
+      
         <Routes>
      
         <Route path="/" Component={Screen}/>
@@ -43,8 +43,7 @@ function App() {
           <Route path='/form/:id' Component={Form}/>
         </Route>
        </Routes>
-      )
-      }
+      
      
     </Box>
   </Grid>
