@@ -16,6 +16,7 @@ import Form from "./Components/User/pages/Doctor/Form";
 import { useSelector } from "react-redux";
 import { useEffect ,useState} from "react";
 import Dashboard from "./Components/Admin/Dashboard";
+import PagenotFound from "./Components/User/pages/PagenotFound";
 
 function App() {
   const [is_admin, setIsAdmin] = useState(localStorage.getItem("is_admin"));
@@ -57,10 +58,13 @@ function App() {
                 <Route path="/about" Component={About} />
                 <Route path="/doctor" Component={Doctor} />
 
+
                 <Route path="/login" Component={LoginForm} />
+
                 <Route Component={PrivateRoutes}>
                   <Route path="/form/:id" Component={Form} />
                 </Route>
+                <Route path="*" Component={PagenotFound} />
               </Routes>
             </Box>
           </Grid>

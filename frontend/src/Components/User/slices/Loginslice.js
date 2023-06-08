@@ -105,7 +105,12 @@ const loginSlice = createSlice({
     error: null,
     user:{}
   },
-  reducers: {},
+  reducers: {
+    logout:(state,action)=>{
+      localStorage.removeItem("jwt")
+      localStorage.removeItem("is_admin")
+    }
+  },
   extraReducers: {
     [loginAsync.pending]: (state) => {
       state.isLoading = true;
@@ -136,6 +141,7 @@ if (isTokenExpired()) {
 // }
 
 // Export the async thunk action and the login slice reducer
-export default loginSlice.reducer;
+export default loginSlice.reducer
+export const  {logout}=loginSlice.actions
 
 

@@ -8,10 +8,12 @@ import {
  
 } from "@mui/material";
 import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { loginAsync } from "../slices/Loginslice";
+import { showLoading,hideLoading} from "../slices/Loadingslice";
 
 
 function LoginForm() {
@@ -48,26 +50,42 @@ function LoginForm() {
 
     if (!isValid) {
       const errorMessages = Object.values(errors).join("\n");
-      window.alert(`\n${errorMessages}`);
+    toast.error(errorMessages,{ duration: 4000,
+      position: 'top-center',})
     }
+    else{
     const users = { username, password };
     try {
-      await dispatch(loginAsync(users));
+      // dispatch(showLoading())
+      const data= await  dispatch(loginAsync(users));
+      if(data.meta.requestStatus==='rejected')
+      {
+        toast.error(data.payload.message)
+      }
+      
       const token = localStorage.getItem("jwt");
       const is_admin=localStorage.getItem("is_admin")
       if (token && is_admin==='false') {
         navigate("/");
+        toast.success("login successfully")
       }
        if( token && is_admin==='true')
       {
         
-         await navigate("/dashboard");
-        window.location.reload(true)
+          navigate("/dashboard");
+       
+        toast.success(" admin login successfully")
        
       }
+      
+      
+      
     } catch (error) {
-      console.log(error);
+      // 
+      
+      toast.error(error)
     }
+  }
   };
 
   return (
