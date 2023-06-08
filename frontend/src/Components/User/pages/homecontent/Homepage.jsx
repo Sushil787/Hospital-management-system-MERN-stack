@@ -1,7 +1,7 @@
-import React from 'react';
-import Screen from '../homecontent/Slider';
-import { Grid, Typography } from '@mui/material';
-import Departments from './Departments';
+import React from "react";
+import Screen from "./Slider";
+import { Grid, Typography } from "@mui/material";
+import Departments from "./Departments";
 
 const Homepage = () => {
   const departments = [
@@ -19,12 +19,18 @@ const Homepage = () => {
           <Screen />
         </Grid>
 
-        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', marginTop: '30px' }}>
-          <Typography sx={{
-            textAlign: 'center',
-            fontSize: '30px',
-            fontWeight: 'bold',
-          }}>
+        <Grid
+          item
+          xs={12}
+          sx={{ display: "flex", justifyContent: "center", marginTop: "30px" }}
+        >
+          <Typography
+            sx={{
+              textAlign: "center",
+              fontSize: "30px",
+              fontWeight: "bold",
+            }}
+          >
             OUR SERVICES
           </Typography>
         </Grid>

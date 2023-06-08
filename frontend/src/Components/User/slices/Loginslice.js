@@ -74,16 +74,17 @@ export const loginAsync = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await axios.post("http://localhost:8080/signin", credentials);
-      console.log(response);
-      if (response.data.message !== undefined) {
+      console.log(response.data)
+      if (response.data.token !== undefined) {
         const expirationTime = new Date().getTime() + TOKEN_EXPIRATION_TIME;
-        localStorage.setItem("jwt", response.data.message);
+        localStorage.setItem("jwt", response.data.token);
+        localStorage.setItem("is_admin", response.data.user.is_admin);
         localStorage.setItem("jwtExpiration", expirationTime);
       }
 
-      return response.data.message;
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data.message);
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -102,7 +103,7 @@ const loginSlice = createSlice({
     token: null,
     isLoading: false,
     error: null,
-    is_admin: false,
+    user:{}
   },
   reducers: {},
   extraReducers: {
@@ -112,7 +113,8 @@ const loginSlice = createSlice({
     [loginAsync.fulfilled]: (state, action) => {
       state.isLoading = false;
      
-      state.token = action.payload
+      state.token = action.payload.token
+      state.user=action.payload.user
       
     },
     [loginAsync.rejected]: (state, action) => {
@@ -126,6 +128,7 @@ const loginSlice = createSlice({
 if (isTokenExpired()) {
   localStorage.removeItem("jwt");
   localStorage.removeItem("jwtExpiration");
+  localStorage.removeItem("is_admin");
 }
 // } else {
 //   const token = localStorage.getItem("jwt");

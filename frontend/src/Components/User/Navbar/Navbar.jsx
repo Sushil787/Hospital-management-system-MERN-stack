@@ -28,8 +28,7 @@
 
 //   const theme = useTheme();
 //   const [value, setValue] = React.useState();
- 
- 
+
 //   const ismatch = useMediaQuery(theme.breakpoints.down("md"));
 //   const [anchorEl, setAnchorEl] = React.useState(null);
 //   const open = Boolean(anchorEl);
@@ -108,7 +107,7 @@
 //       'aria-labelledby': 'basic-button',
 //     }}
 //   >
-    
+
 //     <MenuItem onClick={handleClose } >Logout</MenuItem>
 //   </Menu>
 //   </>
@@ -144,8 +143,6 @@
 
 // export default Navbar;
 
-
-
 import React, { useState, useEffect } from "react";
 import {
   AppBar,
@@ -160,7 +157,7 @@ import {
   Typography,
   Avatar,
   Menu,
-  MenuItem
+  MenuItem,
 } from "@mui/material";
 import Drawor from "./Drawor";
 import { Link, NavLink } from "react-router-dom";
@@ -168,7 +165,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginAsync } from "../slices/Loginslice";
 
-import logo from "./assets/logo.png";
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -182,9 +179,7 @@ const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-
-    const item = localStorage.getItem("jwt");
-
+  const item = localStorage.getItem("jwt");
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
