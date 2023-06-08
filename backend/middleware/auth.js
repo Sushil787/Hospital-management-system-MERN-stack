@@ -11,8 +11,9 @@ const auth_middleware = async(req, res, next)=>{
             req.is_admin = verify.auth_user.is_admin;
             next();
             return;
+        }else{
+            return res.status(401).json({message: "un-authorized"});
         }
-        return res.status(401).json({message: "un-authorized"});
     } catch (error) {
         return res.status(500).json({message:error.message});        
     }

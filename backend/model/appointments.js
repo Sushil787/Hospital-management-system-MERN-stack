@@ -16,8 +16,8 @@ const appintments_schema = mongoose.Schema({
         default: "unchecked",
     },
     invoice: {
-        type: Number,
-        default: 0,
+        type: String,
+        default: "0",
     },
     disease: {
         type: String,
