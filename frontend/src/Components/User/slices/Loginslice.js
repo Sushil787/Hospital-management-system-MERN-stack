@@ -65,8 +65,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// const TOKEN_EXPIRATION_TIME = 5 * 60 * 60 * 1000; // 5 hours in milliseconds
-const  TOKEN_EXPIRATION_TIME=1*60*1000;
+const TOKEN_EXPIRATION_TIME = 5 * 60 * 60 * 1000; // 5 hours in milliseconds
+
 
 // Async thunk action to handle login
 export const loginAsync = createAsyncThunk(

@@ -67,12 +67,14 @@ function LoginForm() {
       const is_admin=localStorage.getItem("is_admin")
       if (token && is_admin==='false') {
         navigate("/");
+        window.location.reload("true")
         toast.success("login successfully")
       }
        if( token && is_admin==='true')
       {
         
-          navigate("/dashboard");
+          navigate("/");
+          window.location.reload("true")
        
         toast.success(" admin login successfully")
        

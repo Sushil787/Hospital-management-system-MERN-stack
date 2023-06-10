@@ -37,6 +37,7 @@ const Navbar = () => {
   const open = Boolean(anchorEl);
 
   const item = localStorage.getItem("jwt");
+  const is_admin=localStorage.getItem("is_admin")
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -94,7 +95,7 @@ const Navbar = () => {
                 <Tab label="Our Services" component={NavLink} to="/services" />
               </Tabs>
               <Box sx={{ marginLeft: "auto" }}>
-                {item ? (
+                {item  && is_admin==="false" ? (
                   <>
                     <Button
                       id="basic-button"

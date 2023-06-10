@@ -20,6 +20,7 @@ import PagenotFound from "./Components/User/pages/PagenotFound";
 
 function App() {
   const [is_admin, setIsAdmin] = useState(localStorage.getItem("is_admin"));
+  console.log(is_admin)
 
  
 
@@ -36,12 +37,14 @@ function App() {
         flexDirection: "column",
       }}
     >
-      {is_admin ? (
+      {is_admin==="true" ? (
         <>
-          <Routes>
+          {/* <Routes>
 
-            <Route path="/dashboard" Component={Dashboard}/>
-          </Routes>
+            <Route path="/" Component={Dashboard}/>
+          </Routes> */}
+          <Dashboard/>
+          
         </>
       ) : (
         <>
@@ -64,7 +67,8 @@ function App() {
                 <Route Component={PrivateRoutes}>
                   <Route path="/form/:id" Component={Form} />
                 </Route>
-                <Route path="*" Component={PagenotFound} />
+               
+               
               </Routes>
             </Box>
           </Grid>

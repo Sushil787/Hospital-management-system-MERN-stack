@@ -26,8 +26,11 @@ const all_appointments = async(req, res)=>{
 
 const create_appointments = async(req, res)=>{
     try{
-        const { doctor, disease,date} = req.body;
+
+        const { doctor, disease,date,status} = req.body;
+
         const user =  req.id;
+       
         if (!user | !doctor |!disease | !date) {
             return  res.status(202).json({ message: "incomplete content" });
          }else{
