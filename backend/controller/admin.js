@@ -25,6 +25,7 @@ const add_doctor = async (req, res) => {
 const delete_doctor = async (req, res) => {
     try {
         const _id = req.params.id;
+       
         if (!_id) {
             return res.status(204).json({ message: "no id sent" });
         } else {

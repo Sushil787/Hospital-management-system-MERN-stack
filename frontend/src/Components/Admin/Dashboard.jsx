@@ -5,7 +5,7 @@ import { ColorModeContext, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import Doctors from './components/Doctors';
 import Users from './components/Users';
-import {Routes,Route} from 'react-router-dom'
+import {Routes,Route, BrowserRouter} from 'react-router-dom'
 
 const Dashboard = () => {
   const [theme, colorMode] = useMode();
@@ -28,13 +28,16 @@ const Dashboard = () => {
               flex: 1,
             }}
           >
-            <Topbar />
+           
 
             <main className="content" style={{ flex: 1 }}>
-              <Routes>
-                <Route path="/" component={Doctors}/>
-                <Route path="/users" component={Users}/>
+            <Topbar />
+            
+            <Routes>
+                <Route path="/" element={<Doctors />} />
+                <Route path="/users" element={<Users />} />
               </Routes>
+             
             </main>
           </div>
         </div>

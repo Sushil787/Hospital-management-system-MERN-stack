@@ -39,10 +39,7 @@ function App() {
     >
       {is_admin==="true" ? (
         <>
-          {/* <Routes>
-
-            <Route path="/" Component={Dashboard}/>
-          </Routes> */}
+          
           <Dashboard/>
           
         </>
