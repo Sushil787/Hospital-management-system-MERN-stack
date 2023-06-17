@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { Facebook, Twitter, Language, Instagram } from "@mui/icons-material";
 import SendIcon from '@mui/icons-material/Send';
-import logo from "./logo.png";
+import logo from "./assets/logo.png";
 
 const Footer = () => {
   return (
@@ -57,7 +57,7 @@ const Footer = () => {
            
             <Paper
       component="form"
-      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
+      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center' }}
     >
      
       <InputBase
@@ -76,9 +76,7 @@ const Footer = () => {
         </Grid>
       </Toolbar>
       <Divider />
-      <Box sx={{ p: 2 }}>
-        
-      </Box>
+     
     </AppBar>
   );
 };
