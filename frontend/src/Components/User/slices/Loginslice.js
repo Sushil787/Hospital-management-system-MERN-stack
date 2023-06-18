@@ -74,6 +74,7 @@ export const loginAsync = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await axios.post("http://localhost:8080/signin", credentials);
+      console.log(response)
       
       if (response.data.token !== undefined) {
         const expirationTime = new Date().getTime() + TOKEN_EXPIRATION_TIME;
