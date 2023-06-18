@@ -14,7 +14,7 @@ margin:0px
   align-items:center;
 
   opacity:0.8;
-  height:75vh;
+  height:100vh;
 
 `;
 const AnimatedSpan = styled('span')`
@@ -109,3 +109,4 @@ const Screen = () => {
 };
 
 export default Screen;
+
