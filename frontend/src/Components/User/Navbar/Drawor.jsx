@@ -16,23 +16,29 @@ const Drawor = () => {
     <>
     <Drawer open={open} onClose={()=>setOpen(false)}>
        <List>
-    <ListItemButton>
+    <ListItemButton component={Link} to='/'>
         <ListItemText>
             Home
         </ListItemText>
-    </ListItemButton>
-    <ListItemButton>
+    </ListItemButton >
+    <ListItemButton component={Link} to='/contact'>
         <ListItemText>
             Contact us
         </ListItemText>
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to='/about'>
         <ListItemText>
             About us
         </ListItemText>
     </ListItemButton>
 
-    <ListItemButton>
+    <ListItemButton component={Link} to='/service'>
+        <ListItemText>
+            Service
+        </ListItemText>
+    </ListItemButton>
+
+    <ListItemButton component={Link} to='/doctor'>
         <ListItemText>
             Doctors
         </ListItemText>

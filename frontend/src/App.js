@@ -18,11 +18,11 @@ import { useEffect ,useState} from "react";
 import Dashboard from "./Components/Admin/Dashboard";
 import PagenotFound from "./Components/User/pages/PagenotFound";
 import Cart from "./Components/User/pages/Doctor/Cart";
-import { display } from "@mui/system";
+
 
 function App() {
   const [is_admin, setIsAdmin] = useState(localStorage.getItem("is_admin"));
-  console.log(is_admin)
+
 
  
 
@@ -30,54 +30,7 @@ function App() {
 
   
   return (
-    // <Grid
-    //   Container
-    //   sx={{
-    //     marginTop: "0px",
-    //     gap: 0,
-    //     display: "flex",
-    //     flexDirection: "column",
-    //   }}
-    // >
-    //   {is_admin==="true" ? (
-    //     <>
-          
-    //       <Dashboard/>
-          
-    //     </>
-    //   ) : (
-    //     <>
-    //       <Grid item>
-    //         <Navbar />
-    //       </Grid>
-    //       <Grid style={{ flexGrow: 1, minHeight: "80vh" }} item>
-    //         <Box>
-    //           <Routes>
-    //             <Route path="/" Component={Screen} />
-    //             <Route path="/contact" Component={Contact} />
-    //             <Route path="/SignUp" Component={SignUpForm} />
-    //             <Route path="/services" Component={Services} />
-    //             <Route path="/about" Component={About} />
-    //             <Route path="/doctor" Component={Doctor} />
-
-
-    //             <Route path="/login" Component={LoginForm} />
-
-    //             <Route Component={PrivateRoutes}>
-    //               <Route path="/form/:id" Component={Form} />
-    //               <Route path="/cart" Component={Cart} />
-    //             </Route>
-               
-               
-    //           </Routes>
-    //         </Box>
-    //       </Grid>
-    //       <Grid item>
-    //         <Footer />
-    //       </Grid>
-    //     </>
-    //   )}
-    // </Grid>
+   
 
 
     <Grid container >

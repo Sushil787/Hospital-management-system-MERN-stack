@@ -1,28 +1,26 @@
-
-
-import React, { useState, useEffect } from "react";
+import{ React,  useState } from "react";
 import {
   AppBar,
   Toolbar,
   IconButton,
-  Tabs,
-  Tab,
   Box,
   Button,
   useTheme,
   useMediaQuery,
-  Typography,
   Avatar,
   Menu,
   MenuItem,
   Tooltip,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
 } from "@mui/material";
 import Drawor from "./Drawor";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../slices/Loginslice";
-import VaccinesIcon from '@mui/icons-material/Vaccines';
 
 import logo from "../assets/logo.png";
 
@@ -30,17 +28,16 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const data = useSelector((state) => state.login);
-  console.log(data)
+  console.log(data);
 
   const theme = useTheme();
-  const [value, setValue] = useState();
 
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
   const item = localStorage.getItem("jwt");
-  const is_admin=localStorage.getItem("is_admin")
+  const is_admin = localStorage.getItem("is_admin");
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -48,18 +45,17 @@ const Navbar = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
- 
   };
 
-  const handlelog=()=>{
-    dispatch(logout())
+  const handlelog = () => {
+    dispatch(logout());
     navigate("/");
-  }
+  };
 
   return (
     <>
-      <AppBar sx={{ background: "#edf0ed" }} position="relative">
-        <Toolbar>
+      <AppBar sx={{ background: "#edf0ed" ,position:"relative" }} >
+        <Toolbar sx={{justifyContent:"space-between"}}>
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -76,53 +72,66 @@ const Navbar = () => {
             <Drawor />
           ) : (
             <>
-              <Tabs
-                value={value}
-                onChange={(e, value) => setValue(value)}
-                textColor="secondary"
-                indicatorColor="secondary"
-                sx={{
-                  ml: "50px",
-                  flexGrow: 1,
-                  justifyContent: "center",
-                  display: "flex",
-                }}
-              >
-                <Tab
-                  label="Home"
-                  component={NavLink}
-                  to="/"
-                  exact
-                  activeClassName="Mui-selected"
-                />
+              <List sx={{ display: "flex", flexDirection: "row", gap:"10px", color:"black" }}>
+                <ListItem>
+                  <ListItemButton component={Link} to="/" sx={{ textAlign: "center" }}>
+                    <ListItemText primary="Home" />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
+                  <ListItemButton
+                    component={Link}
+                    to="/contact"
+                    sx={{ textAlign: "center" }}
+                  >
+                    <ListItemText primary="Contact " />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
+                  <ListItemButton
+                    component={Link}
+                    to="/about"
+                    sx={{ textAlign: "center" }}
+                  >
+                    <ListItemText primary="About " />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
+                  <ListItemButton
+                    component={Link}
+                    to="/doctor"
+                    sx={{ textAlign: "center" }}
+                  >
+                    <ListItemText primary="Doctors" />
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
+                  <ListItemButton
+                    component={Link}
+                    to="/services"
+                    sx={{ textAlign: "center" }}
+                  >
+                    <ListItemText primary="Services" />
+                  </ListItemButton>
+                </ListItem>
+              </List>
 
-                <Tab label="Contact us" component={NavLink} to="/contact" />
-                <Tab label="About us" component={NavLink} to="/about" />
-                <Tab label="Doctors" component={NavLink} to="/doctor" />
-                <Tab label="Our Services" component={NavLink} to="/services" />
-              </Tabs>
               <Box sx={{ marginLeft: "auto" }}>
-                {item  && is_admin==="false" ? (
+                {item && is_admin === "false" ? (
                   <>
-                    
+                    <Tooltip title={localStorage.getItem("user")}>
+                      <Button
+                        id="basic-button"
+                        aria-controls={open ? "basic-menu" : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? "true" : undefined}
+                        onClick={handleClick}
+                      >
+                        <Avatar />
+                      </Button>
+                    </Tooltip>
 
-                    
-
-<Tooltip title={localStorage.getItem("user")}>
-<Button 
-                      id="basic-button"
-                      aria-controls={open ? "basic-menu" : undefined}
-                      aria-haspopup="true"
-                      aria-expanded={open ? "true" : undefined}
-                      onClick={handleClick}
-                    >
-                      <Avatar />
-
-                    </Button>
-</Tooltip>
-
-                    
-                      <Menu
+                    <Menu
                       id="basic-menu"
                       anchorEl={anchorEl}
                       open={open}
@@ -131,12 +140,11 @@ const Navbar = () => {
                         "aria-labelledby": "basic-button",
                       }}
                     >
-
-                      <MenuItem as={NavLink} to="/cart">Appotnment</MenuItem>
+                      <MenuItem as={NavLink} to="/cart">
+                        Appotnment
+                      </MenuItem>
                       <MenuItem onClick={handlelog}>Logout</MenuItem>
                     </Menu>
-                      
-                    
                   </>
                 ) : (
                   <>
@@ -162,7 +170,6 @@ const Navbar = () => {
               </Box>
             </>
           )}
-        
         </Toolbar>
       </AppBar>
     </>
