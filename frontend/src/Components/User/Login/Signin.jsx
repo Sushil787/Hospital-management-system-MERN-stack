@@ -11,6 +11,9 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {Formik,Field,Form,ErrorMessage} from 'formik'
+import * as yup from 'yup'
+import toast from "react-hot-toast";
 
 
 function SignUpForm() {
@@ -21,139 +24,93 @@ function SignUpForm() {
   const [password, setPassword] = useState("");
   const [is_admin, setIsAdmin] = useState(false);
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-  const handleusernameChange = (e) => {
-    setUsername(e.target.value);
-  };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+  const initialValues = {
+    username: "",
+    email:"",
+    password: "",
   };
+  
+  const validationSchema = yup.object({
+    username: yup.string().required("Username must be required"),
+    email: yup.string().email("Invalid email!").required("email must be required"),
+    password: yup.string().required("Password must be required").min(8,"Password must be greater then 8 character"),
+  });
 
-  const handleIsAdminChange = (e) => {
-    setIsAdmin(e.target.checked);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit= async(values)=>{
     try {
-      let isValid = true;
-      const errors = {};
-
-      if (!username.trim()) {
-        errors.username = "Username is required";
-        isValid = false;
-      }
-
-      if (!email.trim()) {
-        errors.email = "Email is required";
-        isValid = false;
-      }
-
-      if (!password.trim()) {
-        errors.password = "Password is required";
-        isValid = false;
-      } else if (password.length < 8) {
-        errors.password = "Password must be at least 8 characters long";
-        isValid = false;
-      }
-
-      if (!isValid) {
-        const errorMessages = Object.values(errors).join("\n");
-        window.alert(`\n${errorMessages}`);
-       
-        return;
-      }
-      const userData = {
-        username,
-        email,
-        password,
-        is_admin,
-      };
-       const response= await axios.post(
+      const response= await axios.post(
         "http://localhost:8080/signup",
 
-        userData
+        values
       );
-      console.log(response.data)
-     
-      
-        Navigate("/login")
-      
-     
+      console.log(response)
 
-      setEmail("");
-      setUsername("");
-      setPassword("");
-      setIsAdmin(false);
+      Navigate("/login")
+      
     } catch (error) {
-      if (
-				error.response &&
-				error.response.status >= 400 &&
-				error.response.status <= 500
-			) {
-				setError(error.response.data.message);
-        alert(error)
-        
-			}
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("An error occurred during signup.");
+      }
+      
     }
-    
-  };
 
+  }
   return (
     <Container maxWidth="xs">
       <Typography variant="h4" align="center" gutterBottom>
         Sign Up
       </Typography>
-      <form onSubmit={handleSubmit}>
+      <Formik validationSchema={validationSchema}initialValues={initialValues} onSubmit={onSubmit}>
+      <Form >
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <TextField
+            <Field
+            as={TextField}
               type="text"
               label="Username"
               variant="outlined"
+              name="username"
               fullWidth
-              value={username}
-              onChange={handleusernameChange}
+              
             />
+            <ErrorMessage name="username"/>
           </Grid>
           <Grid item xs={12}>
-            <TextField
+            <Field
+            as={TextField}
               type="email"
               label="Email"
               variant="outlined"
+              name="email"
               fullWidth
-              value={email}
-              onChange={handleEmailChange}
+              
             />
+            <ErrorMessage name="email"/>
           </Grid>
           <Grid item xs={12}>
-            <TextField
+            <Field
+            as={TextField}
               type="password"
               label="Password"
               variant="outlined"
+              name="password"
               fullWidth
-              value={password}
-              onChange={handlePasswordChange}
+             
             />
+            <ErrorMessage name="password"/>
           </Grid>
-          <Grid item xs={12}>
-            <FormControlLabel
-              control={
-                <Checkbox checked={is_admin} onChange={handleIsAdminChange} />
-              }
-              label="Is Admin"
-            />
-          </Grid>
+         
           <Grid item xs={12}>
             <Button type="submit" variant="contained" color="primary" fullWidth>
               Sign Up
             </Button>
           </Grid>
         </Grid>
-      </form>
+      </Form>
+      </Formik>
     </Container>
   );
 }
