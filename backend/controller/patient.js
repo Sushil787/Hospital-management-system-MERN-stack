@@ -52,14 +52,14 @@ const create_appointments = async (req, res) => {
 
 
 const payment_history = async(req,res)=>{
-  try {
-    console.log(req.body)
+  
+  
      
       const { token, amount } = req.body;
       const user=req.id
       console.log(user)
     
-  
+      try {
       
       if (!user || !token || !amount) {
         return res.status(400).json({ message: 'Invalid payment request' });

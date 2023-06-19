@@ -1,4 +1,4 @@
-const e = require("express");
+
 const doctor = require("../model/doctor");
 const mongoose = require("mongoose");
 const appointments = require("../model/appointments");
