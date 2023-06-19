@@ -40,10 +40,10 @@ function App() {
         </Grid>
       ) : (
         <>
-          <Grid item xs={12}>
-            <Navbar />
+          <Grid item xs={12} >
+            <Navbar sx={{ backgroundColor:"#acb2bd", opacity:"0.8"}} />
           </Grid>
-          <Grid item xs={12} sx={{ minHeight: '80vh' }}>
+          <Grid item xs={12} sx={{ minHeight: '80vh' , backgroundColor:"#acb2bd", opacity:"0.8" }}>
           <Box>
               <Routes>
                 <Route path="/" Component={Screen} />

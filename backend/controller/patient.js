@@ -1,6 +1,7 @@
 const appointments = require("../model/appointments");
 const doctor = require("../model/doctor");
 const user = require("../model/user");
+
 const axios=require("axios")
 
 const all_appointments = async (req, res) => {
@@ -22,6 +23,7 @@ const all_appointments = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
 
 const create_appointments = async (req, res) => {
   try {
@@ -95,4 +97,4 @@ const payment_history = async(req,res)=>{
 
 }
 
-module.exports = { all_appointments, create_appointments,payment_history };
+module.exports = { all_appointments, create_appointments,payment_history};

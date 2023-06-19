@@ -1,4 +1,5 @@
 const doctor = require("../model/doctor");
+const service = require("../model/service");
 
 
 const get_doctor= async(req, res)=>{
@@ -10,4 +11,21 @@ const get_doctor= async(req, res)=>{
     }
 }
 
-module.exports = get_doctor;
+
+
+const all_services = async (req, res) => {
+    try {
+      
+        const user_service = await service
+          .find()
+          return res.status(200).json({user_service});
+          
+        
+      }
+    catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  };
+  
+
+module.exports ={all_services,get_doctor} 
