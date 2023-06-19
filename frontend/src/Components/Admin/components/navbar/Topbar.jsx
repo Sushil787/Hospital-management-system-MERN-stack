@@ -2,12 +2,10 @@ import React from 'react'
 import {Box, IconButton, useTheme} from '@mui/material'
 import { useContext } from 'react'
 import { ColorModeContext,tokens } from '../../theme'
-import InputBase from '@mui/material/InputBase'
-import SearchIcon from '@mui/icons-material/Search'
+
 import { LightModeOutlined } from '@mui/icons-material'
 import { DarkModeOutlined } from '@mui/icons-material'
-import { NotificationAddOutlined } from '@mui/icons-material'
-import { SettingsOutlined } from '@mui/icons-material'
+
 import { PersonOutline } from '@mui/icons-material'
 import logo from '../../../User/assets/logo.png'
 

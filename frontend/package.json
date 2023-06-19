@@ -1,5 +1,10 @@
 {
   "name": "frontend",
+  
+    
+    "proxy": "http://localhost:8080",
+    
+
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,6 +22,7 @@
     "formik": "^2.4.2",
     "khalti-checkout-web": "^2.2.0",
     "khalti-web": "^1.1.1",
+    "mui-image": "^1.0.7",
     "ra-data-simple-rest": "^4.11.1",
     "react": "^18.2.0",
     "react-admin": "^4.11.1",

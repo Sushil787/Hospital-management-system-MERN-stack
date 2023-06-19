@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import KhaltiCheckout from "khalti-checkout-web";
 import config from "./Khalticonfig";
 import { Box } from "@mui/system";
+import { Typography } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -69,6 +70,10 @@ export default function Cart() {
                 <StyledTableCell align="right">{item.invoice}</StyledTableCell>
                 <StyledTableCell align="right">
                   {" "}
+
+                  {
+                  item.status==="unchecked"?<Typography>wait....</Typography>:
+                 
                   <Box
                     sx={{
                       display: "inline-block",
@@ -80,6 +85,7 @@ export default function Cart() {
                       border: "1px solid white",
                     }}
                   >
+                    
                     <button
                       onClick={() =>
                         checkout.show({ amount: item.invoice * 10 })
@@ -95,6 +101,7 @@ export default function Cart() {
                       Pay Via Khalti
                     </button>
                   </Box>
+}
                 </StyledTableCell>
               </StyledTableRow>
             ))}

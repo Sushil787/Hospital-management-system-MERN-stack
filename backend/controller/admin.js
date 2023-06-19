@@ -84,6 +84,9 @@ const all_appointments = async (req, res) => {
 
 
 
+
+
+
 module.exports = {
     add_doctor, delete_doctor, all_appointments, update_appointment
 };
