@@ -5,10 +5,9 @@ const tokens = localStorage.getItem("jwt");
 const makePayment = async (token, amount) => {
   try {
     const response = await axios.post(
-      "http://localhost:8080/patient/appointment/payment",
+      "http://localhost:8080/patient/payment",
       {
-        token: token,
-        amount: amount,
+        status:'paid'
       },
       {
         headers: {
@@ -35,7 +34,8 @@ const Config = {
     onSuccess(payload) {
       console.log(payload);
       const { token, amount } = payload;
-       makePayment(token, amount);
+      makePayment(token, amount);
+      
     },
     onError(error) {
       console.log(error);

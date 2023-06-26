@@ -72,7 +72,7 @@ export default function Cart() {
                   {" "}
 
                   {
-                  item.status==="unchecked"?<Typography>wait....</Typography>:
+                  item.status==="unchecked"?<Typography>pending</Typography>:
                  
                   <Box
                     sx={{
