@@ -77,6 +77,7 @@ const payment_history = async(req,res)=>{
         },
        config
       );
+      console.log(khaltiResponse)
       
   
      

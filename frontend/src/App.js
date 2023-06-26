@@ -17,18 +17,12 @@ import { useSelector } from "react-redux";
 import { useEffect ,useState} from "react";
 import Dashboard from "./Components/Admin/Dashboard";
 import PagenotFound from "./Components/User/pages/PagenotFound";
-import Cart from "./Components/User/pages/Doctor/Cart";
+import Appointment from "./Components/User/pages/Doctor/Appointment";
 
 
 function App() {
   const [is_admin, setIsAdmin] = useState(localStorage.getItem("is_admin"));
 
-
- 
-
-
-
-  
   return (
    
 
@@ -58,7 +52,7 @@ function App() {
 
                 <Route Component={PrivateRoutes}>
               <Route path="/form/:id" Component={Form} />
-                 <Route path="/cart" Component={Cart} />
+                 <Route path="/appointment" Component={Appointment} />
                 </Route>
                
                

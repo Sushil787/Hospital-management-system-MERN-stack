@@ -1,5 +1,5 @@
-import React from 'react'
-import {Box, IconButton, useTheme} from '@mui/material'
+import React, { useState } from 'react'
+import {Box, IconButton, Menu, useTheme,MenuItem} from '@mui/material'
 import { useContext } from 'react'
 import { ColorModeContext,tokens } from '../../theme'
 
@@ -9,10 +9,24 @@ import { DarkModeOutlined } from '@mui/icons-material'
 import { PersonOutline } from '@mui/icons-material'
 import logo from '../../../User/assets/logo.png'
 
+
 const Topbar = () => {
+
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext);
+
+
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
 
   return (
     <Box sx={{display: 'flex', justifyContent: 'space-between', p:2}}>
@@ -25,7 +39,7 @@ const Topbar = () => {
             sx={{
                 backgroundColor:"white",
                 '&:hover': {
-                    backgroundColor: 'white', // Specify the same background color on hover
+                    backgroundColor: 'white', 
                   },
             }}
             
@@ -45,10 +59,24 @@ const Topbar = () => {
 
            
 
-            <IconButton onClick={()=>{localStorage.clear()
-            window.location.reload("true")}}>
+            <IconButton  onClick={handleClick}>
                 <PersonOutline/>
             </IconButton>
+
+         
+            <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      MenuListProps={{
+                        "aria-labelledby": "basic-button",
+                      }}
+                    >
+                      
+                      <MenuItem   onClick={()=>{localStorage.clear()
+            window.location.reload("true")}}>Logout</MenuItem>
+                    </Menu>
 
         </Box>
 

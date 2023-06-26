@@ -1,9 +1,8 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { DataGrid,GridOverlay } from "@mui/x-data-grid";
+import { DataGrid, GridOverlay } from "@mui/x-data-grid";
 import axios from "axios";
 import { useEffect } from "react";
-
 
 import AddDoctorForm from "./AddDoctor";
 import { Grid, Typography } from "@mui/material";
@@ -40,6 +39,7 @@ const columns = [
               },
             }
           );
+          window.location.reload(true);
         } catch (error) {
           console.log(error.message);
         }
@@ -84,8 +84,6 @@ export default function DataGridDemo() {
     );
   };
   return (
-
-    
     <Grid container spacing={1}>
       <Grid item xs={12} sm={6}>
         <AddDoctorForm fetchdata={fetchData} />

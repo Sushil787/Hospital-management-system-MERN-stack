@@ -140,7 +140,7 @@ const Navbar = () => {
                         "aria-labelledby": "basic-button",
                       }}
                     >
-                      <MenuItem as={NavLink} to="/cart">
+                      <MenuItem as={NavLink} to="/appointment">
                         Appotnment
                       </MenuItem>
                       <MenuItem onClick={handlelog}>Logout</MenuItem>
