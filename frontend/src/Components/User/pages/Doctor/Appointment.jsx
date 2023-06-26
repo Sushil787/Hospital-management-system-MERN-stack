@@ -10,10 +10,10 @@ import Paper from "@mui/material/Paper";
 import { getcart } from "../../slices/CartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import KhaltiCheckout from "khalti-checkout-web";
-import config from "./Khalticonfig";
+import getKhaltiConfig from "./Khalticonfig";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
-
+import Config from "./Khalticonfig";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -36,7 +36,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function Cart() {
   const dispatch = useDispatch();
-  let checkout = new KhaltiCheckout(config);
+  let checkout = new KhaltiCheckout(getKhaltiConfig);
   const appointment = useSelector((state) => state.cart);
   console.log(appointment.list.user_appointments);
 
@@ -70,38 +70,71 @@ export default function Cart() {
                 <StyledTableCell align="right">{item.invoice}</StyledTableCell>
                 <StyledTableCell align="right">
                   {" "}
-
                   {
-                  item.status==="unchecked"?<Typography>pending</Typography>:
-                 
-                  <Box
-                    sx={{
-                      display: "inline-block",
-                      backgroundColor: "purple",
-                      padding: "10px",
-                      color: "white",
-                      cursor: "pointer",
-                      fontWeight: "bold",
-                      border: "1px solid white",
-                    }}
-                  >
-                    
-                    <button
-                      onClick={() =>
-                        checkout.show({ amount: item.invoice * 10 })
-                      }
-                      style={{
-                        backgroundColor: "transparent",
-                        border: "none",
-                        color: "inherit",
-                        cursor: "inherit",
-                        padding: 0,
-                      }}
-                    >
-                      Pay Via Khalti
-                    </button>
-                  </Box>
-}
+                    item.status === "checked" ? (
+                      item.payment === "paid" ? (
+                        <Typography>Paid</Typography>
+                      ) : (
+                        <Box
+                          sx={{
+                            display: "inline-block",
+                            backgroundColor: "purple",
+                            padding: "10px",
+                            color: "white",
+                            cursor: "pointer",
+                            fontWeight: "bold",
+                            border: "1px solid white",
+                          }}
+                        >
+                          <button
+                            onClick={() =>
+                              checkout.show({ amount: item.invoice * 10})
+                              
+                            }
+                            style={{
+                              backgroundColor: "transparent",
+                              border: "none",
+                              color: "inherit",
+                              cursor: "inherit",
+                              padding: 0,
+                            }}
+                          >
+                            Pay Via Khalti
+                          </button>
+                        </Box>
+                      )
+                    ) : (
+                      <Typography>Pending</Typography>
+                    )
+
+                    // <Box
+                    //   sx={{
+                    //     display: "inline-block",
+                    //     backgroundColor: "purple",
+                    //     padding: "10px",
+                    //     color: "white",
+                    //     cursor: "pointer",
+                    //     fontWeight: "bold",
+                    //     border: "1px solid white",
+                    //   }}
+                    // >
+
+                    //   <button
+                    //     onClick={() =>
+                    //       checkout.show({ amount: item.invoice * 10 })
+                    //     }
+                    //     style={{
+                    //       backgroundColor: "transparent",
+                    //       border: "none",
+                    //       color: "inherit",
+                    //       cursor: "inherit",
+                    //       padding: 0,
+                    //     }}
+                    //   >
+                    //     Pay Via Khalti
+                    //   </button>
+                    // </Box>
+                  }
                 </StyledTableCell>
               </StyledTableRow>
             ))}

@@ -2,7 +2,7 @@ const appointments = require("../model/appointments");
 const doctor = require("../model/doctor");
 const user = require("../model/user");
 
-const axios=require("axios")
+const axios = require("axios");
 
 const all_appointments = async (req, res) => {
   try {
@@ -23,7 +23,6 @@ const all_appointments = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
-
 
 const create_appointments = async (req, res) => {
   try {
@@ -51,42 +50,41 @@ const create_appointments = async (req, res) => {
   }
 };
 
-
-const payment = async(req, res)=>{
-  const user = req.id;
-  const {status} = req.body;
- console.log(user, status);
- try{
-  if(!user| !status){
-    return res.status(400).json({ message: 'Invalid payment request' });
+const payment = async (req, res) => {
+  const { status, _id } = req.body;
+  
+  console.log(_id, status);
+  try {
+    if (!_id | !status) {
+      return res.status(400).json({ message: "Invalid payment request" });
+    }
+    await appointments.findByIdAndUpdate(
+      { _id },
+      { payment: status },
+      
+    );
+    return res.status(200).json({ message: "paid successfully" });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ message: error.message });
   }
-  await appointments.findByIdAndUpdate(user,{ payment: status });
-  return res.status(200).json({message:'paid successfully'});
- }catch(error){
-  console.log(error.message);
-  return res.status(500).json({ message: error.message });
-
- }
-}
-
+};
 
 // const payment_history = async(req,res)=>{
-  
-  
-     
+
 //       const { token, amount } = req.body;
 //       const user=req.id
 //       console.log(user)
-    
+
 //       try {
-      
+
 //       if (!user || !token || !amount) {
-        // return res.status(400).json({ message: 'Invalid payment request' });
+// return res.status(400).json({ message: 'Invalid payment request' });
 //       }
 //       let config = {
 //         headers: {'Authorization': process.env.KHALTI_SECRET_KEY}
 //       };
-      
+
 //       const khaltiResponse = await axios.post(
 //         'https://khalti.com/api/v2/payment/verify/',
 //         {
@@ -95,24 +93,20 @@ const payment = async(req, res)=>{
 //        config
 //       );
 //       console.log(khaltiResponse)
-      
-  
-     
+
 //       if (khaltiResponse.data && khaltiResponse.data.state === 'Completed') {
-        
-  
+
 //         return res.status(200).json({ message: 'Payment successful' });
 //       } else {
-       
+
 //         return res.status(400).json({ message: 'Payment failed or pending' });
 //       }
 //     } catch (error) {
-      
+
 //       console.error('Error verifying payment:', error);
 //       return res.status(500).json({ message: 'Internal server error' });
 //     }
 
-
 // }
 
-module.exports = { all_appointments, create_appointments, payment};
+module.exports = { all_appointments, create_appointments, payment };
