@@ -54,7 +54,7 @@ function LoginForm() {
 
   return (
     <>
-      <Container maxWidth="xs" sx={{display:"flex" ,justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
+      <Container maxWidth="xs" sx={{display:"flex" ,justifyContent:"center",alignItems:"center",flexDirection:"column",minHeight:"70vh"}}>
         <Typography variant="h4" align="center" gutterBottom>
           Login
         </Typography>

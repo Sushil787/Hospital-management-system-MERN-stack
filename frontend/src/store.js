@@ -4,14 +4,16 @@ import getService from "./Components/User/slices/getService"
 import Loginslice from "./Components/User/slices/Loginslice"
 import {alertSlice} from "./Components/User/slices/Loadingslice";
 import thunk from "redux-thunk";
-import getCart  from "./Components/User/slices/CartSlice";
+import getPatients  from "./Components/User/slices/patientSlice";
+import idslice from "./Components/User/slices/idslice";
 export const store = configureStore({
   reducer: {
     doctor: getDoctor,
     login:Loginslice,
     loading:alertSlice.reducer,
-    cart: getCart,
-    service:getService
+    patient: getPatients,
+    service:getService,
+    id:idslice
   },
   middleware:[thunk]
 });

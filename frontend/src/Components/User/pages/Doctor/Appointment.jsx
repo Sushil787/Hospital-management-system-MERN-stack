@@ -7,13 +7,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { getcart } from "../../slices/CartSlice";
+import { getpatient } from "../../slices/patientSlice";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import KhaltiCheckout from "khalti-checkout-web";
-import getKhaltiConfig from "./Khalticonfig";
+
+import toast from 'react-hot-toast'
+
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
-import Config from "./Khalticonfig";
+
+import { getId } from "../../slices/idslice";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -36,12 +40,77 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function Cart() {
   const dispatch = useDispatch();
-  let checkout = new KhaltiCheckout(getKhaltiConfig);
-  const appointment = useSelector((state) => state.cart);
+  const tokens = localStorage.getItem("jwt");
+  const id=useSelector((state)=>state.id)
+    console.log(id)
+
+  const MakePayment = async () => {
+    if(!id)
+    {
+      return;
+    }
+    
+  
+    try {
+        
+       
+      const response = await axios.post(
+        "http://localhost:8080/patient/payment",
+        {
+          status:'paid',
+          _id:id.id
+        },
+        {
+          headers: {
+            authorization: tokens
+  
+          },
+        }
+      );
+  
+      console.log(response.data);
+      toast.success("payment successfull!!!")
+    } catch (error) {
+      console.log(error.message);
+    }
+    
+  };
+
+  const Config = {
+  
+    publicKey: "test_public_key_2a7f2e2188034b8c8afe09bba670bd67",
+    productIdentity: "123766",
+    productName: "My Ecommerce Store",
+    productUrl: "http://localhost:3000",
+    eventHandler: {
+      onSuccess(payload) {
+        console.log(payload);
+       
+        MakePayment();
+       
+        
+      },
+      onError(error) {
+        console.log(error);
+      },
+      onClose() {
+        console.log("widget is closing");
+      },
+    },
+    paymentPreference: [
+      "KHALTI",
+      "EBANKING",
+      "MOBILE_BANKING",
+      "CONNECT_IPS",
+      "SCT",
+    ],
+  };
+  let checkout = new KhaltiCheckout(Config);
+  const appointment = useSelector((state) => state.patient);
   console.log(appointment.list.user_appointments);
 
   React.useEffect(() => {
-    dispatch(getcart());
+    dispatch(getpatient());
   }, [dispatch]);
   return (
     <>
@@ -69,7 +138,7 @@ export default function Cart() {
                 <StyledTableCell align="right">{item.status}</StyledTableCell>
                 <StyledTableCell align="right">{item.invoice}</StyledTableCell>
                 <StyledTableCell align="right">
-                  {" "}
+               
                   {
                     item.status === "checked" ? (
                       item.payment === "paid" ? (
@@ -88,7 +157,10 @@ export default function Cart() {
                         >
                           <button
                             onClick={() =>
+                              {
                               checkout.show({ amount: item.invoice * 10})
+                              dispatch(getId(item._id))
+                              }
                               
                             }
                             style={{
@@ -107,33 +179,7 @@ export default function Cart() {
                       <Typography>Pending</Typography>
                     )
 
-                    // <Box
-                    //   sx={{
-                    //     display: "inline-block",
-                    //     backgroundColor: "purple",
-                    //     padding: "10px",
-                    //     color: "white",
-                    //     cursor: "pointer",
-                    //     fontWeight: "bold",
-                    //     border: "1px solid white",
-                    //   }}
-                    // >
-
-                    //   <button
-                    //     onClick={() =>
-                    //       checkout.show({ amount: item.invoice * 10 })
-                    //     }
-                    //     style={{
-                    //       backgroundColor: "transparent",
-                    //       border: "none",
-                    //       color: "inherit",
-                    //       cursor: "inherit",
-                    //       padding: 0,
-                    //     }}
-                    //   >
-                    //     Pay Via Khalti
-                    //   </button>
-                    // </Box>
+                  
                   }
                 </StyledTableCell>
               </StyledTableRow>

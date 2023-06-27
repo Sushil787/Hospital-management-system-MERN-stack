@@ -63,7 +63,7 @@ function SignUpForm() {
   };
   return (<>
       
-    <Container maxWidth="xs">
+    <Container maxWidth="xs" sx={{display:"flex" ,justifyContent:"center",alignItems:"center",flexDirection:"column",minHeight:"70vh"}}>
       <Typography variant="h4" align="center" gutterBottom>
         Sign Up
       </Typography>

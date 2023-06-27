@@ -7,7 +7,7 @@ import axios from "axios";
     isLoading:false,
     error:''
 }
-export const getcart = createAsyncThunk('getacrt', async () => {
+export const getpatient = createAsyncThunk('getacrt', async () => {
     try {
       const response = await axios.get('http://localhost:8080/patient',{
         headers: {
@@ -23,18 +23,18 @@ export const getcart = createAsyncThunk('getacrt', async () => {
       throw error;
     }
   });
-export const getCart=createSlice({
+export const getPatients=createSlice({
     name:'getCart',
     initialState,
     extraReducers:{
-        [getcart.pending]:(state)=>{
+        [getpatient.pending]:(state)=>{
             state.isLoading=true
         },
-        [getcart.fulfilled]:(state,action)=>{
+        [getpatient.fulfilled]:(state,action)=>{
             state.isLoading=false
             state.list=action.payload
         },
-        [getcart.rejected]:(state,action)=>{
+        [getpatient.rejected]:(state,action)=>{
             state.isLoading=false
             state.error=action.payload
         }
@@ -44,4 +44,4 @@ export const getCart=createSlice({
 })
 
 
-export default getCart.reducer
+export default getPatients.reducer

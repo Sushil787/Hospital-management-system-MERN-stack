@@ -51,14 +51,14 @@ export default function Users() {
   };
 
   const columns = [
-    { field: '_id', headerName: 'ID', width: 200 },
-    { field: 'user', headerName: 'User Name', width: 200 },
-    { field: 'disease', headerName: 'Disease', width: 200 },
-    { field: 'date', headerName: 'Date', width: 200 },
+    { field: '_id', headerName: 'ID', width: 150 },
+    { field: 'user', headerName: 'User Name', width: 150 },
+    { field: 'disease', headerName: 'Disease', width: 100 },
+    { field: 'date', headerName: 'Date', width: 150 },
     {
       field: 'status',
       headerName: 'Status',
-      width: 150,
+      width: 100,
       renderCell: (params) => (
         <span>
           {params.row.status === 'checked' ? '✔️' : 'Pending'}
@@ -66,9 +66,19 @@ export default function Users() {
       ),
     },
     {
+      field: 'payment',
+      headerName: 'Payment',
+      width: 100,
+      renderCell: (params) => (
+        <span>
+          {params.row.payment === 'paid' ? 'paid' : 'unpaid'}
+        </span>
+      ),
+    },
+    {
       field: 'invoice',
       headerName: 'Invoice',
-      width: 230,
+      width: 200,
       renderCell: (params) => (
         <>
           {params.row.status === 'checked' ? params.value :  <TextField
@@ -85,7 +95,7 @@ export default function Users() {
     {
       field: 'actions',
       headerName: 'Actions',
-      width: 120,
+      width: 100,
       renderCell: (params) => (
         params.row.status !== "checked" ? (
           <Button onClick={() => handleSave(params.row)} style={{ color: 'white' }}>
@@ -117,7 +127,7 @@ export default function Users() {
   };
 
   return (
-    <div style={{ height: 400, width: '80%' }}>
+    <div style={{ height: 400, width: '100%' }}>
       <DataGrid rows={appointments} columns={columns} getRowId={(row) => row._id} />
     </div>
   );
