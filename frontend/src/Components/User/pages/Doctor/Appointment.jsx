@@ -17,7 +17,7 @@ import toast from 'react-hot-toast'
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 
-import { getId } from "../../slices/idslice";
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -38,44 +38,44 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+
+
 export default function Cart() {
+  const [id,setId]=React.useState(null)
+
   const dispatch = useDispatch();
   const tokens = localStorage.getItem("jwt");
-  const id=useSelector((state)=>state.id)
-    console.log(id)
+
 
   const MakePayment = async () => {
-    if(!id)
-    {
-      return;
-    }
-    
+ 
+   
   
-    try {
-        
-       
-      const response = await axios.post(
-        "http://localhost:8080/patient/payment",
-        {
-          status:'paid',
-          _id:id.id
-        },
-        {
-          headers: {
-            authorization: tokens
-  
+        try {
+
+        const response = await axios.post(
+          "http://localhost:8080/patient/payment",
+          {
+            status:'paid',
+            _id:id
           },
-        }
-      );
-  
-      console.log(response.data);
-      toast.success("payment successfull!!!")
-    } catch (error) {
-      console.log(error.message);
-    }
+          {
+            headers: {
+              authorization: tokens
+    
+            },
+          }
+        );
+    
+        console.log(response.data);
+        toast.success("payment successfull!!!")
+        setId(null)
+      } catch (error) {
+        console.log(error.message);
+      }
+    
     
   };
-
   const Config = {
   
     publicKey: "test_public_key_2a7f2e2188034b8c8afe09bba670bd67",
@@ -85,9 +85,9 @@ export default function Cart() {
     eventHandler: {
       onSuccess(payload) {
         console.log(payload);
-       
-        MakePayment();
-       
+      
+        MakePayment()
+      
         
       },
       onError(error) {
@@ -111,7 +111,8 @@ export default function Cart() {
 
   React.useEffect(() => {
     dispatch(getpatient());
-  }, [dispatch]);
+  }, [dispatch,id]);
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -159,7 +160,7 @@ export default function Cart() {
                             onClick={() =>
                               {
                               checkout.show({ amount: item.invoice * 10})
-                              dispatch(getId(item._id))
+                              setId(item._id)
                               }
                               
                             }
