@@ -67,8 +67,8 @@ const Navbar = () => {
             <img
               style={{
                 borderRadius: "60%",
-                width: 100,
-                height: 100,
+                width: 80,
+                height: 70,
               }}
               src={logo}
               alt="logo"

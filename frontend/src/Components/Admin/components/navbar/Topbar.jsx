@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, IconButton, Menu, useTheme, MenuItem } from "@mui/material";
+import { Box, IconButton, Menu, useTheme, MenuItem, Typography } from "@mui/material";
 import { useContext } from "react";
 import { ColorModeContext} from "../../theme";
 
@@ -26,21 +26,9 @@ const Topbar = () => {
 
   return (
     <Box sx={{ display: "flex", justifyContent: "space-between", p: 2 }}>
-      <IconButton
-        size="large"
-        aria-label="account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
-        color="primary"
-        sx={{
-          backgroundColor: "white",
-          "&:hover": {
-            backgroundColor: "white",
-          },
-        }}
-      >
-        <img src={logo} alt="logo" />
-      </IconButton>
+      <Typography as="h4">
+        Admin DashBoard
+      </Typography>
 
       <Box sx={{ display: "flex" }}>
         <IconButton onClick={colorMode.toggleColorMode}>
