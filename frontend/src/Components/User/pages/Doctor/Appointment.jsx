@@ -15,7 +15,7 @@ import KhaltiCheckout from "khalti-checkout-web";
 import toast from "react-hot-toast";
 
 import { Box } from "@mui/system";
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -109,6 +109,17 @@ export default function Cart() {
 
   return (
     <>
+
+    <Grid container sx={{display:"flex" ,flexDirection:'column'}}>
+      <Grid item sx={{
+        marginTop:"20px",
+        marginBottom:"20px"
+      }}>
+      <Typography variant="h4" align="center" gutterBottom>
+            User DashBoard
+          </Typography>
+      </Grid >
+      <Grid item>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 600 }} aria-label="customized table">
           <TableHead>
@@ -179,6 +190,10 @@ export default function Cart() {
           </TableBody>
         </Table>
       </TableContainer>
+      </Grid>
+       
+    </Grid>
+     
     </>
   );
 }

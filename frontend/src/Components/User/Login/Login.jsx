@@ -10,7 +10,6 @@ import * as yup from "yup";
 function LoginForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
- 
 
   const initialValues = {
     username: "",
@@ -40,12 +39,9 @@ function LoginForm() {
         toast.success(" admin login successfully");
       }
     } catch (error) {
-      
-
       toast.error(error);
     }
   };
-
 
   const validationSchema = yup.object({
     username: yup.string().required("Username must be required"),
@@ -54,7 +50,16 @@ function LoginForm() {
 
   return (
     <>
-      <Container maxWidth="xs" sx={{display:"flex" ,justifyContent:"center",alignItems:"center",flexDirection:"column",minHeight:"70vh"}}>
+      <Container
+        maxWidth="xs"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          minHeight: "70vh",
+        }}
+      >
         <Typography variant="h4" align="center" gutterBottom>
           Login
         </Typography>
@@ -67,27 +72,29 @@ function LoginForm() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Field
-                 as={TextField}
+                  as={TextField}
                   type="text"
                   label="Username"
                   variant="outlined"
                   name="username"
                   fullWidth
                 />
-                <ErrorMessage name="username"  component="div"
-                    sx={{ color: "red" }} />
+                <ErrorMessage
+                  name="username"
+                  component="div"
+                  sx={{ color: "red" }}
+                />
               </Grid>
               <Grid item xs={12}>
                 <Field
-                as={TextField}
+                  as={TextField}
                   type="password"
                   label="Password"
                   variant="outlined"
                   name="password"
                   fullWidth
                 />
-                <ErrorMessage name="password"  as="div"
-                    sx={{ color: "red" }} />
+                <ErrorMessage name="password" as="div" sx={{ color: "red" }} />
               </Grid>
 
               <Grid item xs={12}>

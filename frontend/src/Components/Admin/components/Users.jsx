@@ -99,7 +99,7 @@ export default function Users() {
       renderCell: (params) => (
         params.row.status !== "checked" ? (
           <Button onClick={() => handleSave(params.row)} style={{ color: 'white' }}>
-            Pay
+            Add 
           </Button>):
           (
             <span>

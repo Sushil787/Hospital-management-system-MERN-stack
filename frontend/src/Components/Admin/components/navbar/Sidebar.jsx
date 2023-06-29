@@ -1,23 +1,15 @@
-import React from 'react'
-import {useState} from 'react'
-import {ProSidebar,Menu, MenuItem } from 'react-pro-sidebar';
-import {Box, IconButton, Typography, useTheme} from '@mui/material'
-import {Link} from 'react-router-dom'   
-import { tokens } from '../../theme'
+import React from "react";
+import { useState } from "react";
+import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Link } from "react-router-dom";
+import { tokens } from "../../theme";
 import "react-pro-sidebar/dist/css/styles.css";
-import { HomeOutlined, PersonOutlined } from '@mui/icons-material'
-import { PeopleOutline } from '@mui/icons-material'
-import { ContactsOutlined } from '@mui/icons-material'
-import { ReceiptOutlined } from '@mui/icons-material'
-import { CalendarTodayOutlined } from '@mui/icons-material'
-import { HelpOutlined } from '@mui/icons-material'
-import { BarChartOutlined } from '@mui/icons-material'
-import { PieChartOutlined } from '@mui/icons-material'
-import { TimelineOutlined } from '@mui/icons-material'
-import { MenuOutlined } from '@mui/icons-material'
-import { MapOutlined } from '@mui/icons-material'
+import { HomeOutlined } from "@mui/icons-material";
 
+import { HelpOutlined } from "@mui/icons-material";
 
+import { MenuOutlined } from "@mui/icons-material";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -38,8 +30,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 };
 
 const Sidebar1 = () => {
-
-    const theme = useTheme();
+  const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
@@ -62,7 +53,7 @@ const Sidebar1 = () => {
         "& .pro-menu-item.active": {
           color: "#6870fa !important",
         },
-        minHeight:"100vh"
+        minHeight: "100vh",
       }}
     >
       <ProSidebar collapsed={isCollapsed}>
@@ -93,24 +84,15 @@ const Sidebar1 = () => {
             )}
           </MenuItem>
 
-        
-
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Doctors"
               to="/"
-              icon={<HomeOutlined/>}
+              icon={<HomeOutlined />}
               selected={selected}
               setSelected={setSelected}
             />
 
-           
-           
-           
-           
-
-           
-            
             <Item
               title="Users"
               to="/Users"
@@ -118,18 +100,11 @@ const Sidebar1 = () => {
               selected={selected}
               setSelected={setSelected}
             />
-
-           
-           
-            
-           
-            
           </Box>
         </Menu>
       </ProSidebar>
     </Box>
   );
-}
+};
 
 export default Sidebar1;
-

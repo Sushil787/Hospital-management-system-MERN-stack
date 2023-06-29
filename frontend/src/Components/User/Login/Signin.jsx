@@ -1,25 +1,14 @@
 import React from "react";
-import {
-  TextField,
-  Button,
-  Grid,
-  Typography,
-  Container,
-} from "@mui/material";
+import { TextField, Button, Grid, Typography, Container } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
 import toast from "react-hot-toast";
 
-import { useDispatch ,useSelector} from "react-redux";
-
-
-
 function SignUpForm() {
- 
   const Navigate = useNavigate();
- 
+
   const initialValues = {
     username: "",
     email: "",
@@ -39,13 +28,12 @@ function SignUpForm() {
 
   const onSubmit = async (values) => {
     try {
-      
       const response = await axios.post(
         "http://localhost:8080/signup",
 
         values
       );
-      
+
       console.log(response);
 
       Navigate("/login");
@@ -61,67 +49,76 @@ function SignUpForm() {
       }
     }
   };
-  return (<>
-      
-    <Container maxWidth="xs" sx={{display:"flex" ,justifyContent:"center",alignItems:"center",flexDirection:"column",minHeight:"70vh"}}>
-      <Typography variant="h4" align="center" gutterBottom>
-        Sign Up
-      </Typography>
-      <Formik
-        validationSchema={validationSchema}
-        initialValues={initialValues}
-        onSubmit={onSubmit}
+  return (
+    <>
+      <Container
+        maxWidth="xs"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          minHeight: "70vh",
+        }}
       >
-        <Form>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Field
-                as={TextField}
-                type="text"
-                label="Username"
-                variant="outlined"
-                name="username"
-                fullWidth
-              />
-              <ErrorMessage name="username" />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                as={TextField}
-                type="email"
-                label="Email"
-                variant="outlined"
-                name="email"
-                fullWidth
-              />
-              <ErrorMessage name="email" />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                as={TextField}
-                type="password"
-                label="Password"
-                variant="outlined"
-                name="password"
-                fullWidth
-              />
-              <ErrorMessage name="password" />
-            </Grid>
+        <Typography variant="h4" align="center" gutterBottom>
+          Sign Up
+        </Typography>
+        <Formik
+          validationSchema={validationSchema}
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+        >
+          <Form>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Field
+                  as={TextField}
+                  type="text"
+                  label="Username"
+                  variant="outlined"
+                  name="username"
+                  fullWidth
+                />
+                <ErrorMessage name="username" />
+              </Grid>
+              <Grid item xs={12}>
+                <Field
+                  as={TextField}
+                  type="email"
+                  label="Email"
+                  variant="outlined"
+                  name="email"
+                  fullWidth
+                />
+                <ErrorMessage name="email" />
+              </Grid>
+              <Grid item xs={12}>
+                <Field
+                  as={TextField}
+                  type="password"
+                  label="Password"
+                  variant="outlined"
+                  name="password"
+                  fullWidth
+                />
+                <ErrorMessage name="password" />
+              </Grid>
 
-            <Grid item xs={12}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                fullWidth
-              >
-                Sign Up
-              </Button>
+              <Grid item xs={12}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                >
+                  Sign Up
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
-        </Form>
-      </Formik>
-    </Container>
+          </Form>
+        </Formik>
+      </Container>
     </>
   );
 }

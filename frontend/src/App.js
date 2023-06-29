@@ -1,4 +1,4 @@
-import { Grid, Box, Button } from "@mui/material";
+import { Grid, Box} from "@mui/material";
 import Navbar from "./Components/User/Navbar/Navbar";
 import { Routes, Route } from "react-router-dom";
 import Footer from "./Components/User/Footer/Footer";
@@ -13,8 +13,8 @@ import About from "./Components/User/pages/About/About";
 import Doctor from "./Components/User/pages/Doctor/Doctor";
 import PrivateRoutes from "./Privateroutes";
 import Form from "./Components/User/pages/Doctor/Form";
-import { useSelector } from "react-redux";
-import { useEffect ,useState} from "react";
+
+import {useState} from "react";
 import Dashboard from "./Components/Admin/Dashboard";
 import PagenotFound from "./Components/User/pages/PagenotFound";
 import Appointment from "./Components/User/pages/Doctor/Appointment";
@@ -54,6 +54,8 @@ function App() {
               <Route path="/form/:id" Component={Form} />
                  <Route path="/appointment" Component={Appointment} />
                 </Route>
+
+                <Route path="*" Component={PagenotFound} />
                
                
                </Routes>

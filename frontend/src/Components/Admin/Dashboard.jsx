@@ -5,7 +5,7 @@ import { ColorModeContext, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import Doctors from './components/Doctors';
 import Users from './components/Users';
-import {Routes,Route, BrowserRouter} from 'react-router-dom'
+import {Routes,Route} from 'react-router-dom'
 
 const Dashboard = () => {
   const [theme, colorMode] = useMode();

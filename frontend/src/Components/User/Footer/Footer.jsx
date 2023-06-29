@@ -53,9 +53,14 @@ const Footer = () => {
               sx={{ width: "80px", height: "80px" }}
             >
               <img
+              style={{
+                borderRadius: "60%",
+                width: 100,
+                height: 100,
+              }}
                 src={logo}
                 alt="logo"
-                sx={{ width: "100%", height: "auto" }}
+               
               />
             </IconButton>
           </Grid>
@@ -95,24 +100,7 @@ const Footer = () => {
                 </Link>
               </Typography>
             </Box>
-            <Paper
-              component="form"
-              sx={{
-                p: "2px 4px",
-                display: "flex",
-                alignItems: "center",
-                marginTop: "1rem",
-              }}
-            >
-              <InputBase
-                sx={{ ml: 1, flex: 1 }}
-                placeholder="Comment"
-                inputProps={{ "aria-label": "comment" }}
-              />
-              <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-                <SendIcon />
-              </IconButton>
-            </Paper>
+         
           </Grid>
         </Grid>
         <Divider sx={{ width: "100%", my: 2 }} />

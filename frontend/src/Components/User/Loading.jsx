@@ -10,7 +10,7 @@ export default function SimpleBackdrop({isloading}) {
     <div>
       
       <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 , backgroundColor:"black"}}
         open={isloading}
        
       >

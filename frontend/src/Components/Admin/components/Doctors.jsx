@@ -27,10 +27,9 @@ const columns = [
     renderCell: (params) => {
       const handleDelete = async () => {
         const token = localStorage.getItem("jwt");
-        // console.log(token);
-        // console.log(params.row._id);
+       
         try {
-          const response = await axios.delete(
+          await axios.delete(
             `http://localhost:8080/doctor/${params.row._id}`,
             {
               headers: {
@@ -61,7 +60,7 @@ export default function DataGridDemo() {
           authorization: localStorage.getItem("jwt"),
         },
       });
-      // console.log(response.data);
+     
 
       const rowsWithId = response.data.doctors.map((row, index) => ({
         id: index + 1,

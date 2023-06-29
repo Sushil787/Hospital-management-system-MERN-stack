@@ -16,10 +16,10 @@ export const getpatient = createAsyncThunk('getacrt', async () => {
             
           },
       });
-    //   console.log(response.data)
+    
       return response.data;
     } catch (error) {
-      // Handle any errors
+      
       throw error;
     }
   });

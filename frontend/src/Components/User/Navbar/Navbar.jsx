@@ -1,4 +1,4 @@
-import{ React,  useState } from "react";
+import { React, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -21,7 +21,6 @@ import { Link, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../slices/Loginslice";
-
 import logo from "../assets/logo.png";
 
 const Navbar = () => {
@@ -54,8 +53,8 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar sx={{ background: "#edf0ed" ,position:"relative" }} >
-        <Toolbar sx={{justifyContent:"space-between"}}>
+      <AppBar sx={{ background: "#edf0ed", position: "sticky" ,top:"50px" }}>
+        <Toolbar sx={{ justifyContent: "space-between" }}>
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -65,16 +64,35 @@ const Navbar = () => {
             component={Link}
             to="/"
           >
-            <img src={logo} alt="logo" />
+            <img
+              style={{
+                borderRadius: "60%",
+                width: 100,
+                height: 100,
+              }}
+              src={logo}
+              alt="logo"
+            />
           </IconButton>
 
           {isMatch ? (
             <Drawor />
           ) : (
             <>
-              <List sx={{ display: "flex", flexDirection: "row", gap:"10px", color:"black" }}>
+              <List
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: "10px",
+                  color: "black",
+                }}
+              >
                 <ListItem>
-                  <ListItemButton component={Link} to="/" sx={{ textAlign: "center" }}>
+                  <ListItemButton
+                    component={Link}
+                    to="/"
+                    sx={{ textAlign: "center" }}
+                  >
                     <ListItemText primary="Home" />
                   </ListItemButton>
                 </ListItem>
