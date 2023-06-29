@@ -14,17 +14,48 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import axios from "axios";
+import toast from 'react-hot-toast'
 
 const AppointmentForm = () => {
+  const [doctor,setDoctor]=useState()
  
-  const data = useSelector((state) => state.doctor);
+  const { id } = useParams();
+  
   const token = localStorage.getItem("jwt");
 
-  const { id } = useParams();
-  const doctor = data.doctor.doctors.find((item) => item._id === id);
-  const { _id, name, expertise, image } = doctor;
+  const doctorDetails= async(id)=>{
+    try{
+      const {data}= await axios.get(`http://localhost:8080/public/doctor/${id}`,{headers:{
+        authorization:token
+      }})
+      
+    setDoctor(data.data)
+    toast.success(data.message)
+    
+
+    }
+    catch(error)
+    {
+      
+      toast.error(error.message)
+    }
+
+   
+
+
+  }
+
+
+  React.useEffect(()=>{
+      doctorDetails(id)
+
+  },[id])
+ 
+ 
+ 
+
   const [appointmentData, setAppointmentData] = useState({
-    doctor: _id,
+    doctor:id,
     disease: "",
     date: "",
     // status:''
@@ -41,7 +72,7 @@ const AppointmentForm = () => {
   const submithandler = async (event) => {
     event.preventDefault();
 
-    console.log(appointmentData);
+   
 
     try {
       const res = await axios.post(
@@ -55,8 +86,11 @@ const AppointmentForm = () => {
           },
         }
       );
-      console.log(res);
-    } catch (error) {}
+      toast.success(res.data.message)
+    } catch (error) {
+      console.log(error)
+      toast.danger(error.message)
+    }
     // Reset the form
     setAppointmentData({
       disease: "",
@@ -65,8 +99,14 @@ const AppointmentForm = () => {
     });
   };
 
+ 
+
+  
+
   return (
     <>
+    {doctor&&
+      <>
       <Grid
         container
         sx={{ mt: "20px", display: "flex", justifyContent: "space-evenly" }}
@@ -86,8 +126,8 @@ const AppointmentForm = () => {
             }}
           >
             <img
-              src={image}
-              alt={name}
+              src={doctor?.image}
+              alt={doctor?.name}
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
           </Box>
@@ -105,7 +145,7 @@ const AppointmentForm = () => {
           }}
         >
           <Typography variant="h6" sx={{ textAlign: "center" }}>
-            Name: {name}
+            Name: {doctor?.name}
           </Typography>
           <Divider />
           <Typography variant="h6" sx={{ textAlign: "center",paddingTop:"30px" }}>
@@ -120,7 +160,7 @@ const AppointmentForm = () => {
               },
             }}
           >
-            {expertise.map((item) => {
+            {doctor?.expertise.map((item) => {
               return <ListItem>{item}</ListItem>;
             })}
           </List>
@@ -207,6 +247,8 @@ const AppointmentForm = () => {
           </Grid>
         </Grid>
       </Grid>
+      </>
+}
     </>
   );
 };

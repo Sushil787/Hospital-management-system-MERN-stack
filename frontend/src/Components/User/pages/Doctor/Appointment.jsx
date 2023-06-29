@@ -12,11 +12,10 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import KhaltiCheckout from "khalti-checkout-web";
 
-import toast from 'react-hot-toast'
+import toast from "react-hot-toast";
 
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
-
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -38,46 +37,37 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-
-
 export default function Cart() {
-  const [id,setId]=React.useState(null)
+  const [id, setId] = React.useState(null);
+
+  const [selectedInvoice, setSelectedInvoice] = React.useState(null);
 
   const dispatch = useDispatch();
   const tokens = localStorage.getItem("jwt");
 
-
-  const MakePayment = async () => {
- 
-   
-  
-        try {
-
-        const response = await axios.post(
-          "http://localhost:8080/patient/payment",
-          {
-            status:'paid',
-            _id:id
+  const MakePayment = async (id) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/patient/payment",
+        {
+          status: "paid",
+          _id: id,
+        },
+        {
+          headers: {
+            authorization: tokens,
           },
-          {
-            headers: {
-              authorization: tokens
-    
-            },
-          }
-        );
-    
-        console.log(response.data);
-        toast.success("payment successfull!!!")
-        setId(null)
-      } catch (error) {
-        console.log(error.message);
-      }
-    
-    
+        }
+      );
+
+      console.log(response.data);
+      toast.success("payment successfull!!!");
+      setId(null);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   const Config = {
-  
     publicKey: "test_public_key_2a7f2e2188034b8c8afe09bba670bd67",
     productIdentity: "123766",
     productName: "My Ecommerce Store",
@@ -85,10 +75,8 @@ export default function Cart() {
     eventHandler: {
       onSuccess(payload) {
         console.log(payload);
-      
-        MakePayment()
-      
-        
+
+        MakePayment(id);
       },
       onError(error) {
         console.log(error);
@@ -111,7 +99,13 @@ export default function Cart() {
 
   React.useEffect(() => {
     dispatch(getpatient());
-  }, [dispatch,id]);
+  }, [dispatch, id]);
+
+  React.useEffect(() => {
+    if (id && selectedInvoice) {
+      checkout.show({ amount: selectedInvoice * 100 });
+    }
+  }, [id, selectedInvoice]);
 
   return (
     <>
@@ -121,67 +115,64 @@ export default function Cart() {
             <TableRow>
               <StyledTableCell>Doctors Name</StyledTableCell>
 
-              <StyledTableCell align="right">Disease</StyledTableCell>
-              <StyledTableCell align="right">Date</StyledTableCell>
-              <StyledTableCell align="right">Status</StyledTableCell>
-              <StyledTableCell align="right">Invoice</StyledTableCell>
-              <StyledTableCell align="right">Pay Now</StyledTableCell>
+              <StyledTableCell align="left">Disease</StyledTableCell>
+              <StyledTableCell align="left">Date</StyledTableCell>
+              <StyledTableCell align="left">Status</StyledTableCell>
+              <StyledTableCell align="left">Invoice</StyledTableCell>
+              <StyledTableCell align="left">Pay Now</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {appointment?.list?.user_appointments?.map((item) => (
               <StyledTableRow key={item._id}>
-                <StyledTableCell align="right">
+                <StyledTableCell align="left">
                   {item.doctor.name}
                 </StyledTableCell>
-                <StyledTableCell align="right">{item.disease}</StyledTableCell>
-                <StyledTableCell align="right">{item.date}</StyledTableCell>
-                <StyledTableCell align="right">{item.status}</StyledTableCell>
-                <StyledTableCell align="right">{item.invoice}</StyledTableCell>
-                <StyledTableCell align="right">
-               
-                  {
-                    item.status === "checked" ? (
-                      item.payment === "paid" ? (
-                        <Typography>Paid</Typography>
-                      ) : (
-                        <Box
-                          sx={{
-                            display: "inline-block",
-                            backgroundColor: "purple",
-                            padding: "10px",
-                            color: "white",
-                            cursor: "pointer",
-                            fontWeight: "bold",
-                            border: "1px solid white",
+                <StyledTableCell align="left">{item.disease}</StyledTableCell>
+                <StyledTableCell align="left">{item.date}</StyledTableCell>
+                <StyledTableCell align="left">{item.status}</StyledTableCell>
+                <StyledTableCell align="left">{item.invoice}</StyledTableCell>
+                <StyledTableCell align="left">
+                  {item.status === "checked" ? (
+                    item.payment === "paid" ? (
+                      <Typography>Paid</Typography>
+                    ) : (
+                      <Box
+                        sx={{
+                          display: "inline-block",
+                          backgroundColor: "purple",
+                          padding: "10px",
+                          color: "white",
+                          cursor: "pointer",
+                          fontWeight: "bold",
+                          border: "1px solid white",
+                        }}
+                      >
+                        <button
+                          onClick={() => {
+                            // setId(item._id)
+                            // if(id)
+                            // {
+                            //   checkout.show({ amount: item.invoice * 100})
+                            // }
+                            setId(item._id);
+                            setSelectedInvoice(item.invoice);
+                          }}
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "inherit",
+                            cursor: "inherit",
+                            padding: 0,
                           }}
                         >
-                          <button
-                            onClick={() =>
-                              {
-                              checkout.show({ amount: item.invoice * 10})
-                              setId(item._id)
-                              }
-                              
-                            }
-                            style={{
-                              backgroundColor: "transparent",
-                              border: "none",
-                              color: "inherit",
-                              cursor: "inherit",
-                              padding: 0,
-                            }}
-                          >
-                            Pay Via Khalti
-                          </button>
-                        </Box>
-                      )
-                    ) : (
-                      <Typography>Pending</Typography>
+                          Pay Via Khalti
+                        </button>
+                      </Box>
                     )
-
-                  
-                  }
+                  ) : (
+                    <Typography>Pending</Typography>
+                  )}
                 </StyledTableCell>
               </StyledTableRow>
             ))}

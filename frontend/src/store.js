@@ -5,7 +5,7 @@ import Loginslice from "./Components/User/slices/Loginslice"
 import {alertSlice} from "./Components/User/slices/Loadingslice";
 import thunk from "redux-thunk";
 import getPatients  from "./Components/User/slices/patientSlice";
-import idslice from "./Components/User/slices/idslice";
+
 export const store = configureStore({
   reducer: {
     doctor: getDoctor,
@@ -13,7 +13,7 @@ export const store = configureStore({
     loading:alertSlice.reducer,
     patient: getPatients,
     service:getService,
-    id:idslice
+
   },
   middleware:[thunk]
 });
