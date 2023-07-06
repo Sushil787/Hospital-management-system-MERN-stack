@@ -68,7 +68,7 @@ export default function Cart() {
     }
   };
   const Config = {
-    publicKey: "test_public_key_2a7f2e2188034b8c8afe09bba670bd67",
+    publicKey: process.env.KHALTI_PUBLIC_KEY,
     productIdentity: "123766",
     productName: "My Ecommerce Store",
     productUrl: "http://localhost:3000",
