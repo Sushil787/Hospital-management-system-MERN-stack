@@ -54,7 +54,7 @@ A web application for managing hospital operations, appointments, and payments.
 - On `.env` file in the `backend` directory.
 
 - Add the necessary environment variables such as database connection details, SECRET keys for external services, etc.
-4. Start the development server:
-```npm run dev ```
+4. Start backend server in different port on localhost:
+```npm start ```
 5. Start front end server in different port on local host
 ```npm start ```

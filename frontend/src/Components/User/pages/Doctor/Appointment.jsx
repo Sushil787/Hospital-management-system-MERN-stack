@@ -137,15 +137,15 @@ export default function Cart() {
             {appointment?.list?.user_appointments?.map((item) => (
               <StyledTableRow key={item._id}>
                 <StyledTableCell align="left">
-                  {item.doctor.name}
+                  {item?.doctor?.name}
                 </StyledTableCell>
-                <StyledTableCell align="left">{item.disease}</StyledTableCell>
-                <StyledTableCell align="left">{item.date}</StyledTableCell>
-                <StyledTableCell align="left">{item.status}</StyledTableCell>
-                <StyledTableCell align="left">{item.invoice}</StyledTableCell>
+                <StyledTableCell align="left">{item?.disease}</StyledTableCell>
+                <StyledTableCell align="left">{item?.date}</StyledTableCell>
+                <StyledTableCell align="left">{item?.status}</StyledTableCell>
+                <StyledTableCell align="left">{item?.invoice}</StyledTableCell>
                 <StyledTableCell align="left">
-                  {item.status === "checked" ? (
-                    item.payment === "paid" ? (
+                  {item?.status === "checked" ? (
+                    item?.payment === "paid" ? (
                       <Typography>Paid</Typography>
                     ) : (
                       <Box
@@ -166,7 +166,7 @@ export default function Cart() {
                             // {
                             //   checkout.show({ amount: item.invoice * 100})
                             // }
-                            setId(item._id);
+                            setId(item?._id);
                             setSelectedInvoice(item.invoice);
                           }}
                           style={{
