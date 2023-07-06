@@ -47,14 +47,53 @@ A web application for managing hospital operations, appointments, and payments.
 ```git clone https://github.com/your-username/hospital-management-web-app.git```
 
 2. Install the dependencies for the frontend and backend:
+2.1 for frontend
 
-4. Configure the environment variables:
 
 
-- On `.env` file in the `backend` directory.
 
-- Add the necessary environment variables such as database connection details, SECRET keys for external services, etc.
-4. Start backend server in different port on localhost:
-```npm start ```
-5. Start front end server in different port on local host
-```npm start ```
+
+
+```bash
+  cd  frontend 
+  npm install
+```
+
+2.2 for backend
+```bash 
+cd backend 
+npm  install```
+
+
+
+```
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+DB_URL=Go to Mnogo Atlat and add clusture link here :
+SECRET_KEY =Secret key for jwt:
+
+USER_NAME=Add Admin :
+
+PASSWORD=Add Admin password:
+
+EMAIL= add admin email:
+
+KHALTI_SECRET_KEY=Your KHALTI_SECRET_KEY:
+
+KHALTI_PUBLIC_KEY=Your KHALTI_PUBLIC_KEY:
+
+
+## How to run program
+
+To run program go to folder 
+ ```bash 
+ cd frontend
+     npm start
+
+  cd backend 
+    npm start 
+
+    
+
