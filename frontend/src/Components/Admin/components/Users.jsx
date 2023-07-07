@@ -18,12 +18,13 @@ export default function Users() {
           authorization: localStorage.getItem('jwt'),
         },
       });
-      console.log(response)
+      
       setAppointments(response.data.all_appointments);
     } catch (error) {
       console.log(error);
     }
   };
+  console.log(appointments)
 
   const handleSave = async (appointment) => {
     try {
@@ -51,9 +52,23 @@ export default function Users() {
   };
 
   const columns = [
-    { field: '_id', headerName: 'ID', width: 150 },
-    { field: 'user', headerName: 'User Name', width: 150 },
+
+{field:'_id', headerName:"ID", width:150},
+    {
+      field: 'user',
+      headerName: 'User Name',
+      width: 150,
+      renderCell: (params) => {
+        const userName = params.row.user.username;
+        return userName;
+      }
+    },
+  
+  
+   
+  
     { field: 'disease', headerName: 'Disease', width: 100 },
+    
     { field: 'date', headerName: 'Date', width: 150 },
     {
       field: 'status',
