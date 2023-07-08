@@ -66,7 +66,7 @@ const update_appointment = async (req, res) => {
 const all_appointments = async (req, res) => {
     try {
 
-        const all_appointments = await appointments.find({}).populate("doctor");
+        const all_appointments = await appointments.find({}).populate("doctor").populate("user");
         if (!all_appointments) {
             return res
                 .status(401)
