@@ -70,7 +70,8 @@ Hospital Management System in mern stack. This system has a ‘Home’ page from
 
 
 
-##Contact us page
+## Contact us page
+
 ‘Contact’ page allows users to provide feedback or queries about the services of the hospital. 
 ![contact page](<Screenshot (9).png>)
 
@@ -92,7 +93,7 @@ After Login in successfully user book their  Appointment. The appointment form r
 After the process of Appointment is completed.Administrator add the invoice for each Appointment.
 
 
-![admin ](<Screenshot (16).png>)
+![add invoice](<Screenshot (20)-1.png>)
 
 
 ## payment 
@@ -113,7 +114,7 @@ After the process of Appointment is completed.Administrator add the invoice for 
    This module is the heart of our project where an admin can see the list of all patients. Admin also can add the invoice for each user..who make a appointment of doctor. Admin can also Add docotor ,Delete Doctor.
 
    
-![admin-user](<Screenshot (16)-1.png>)
+![admin-user](<Screenshot (20).png>)
 
 
 ![admin-doctor](<Screenshot (19).png>)
