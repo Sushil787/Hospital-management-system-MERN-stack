@@ -4,9 +4,9 @@ import AboutImage from './AboutImg';
 
 const AboutUs = () => {
   return (
-    <Container maxWidth="xl" >
+    <Container maxWidth="xl"   >
       <AboutImage/>
-      <Typography variant="h4" component="h1" style={{ marginBottom: '1rem' }}>
+      <Typography variant="h4" component="h1" style={{ marginBottom: '1rem', marginTop: '2rem' ,}}>
         About Us
       </Typography>
       <Typography variant="body1" paragraph>
@@ -57,9 +57,9 @@ const AboutUs = () => {
         will be happy to assist you.
       </Typography>
       <Typography variant="body1" paragraph>
-        Phone: 123-456-7890
+        Phone: +977-9862164447
         <br />
-        Email: info@hospital.com
+        Email:  bastolaronak12@gmail.com
       </Typography>
     </Container>
   );

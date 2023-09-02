@@ -79,7 +79,7 @@ const Screen = () => {
                     Committed to success
                   </Typography>
                   <Typography
-                    variant="h1"
+                    variant="h2"
                     component="h1"
                     className="cd-headline letters scale"
                   >
@@ -92,6 +92,7 @@ const Screen = () => {
                     variant="body1"
                     data-animation="fadeInLeft"
                     data-delay="0.1s"
+                    fontSize={20}
                   >
                     Efficient hospital management system streamlining
                     operations, enhancing patient care, and optimizing resource

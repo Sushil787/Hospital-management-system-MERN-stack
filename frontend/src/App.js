@@ -50,14 +50,14 @@ function App() {
 
                 <Route path="/login" Component={LoginForm} />
 
+{/* scope of private routes */}
                 <Route Component={PrivateRoutes}>
               <Route path="/form/:id" Component={Form} />
                  <Route path="/appointment" Component={Appointment} />
                 </Route>
-
+{/* scope of private routes */}
+                
                 <Route path="*" Component={PagenotFound} />
-               
-               
                </Routes>
            </Box>
           </Grid>

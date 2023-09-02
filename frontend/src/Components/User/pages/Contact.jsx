@@ -27,7 +27,7 @@ const ContactUsPage = () => {
             <Box display="flex" alignItems="center">
               <Email sx={{ mr: 1 }} />
               <Typography variant="body1">
-                Email: example@hospital.com
+                Email: bastolaronak12@gmail.com
               </Typography>
             </Box>
           </Grid>
@@ -35,7 +35,7 @@ const ContactUsPage = () => {
             <Box display="flex" alignItems="center">
               <Phone sx={{ mr: 1 }} />
               <Typography variant="body1">
-                Phone: +1234567890
+                Phone: +977-9862164447
               </Typography>
             </Box>
           </Grid>
@@ -50,7 +50,7 @@ const ContactUsPage = () => {
               <Box display="flex" alignItems="center">
                 <LocationOn sx={{ mr: 1 }} />
                 <Typography variant="body1">
-                  Hospital Address Line 1
+                   Kathmandu,Kritipur
                 </Typography>
               </Box>
             </Grid>
@@ -58,7 +58,7 @@ const ContactUsPage = () => {
               <Box display="flex" alignItems="center">
                 <LocationOn sx={{ mr: 1 }} />
                 <Typography variant="body1">
-                  Hospital Address Line 2
+                 Panga, Kritpur
                 </Typography>
               </Box>
             </Grid>

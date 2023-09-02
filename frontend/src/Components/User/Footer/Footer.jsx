@@ -68,13 +68,7 @@ const Footer = () => {
             <Box>
               <Typography variant="body2">About us</Typography>
               <Typography variant="body2">
-                Building up on these experiences and based on the national need,
-                Bir Hospital was developed into the National Academy of Medical
-                Sciences (NAMS) on its glorious 114 years in 2002. This was
-                another landmark achievement in the fields of medical education
-                and health services which has provided great optimism and
-                opportunities for the doctors working under the Ministry of
-                Health to teach and to be taught.
+              we are dedicated to delivering exceptional healthcare services that cater to your physical, emotional, and mental well-being. As a leading healthcare institution, we have been serving our community for 10 years with unwavering commitment and a mission to promote health and healing.
               </Typography>
             </Box>
           </Grid>
@@ -85,18 +79,18 @@ const Footer = () => {
             sx={{ textAlign: { xs: "center", sm: "left" } }}
           >
             <Box gap={2}>
-              <Typography variant="body2"> contact:+977 9876543212</Typography>
+              <Typography variant="body2"> contact: +977-9862164447</Typography>
               <Typography
                 variant="body2"
                 sx={{ display: "flex", alignItems: "center" }}
               >
                 <span>Email: </span>
                 <Link
-                  href="mailto:niroj.satyal2000@gmail.com"
+                  href="mailto:bastolaronak12@gmail.com"
                   color="inherit"
                   sx={{ marginLeft: "4px" }}
                 >
-                  abc@gmail.com
+                   bastolaronak12@gmail.com
                 </Link>
               </Typography>
             </Box>

@@ -5,7 +5,7 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
 import "react-pro-sidebar/dist/css/styles.css";
-import { HomeOutlined } from "@mui/icons-material";
+import { HomeOutlined, Message } from "@mui/icons-material";
 
 import { HelpOutlined } from "@mui/icons-material";
 
@@ -97,6 +97,13 @@ const Sidebar1 = () => {
               title="Users"
               to="/Users"
               icon={<HelpOutlined />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+             <Item
+              title="Messages"
+              to="/Users"
+              icon={<Message />}
               selected={selected}
               setSelected={setSelected}
             />

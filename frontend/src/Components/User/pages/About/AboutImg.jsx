@@ -15,7 +15,7 @@ const StyledSliderArea = styled("div")`
   background-position: center;
   display: flex;
   align-items: center;
-  opacity: 0.8;
+  opacity: 0.9;
   height: 75vh;
   
 
@@ -24,7 +24,7 @@ const StyledSliderArea = styled("div")`
       opacity: 0;
     }
     50% {
-      opacity: 1;
+      opacity: 0;
     }
     100% {
       opacity: 0;
@@ -72,6 +72,7 @@ const AboutImage = () => {
                 variant="body1"
                 data-animation="fadeInLeft"
                 data-delay="0.1s"
+                fontSize={20}
               >
                 Efficient hospital management system streamlining
                 operations, enhancing patient care, and optimizing resource
