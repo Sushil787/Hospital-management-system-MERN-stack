@@ -37,7 +37,7 @@ const Doctor = () => {
           return (
             <Grid
               item
-              sx={{ padding: "30px" }}
+              sx={{ padding: "10px" }}
               xs={12}
               sm={6}
               md={3}

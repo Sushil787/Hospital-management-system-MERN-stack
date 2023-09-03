@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, IconButton, Menu, useTheme, MenuItem, Typography } from "@mui/material";
 import { useContext } from "react";
 import { ColorModeContext} from "../../theme";
+import { useNavigate } from "react-router-dom";
 
 import { LightModeOutlined } from "@mui/icons-material";
 import { DarkModeOutlined } from "@mui/icons-material";
@@ -13,6 +14,7 @@ const Topbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const theme = useTheme();
+  const navigate=useNavigate()
   
   const colorMode = useContext(ColorModeContext);
 
@@ -55,6 +57,8 @@ const Topbar = () => {
           <MenuItem
             onClick={() => {
               localStorage.clear();
+              navigate("/")
+              
               window.location.reload("true");
             }}
           >

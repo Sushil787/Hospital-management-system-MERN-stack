@@ -104,6 +104,14 @@ const ContactUsPage = () => {
                   required
                 />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Contact Number"
+                  variant="outlined"
+                  fullWidth
+                  required
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   label="Message"

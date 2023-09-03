@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { loginAsync } from "../slices/Loginslice";
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
+import { Box } from "@mui/system";
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -69,7 +70,11 @@ function LoginForm() {
           onSubmit={onSubmit}
         >
           <Form>
-            <Grid container spacing={2}>
+            <Grid sx={{
+              
+            
+
+            }} container spacing={2}>
               <Grid item xs={12}>
                 <Field
                   as={TextField}
@@ -79,11 +84,13 @@ function LoginForm() {
                   name="username"
                   fullWidth
                 />
-                <ErrorMessage
-                  name="username"
-                  component="div"
+                <Box
+
                   sx={{ color: "red" }}
-                />
+                >
+                  <ErrorMessage name="username" />
+                </Box>
+                
               </Grid>
               <Grid item xs={12}>
                 <Field
@@ -94,7 +101,10 @@ function LoginForm() {
                   name="password"
                   fullWidth
                 />
-                <ErrorMessage name="password" as="div" sx={{ color: "red" }} />
+                <Box sx={{ color: "red" }}>
+                  <ErrorMessage name="password" />  
+                </Box>
+                {/* <ErrorMessage name="password" as="div" sx={{ color: "red" }} /> */}
               </Grid>
 
               <Grid item xs={12}>

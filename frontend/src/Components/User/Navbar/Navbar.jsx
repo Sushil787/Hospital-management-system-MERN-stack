@@ -53,8 +53,8 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar sx={{ background: "#edf0ed", position: "sticky" ,top:"50px" }}>
-        <Toolbar sx={{ justifyContent: "space-between" }}>
+      <AppBar sx={{ background: "#f3f7eb", position: "sticky" ,top:"0px" }}>
+        <Toolbar sx={{ justifyContent: "space-between" ,border:"none" }}>
           <IconButton
             size="large"
             aria-label="account of current user"

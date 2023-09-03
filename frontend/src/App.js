@@ -35,9 +35,9 @@ function App() {
       ) : (
         <>
           <Grid item xs={12} >
-            <Navbar sx={{ backgroundColor:"#acb2bd", opacity:"0.8"}} />
+            <Navbar sx={{ backgroundColor:"#acb2bd"}} />
           </Grid>
-          <Grid item xs={12} sx={{ minHeight: '80vh' , backgroundColor:"#acb2bd", opacity:"0.8" }}>
+          <Grid item xs={12} sx={{ minHeight: '80vh' , backgroundColor:"#dcfcec",  }}>
           <Box>
               <Routes>
                 <Route path="/" Component={Screen} />

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
 import toast from "react-hot-toast";
+import { Box } from "@mui/system";
 
 function SignUpForm() {
   const Navigate = useNavigate();
@@ -59,6 +60,7 @@ function SignUpForm() {
           alignItems: "center",
           flexDirection: "column",
           minHeight: "70vh",
+          backgroundColor: "#f5f5f5",
         }}
       >
         <Typography variant="h4" align="center" gutterBottom>
@@ -80,7 +82,10 @@ function SignUpForm() {
                   name="username"
                   fullWidth
                 />
+                <Box sx={{ color: "red" }}>
+
                 <ErrorMessage name="username" />
+                </Box>
               </Grid>
               <Grid item xs={12}>
                 <Field
@@ -91,7 +96,10 @@ function SignUpForm() {
                   name="email"
                   fullWidth
                 />
+                <Box sx={{ color: "red" }}>
+
                 <ErrorMessage name="email" />
+                </Box>
               </Grid>
               <Grid item xs={12}>
                 <Field
@@ -102,7 +110,9 @@ function SignUpForm() {
                   name="password"
                   fullWidth
                 />
+                <Box sx={{ color: "red" }}>
                 <ErrorMessage name="password" />
+                </Box>
               </Grid>
 
               <Grid item xs={12}>

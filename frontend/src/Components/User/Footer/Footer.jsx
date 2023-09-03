@@ -1,127 +1,178 @@
-import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Grid,
-  Link,
-  IconButton,
-  Box,
-  Paper,
-  InputBase,
-  Divider,
-} from "@mui/material";
-import { Facebook, Twitter, Language, Instagram } from "@mui/icons-material";
-import SendIcon from "@mui/icons-material/Send";
-import logo from "../assets/logo.png";
+
+
+
+
+import React from 'react';
+import { Avatar, Box, Chip, Container, Divider, Grid, Stack, styled, Typography } from '@mui/material';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import EmailIcon from '@mui/icons-material/Email';
+import HealingTwoToneIcon from '@mui/icons-material/HealingTwoTone';
+import CallIcon from '@mui/icons-material/Call';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+
+import { pink } from '@mui/material/colors';
+import { HashLink } from 'react-router-hash-link';
+import { NavLink } from 'react-router-dom';
+
+
+const Root = styled('div')(({ theme }) => ({
+    width: '100%',
+    ...theme.typography.body2,
+    '& > :not(style) + :not(style)': {
+        marginTop: theme.spacing(2),
+    },
+}));
+
+// copyright function for generate year automatically
+function Copyright(props) {
+    return (
+        <Typography variant="body2" color="text.secondary" align="center" {...props}>
+            {'Developed with 🖤 by '}
+            <strong><a className='text-style' href="#" target="_blank" rel="noreferrer noopener">ABC</a> </strong>{'Copyright ©'}
+            {new Date().getFullYear()}
+            {'.'}
+        </Typography>
+    );
+}
 
 const Footer = () => {
-  return (
-    <AppBar
-      position="static"
-      sx={{
-        backgroundColor: "black",
-      }}
-    >
-      <Toolbar
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          padding: "1rem",
-        }}
-      >
-        <Grid container justifyContent="space-between" alignItems="center">
-          <Grid
-            item
-            xs={12}
-            sm={3}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              color="primary"
-              component={Link}
-              to="/"
-              sx={{ width: "80px", height: "80px" }}
-            >
-              <img
-              style={{
-                borderRadius: "60%",
-                width: 100,
-                height: 100,
-              }}
-                src={logo}
-                alt="logo"
-               
-              />
-            </IconButton>
-          </Grid>
-          <Grid item xs={12} sm={4} md={2}>
-            <Box>
-              <Typography variant="body2">About us</Typography>
-              <Typography variant="body2">
-              we are dedicated to delivering exceptional healthcare services that cater to your physical, emotional, and mental well-being. As a leading healthcare institution, we have been serving our community for 10 years with unwavering commitment and a mission to promote health and healing.
-              </Typography>
+    return (
+        <footer>
+            <Box className='sticky-container' sx={{ bgcolor: '#acb0a5', color: 'text.secondary', mt:3 , pb: 2, top: 'auto' }}>
+                <Container maxWidth="xl">
+                    <Grid container
+                        spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                        <Grid sx={{ m: 'auto' }} item xs={12} sm={6} md={4}>
+                            <Box>
+                                <Typography
+                                    variant="h6"
+                                    component="div"
+                                    direction="row"
+                                    justifyContent="flex-start"
+                                    alignItems="center"
+                                    sx={{ mr: 2, display: { xs: 'flex', md: 'flex' } }}
+                                > <Avatar sx={{mt:1, mb: 1, mr: 1, bgcolor: 'white' }}>
+                                        <HealingTwoToneIcon
+                                            color='primary'
+                                            fontSize='large' />
+                                    </Avatar>
+                                    Health Haven Hospital
+                                </Typography>
+                                <Divider />
+                            </Box>
+
+                            <Stack direction="row"
+                                justifyContent="flex-start"
+                                alignItems="center"
+                                spacing={1} >
+                                <Avatar sx={{ mt: 1, bgcolor: pink[500] }}>
+                                    <LocationOnIcon />
+                                </Avatar><span>kathmandu ,Nepal</span>
+                            </Stack >
+
+                            <Stack direction="row"
+                                justifyContent="flex-start"
+                                alignItems="center"
+                                spacing={1} >
+                                <Avatar sx={{ mb: 1, mt: 1, bgcolor: pink[500] }}>
+                                    <EmailIcon />
+                                </Avatar>
+                                <a className='text-style' href="mailto:bastolaronak12@gmail.com">
+                                bastolaronak12@gmail.com
+                                </a>
+                            </Stack >
+
+                            <Stack direction="row"
+                                justifyContent="flex-start"
+                                alignItems="center"
+                                spacing={1} >
+                                <Avatar sx={{ mb: 1, bgcolor: pink[500] }}>
+                                    <CallIcon />
+                                </Avatar>
+                                <a className='text-style' href="tel:01680xxx86">
+                                +977-9862164447
+                                </a>
+                            </Stack >
+
+
+                        </Grid>
+
+                        {/* ----------service part ---------------*/}
+                        <Grid item xs={12} sm={4}>
+                            <Root>
+                                <Divider>
+                                    <Chip label="Our Services" />
+                                </Divider>
+                            </Root>
+
+                            <Box sx={{ p: 2 }}><NavLink className='text-style' to='/doctors' color='inherit'>Find a Doctor</NavLink></Box>
+
+                            <Box sx={{ p: 2 }}><NavLink className='text-style' to='/services' color='inherit'>All services</NavLink></Box>
+
+                            <Box sx={{ p: 2 }}><NavLink className='text-style' to='/doctors' color='inherit'>Make An Appointment</NavLink></Box>
+
+                            <Box sx={{ p: 2 }}><NavLink className='text-style' to='/contact' color='inherit'>Contact Us </NavLink></Box>
+                        </Grid>
+
+                        {/* ----------social media part ------------*/}
+
+                        <Grid item xs={12} sm={4}>
+                            <Root>
+                                <Divider>
+                                    <Chip label="Find us on social media" />
+                                </Divider>
+                            </Root>
+
+                            <Stack direction="row"
+                                justifyContent="flex-start"
+                                alignItems="center"
+                                spacing={1} >
+                                <Avatar sx={{ mb: 1, mt: 1, bgcolor: pink[500] }}>
+                                    <FacebookIcon />
+                                </Avatar>
+                                <a className='text-style' href="#" target="_blank" rel="noopener noreferrer" >
+                                    Facebook
+                                </a>
+                            </Stack >
+
+                            <Stack direction="row"
+                                justifyContent="flex-start"
+                                alignItems="center"
+                                spacing={1} >
+                                <Avatar sx={{ mb: 1, bgcolor: pink[500] }}>
+                                    <LinkedInIcon />
+                                </Avatar>
+                                <a className='text-style' href="#" target="_blank" rel="noopener noreferrer" >
+                                    LinkedIn
+                                </a>
+                            </Stack >
+
+                            <Stack direction="row"
+                                justifyContent="flex-start"
+                                alignItems="center"
+                                spacing={1} >
+                                <Avatar sx={{ mb: 1, bgcolor: pink[500] }}>
+                                    <GitHubIcon />
+                                </Avatar>
+                                <a className='text-style' href="#" target="_blank" rel="noopener noreferrer" >
+                                    GitHub
+                                </a>
+                            </Stack >
+
+
+                        </Grid>
+
+                    </Grid>
+                    <Divider sx={{ mb: 2 }} />
+                    <Copyright sx={{ mt: 5 }} />
+
+                </Container>
             </Box>
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={4}
-            sx={{ textAlign: { xs: "center", sm: "left" } }}
-          >
-            <Box gap={2}>
-              <Typography variant="body2"> contact: +977-9862164447</Typography>
-              <Typography
-                variant="body2"
-                sx={{ display: "flex", alignItems: "center" }}
-              >
-                <span>Email: </span>
-                <Link
-                  href="mailto:bastolaronak12@gmail.com"
-                  color="inherit"
-                  sx={{ marginLeft: "4px" }}
-                >
-                   bastolaronak12@gmail.com
-                </Link>
-              </Typography>
-            </Box>
-         
-          </Grid>
-        </Grid>
-        <Divider sx={{ width: "100%", my: 2 }} />
-        <Grid container justifyContent="center" alignItems="center">
-          <Grid
-            item
-            xs={12}
-            sm={4}
-            sx={{ display: "flex", justifyContent: "center" }}
-          >
-            <IconButton color="secondary" sx={{ mx: 1 }}>
-              <Facebook />
-            </IconButton>
-            <IconButton color="secondary" sx={{ mx: 1 }}>
-              <Twitter />
-            </IconButton>
-            <IconButton color="secondary" sx={{ mx: 1 }}>
-              <Instagram />
-            </IconButton>
-            <IconButton color="secondary" sx={{ mx: 1 }}>
-              <Language />
-            </IconButton>
-          </Grid>
-        </Grid>
-      </Toolbar>
-    </AppBar>
-  );
+
+        </footer >
+    );
 };
 
 export default Footer;
