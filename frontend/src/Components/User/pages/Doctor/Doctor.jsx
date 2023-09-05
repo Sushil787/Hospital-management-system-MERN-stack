@@ -19,8 +19,8 @@ const Doctor = () => {
   return (
     <>
       <Loading isloading={isLoading} />
-      <Grid container sx={{ display: "flex", marginTop: "30px" }}>
-        <Grid item xs={12}>
+      <Grid container sx={{ display: "flex", marginTop: "30px", marginLeft:"40px" }}>
+        <Grid item xs={10}>
           <Typography
             sx={{
               color: "black",

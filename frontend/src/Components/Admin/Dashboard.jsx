@@ -6,6 +6,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import Doctors from './components/Doctors';
 import Users from './components/Users';
 import {Routes,Route} from 'react-router-dom'
+import Enquery from './components/Enquiry';
 
 const Dashboard = () => {
   const [theme, colorMode] = useMode();
@@ -36,6 +37,9 @@ const Dashboard = () => {
             <Routes>
                 <Route path="/" element={<Doctors />} />
                 <Route path="/users" element={<Users />} />
+                <Route path="/enquery" element={<Enquery />} />
+
+                
               </Routes>
              
             </main>

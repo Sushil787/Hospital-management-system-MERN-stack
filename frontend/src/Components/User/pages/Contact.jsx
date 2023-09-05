@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Container,
@@ -8,12 +8,36 @@ import {
   Button,
 } from '@mui/material';
 import { Email, Phone, LocationOn } from '@mui/icons-material';
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const ContactUsPage = () => {
-  const handleSubmit = (e) => {
+  const navigate=useNavigate();
+  const  handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
+    const data = {
+      name,
+      email,
+      message,
+      contact,
+    };
+    const response = await axios.post('http://localhost:8080/patient/patientmessage', data);
+    if(response.status === 200 ){
+    toast.success(response.data.message);
+    navigate("/");
+
+    }else{
+    toast.error(response.data.message);
+
+    }
   };
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [contact, setContact] = useState("");
+
 
   return (
     <Box py={4} sx={{backgroundColor:'#ced3db'}}>
@@ -94,6 +118,8 @@ const ContactUsPage = () => {
                   variant="outlined"
                   fullWidth
                   required
+                  value={name}
+                  onChange={(e)=>setName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -102,6 +128,8 @@ const ContactUsPage = () => {
                   variant="outlined"
                   fullWidth
                   required
+                  value={email}
+                  onChange={(e)=>setEmail(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -110,6 +138,8 @@ const ContactUsPage = () => {
                   variant="outlined"
                   fullWidth
                   required
+                  value={contact}
+                  onChange={(e)=>setContact(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -120,6 +150,9 @@ const ContactUsPage = () => {
                   rows={4}
                   fullWidth
                   required
+                  value={message}
+                  onChange={(e)=>setMessage(e.target.value)}
+
                 />
               </Grid>
               <Grid item xs={12}>

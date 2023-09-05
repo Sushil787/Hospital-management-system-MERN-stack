@@ -2,7 +2,7 @@
 const doctor = require("../model/doctor");
 const mongoose = require("mongoose");
 const appointments = require("../model/appointments");
-
+const pquery = require("../model/patientmessage");
 const add_doctor = async (req, res) => {
     try {
         const { name, expertise, image } = req.body;
@@ -22,6 +22,7 @@ const add_doctor = async (req, res) => {
         return res.status(400).json({ message: e.message });
     }
 }
+
 const delete_doctor = async (req, res) => {
     try {
         const _id = req.params.id;
@@ -40,6 +41,15 @@ const delete_doctor = async (req, res) => {
     } catch (e) {
         return res.status(400).json({ message: e.message });
     }
+}
+const user_query = async (req, res) => {
+    try {
+        const allQuery = await pquery.find({}).select("-__v ");
+        return res.status(200).json(allQuery);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+
 }
 
 const update_appointment = async (req, res) => {
@@ -88,5 +98,5 @@ const all_appointments = async (req, res) => {
 
 
 module.exports = {
-    add_doctor, delete_doctor, all_appointments, update_appointment
+    add_doctor, delete_doctor, all_appointments, update_appointment, user_query
 };

@@ -1,8 +1,21 @@
 const appointments = require("../model/appointments");
 const doctor = require("../model/doctor");
 const user = require("../model/user");
+const pquery = require("../model/patientmessage");
 
 const axios = require("axios");
+
+const user_query = async (req, res) => {
+  try {
+      const {name,email,contact,message} = req.body;
+      await pquery.create({name, email,contact,message});
+      return res.status(200).json({message:"Message Sent Successfully"});
+    
+
+  } catch (e) {
+      return res.status(400).json({ message: e.message });
+  }
+}
 
 const all_appointments = async (req, res) => {
   try {
@@ -109,4 +122,4 @@ const payment = async (req, res) => {
 
 // }
 
-module.exports = { all_appointments, create_appointments, payment };
+module.exports = { all_appointments, create_appointments, payment,user_query };

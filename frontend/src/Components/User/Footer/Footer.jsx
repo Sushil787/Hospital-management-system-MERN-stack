@@ -107,11 +107,11 @@ const Footer = () => {
                                 </Divider>
                             </Root>
 
-                            <Box sx={{ p: 2 }}><NavLink className='text-style' to='/doctors' color='inherit'>Find a Doctor</NavLink></Box>
+                            <Box sx={{ p: 2 }}><NavLink className='text-style' to='/doctor' color='inherit'>Find a Doctor</NavLink></Box>
 
                             <Box sx={{ p: 2 }}><NavLink className='text-style' to='/services' color='inherit'>All services</NavLink></Box>
 
-                            <Box sx={{ p: 2 }}><NavLink className='text-style' to='/doctors' color='inherit'>Make An Appointment</NavLink></Box>
+                            <Box sx={{ p: 2 }}><NavLink className='text-style' to='/doctor' color='inherit'>Make An Appointment</NavLink></Box>
 
                             <Box sx={{ p: 2 }}><NavLink className='text-style' to='/contact' color='inherit'>Contact Us </NavLink></Box>
                         </Grid>

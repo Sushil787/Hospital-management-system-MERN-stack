@@ -101,8 +101,8 @@ const Sidebar1 = () => {
               setSelected={setSelected}
             />
              <Item
-              title="Messages"
-              to="/Users"
+              title="Enqiry"
+              to="/Enquery"
               icon={<Message />}
               selected={selected}
               setSelected={setSelected}

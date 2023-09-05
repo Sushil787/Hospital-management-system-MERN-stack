@@ -8,5 +8,5 @@ admin_router.delete("/doctor/:id", auth_middleware, role_check, admin_contoller.
 admin_router.get("/appointments", auth_middleware, role_check, admin_contoller.all_appointments);
 admin_router.patch("/appointments", auth_middleware, role_check, admin_contoller.update_appointment);
 admin_router.post("/payment", auth_middleware, role_check, admin_contoller.update_appointment);
-
+admin_router.get("/userquery", auth_middleware, role_check,admin_contoller.user_query);
 module.exports = admin_router;
