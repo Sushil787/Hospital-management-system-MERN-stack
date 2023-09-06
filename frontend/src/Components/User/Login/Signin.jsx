@@ -60,7 +60,7 @@ function SignUpForm() {
           alignItems: "center",
           flexDirection: "column",
           minHeight: "70vh",
-          backgroundColor: "#f5f5f5",
+          
         }}
       >
         <Typography variant="h4" align="center" gutterBottom>

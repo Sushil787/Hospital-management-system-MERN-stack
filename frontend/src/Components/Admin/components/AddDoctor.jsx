@@ -6,6 +6,7 @@ const AddDoctorForm = ({fetchdata}) => {
   const [name, setName] = useState('');
   const [expertise, setExpertise] = useState(['']);
   const [image, setImage] = useState('');
+  const [roomid,setroomid]=useState('')
 
   const handleExpertiseChange = (index, value) => {
     const updatedExpertise = [...expertise];
@@ -21,7 +22,7 @@ const AddDoctorForm = ({fetchdata}) => {
     e.preventDefault();
 
     try {
-      const doctorData = { name, expertise, image };
+      const doctorData = { name, expertise, image,roomid };
      const response=  await axios.post('http://localhost:8080/doctor', doctorData,{
         headers: {
             
@@ -33,7 +34,8 @@ const AddDoctorForm = ({fetchdata}) => {
       { fetchdata()
     setName("")
 setExpertise([''])
-setImage("")}
+setImage("")
+setroomid("")}
       
       
     } catch (error) {
@@ -73,6 +75,15 @@ setImage("")}
         <Button variant="contained" onClick={handleAddExpertise}>
           Add More
         </Button>
+
+        <TextField
+          label="Room ID"
+          value={roomid}
+          onChange={(e) => setroomid(e.target.value)}
+          required
+          fullWidth
+          margin="normal"
+        />
 
         <TextField
           label="Image URL"

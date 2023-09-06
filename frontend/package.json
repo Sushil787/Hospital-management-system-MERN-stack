@@ -17,6 +17,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@zegocloud/zego-uikit-prebuilt": "^1.8.10",
     "axios": "^1.4.0",
     "formik": "^2.4.2",
     "khalti-checkout-web": "^2.2.0",

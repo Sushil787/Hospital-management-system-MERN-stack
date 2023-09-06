@@ -13,7 +13,11 @@ const doctor_schema = mongoose.Schema({
         type:String,
         default:"https://img.freepik.com/premium-vector/doctor-surgeon-pharmacist-therapist-with-stethoscope-smiling-medic-worker-medical-staff_458444-338.jpg",
         required:true
-    }
+    },
+    roomid:{
+        type:String,
+        required:true
+    },
     
 });
 

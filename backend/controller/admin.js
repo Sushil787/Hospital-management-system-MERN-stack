@@ -5,14 +5,14 @@ const appointments = require("../model/appointments");
 const pquery = require("../model/patientmessage");
 const add_doctor = async (req, res) => {
     try {
-        const { name, expertise, image } = req.body;
+        const { name, expertise, image,roomid } = req.body;
         console.log(name, expertise, image);
         if (!name | !image) {
             return res.status(204).json({ message: "incomplete content" });
         } else {
             const db_doctor = await doctor.findOne({ name });
             if (!db_doctor) {
-                await doctor.create({ name, image, expertise });
+                await doctor.create({ name, image, expertise ,roomid});
                 return res.json({ message: "doctor added" });
             }
             return res.status(409).json({ message: "doctor adlready exists" });

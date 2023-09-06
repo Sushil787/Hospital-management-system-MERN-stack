@@ -10,7 +10,7 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import axios from "axios";
@@ -20,6 +20,7 @@ const AppointmentForm = () => {
   const [doctor,setDoctor]=useState()
  
   const { id } = useParams();
+  const Navigate=useNavigate()
   
   const token = localStorage.getItem("jwt");
 
@@ -30,6 +31,7 @@ const AppointmentForm = () => {
       }})
       
     setDoctor(data.data)
+    console.log(doctor)
     toast.success(data.message)
     
 
@@ -99,6 +101,11 @@ const AppointmentForm = () => {
     });
   };
 
+
+  const handlejoin=()=>{
+    Navigate(`/room/${doctor?.roomid}`)
+  }
+
  
 
   
@@ -164,6 +171,31 @@ const AppointmentForm = () => {
               return <ListItem>{item}</ListItem>;
             })}
           </List>
+
+          {/* create a input filed for room id for video call  */}
+           <Typography variant="h6" sx={{ textAlign: "center" }}>
+            Room Id
+          </Typography>
+          <TextField
+            
+            value={doctor?.roomid}
+            required
+          /> 
+            {/* BUTTON FOR VIDEO CALL */}
+            <Button
+              textAlign="center"
+              variant="contained"
+              color="primary"
+              onClick={
+                handlejoin  
+
+              }
+             
+            >
+              Join
+            </Button>
+
+
         </Grid>
       </Grid>
 
@@ -253,4 +285,6 @@ const AppointmentForm = () => {
   );
 };
 
+
 export default AppointmentForm;
+

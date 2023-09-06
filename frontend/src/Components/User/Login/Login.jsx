@@ -51,6 +51,7 @@ function LoginForm() {
 
   return (
     <>
+    <Box >
       <Container
         maxWidth="xs"
         sx={{
@@ -59,6 +60,7 @@ function LoginForm() {
           alignItems: "center",
           flexDirection: "column",
           minHeight: "70vh",
+          marginTop:"100px"
         }}
       >
         <Typography variant="h4" align="center" gutterBottom>
@@ -121,6 +123,7 @@ function LoginForm() {
           </Form>
         </Formik>
       </Container>
+      </Box>
     </>
   );
 }

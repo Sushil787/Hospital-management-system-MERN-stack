@@ -14,10 +14,11 @@ import Doctor from "./Components/User/pages/Doctor/Doctor";
 import PrivateRoutes from "./Privateroutes";
 import Form from "./Components/User/pages/Doctor/Form";
 
-import {useState} from "react";
+import {Component, useState} from "react";
 import Dashboard from "./Components/Admin/Dashboard";
 import PagenotFound from "./Components/User/pages/PagenotFound";
 import Appointment from "./Components/User/pages/Doctor/Appointment";
+import Room from "./Components/User/pages/Doctor/Room";
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
                 <Route Component={PrivateRoutes}>
               <Route path="/form/:id" Component={Form} />
                  <Route path="/appointment" Component={Appointment} />
+                 <Route path="/room/:roomID" Component={Room} />
                 </Route>
 {/* scope of private routes */}
                 
