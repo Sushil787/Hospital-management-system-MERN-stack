@@ -132,6 +132,16 @@ const Navbar = () => {
                     <ListItemText primary="Services" />
                   </ListItemButton>
                 </ListItem>
+
+                <ListItem>
+                  <ListItemButton
+                    component={Link}
+                    to="/ambulance-booking"
+                    sx={{ textAlign: "center" }}
+                  >
+                    <ListItemText primary="Ambulance" />
+                  </ListItemButton>
+                </ListItem>
               </List>
 
               <Box sx={{ marginLeft: "auto" }}>
@@ -159,7 +169,7 @@ const Navbar = () => {
                       }}
                     >
                       <MenuItem as={NavLink} to="/appointment">
-                        Appotnment
+                        Appointment
                       </MenuItem>
                       <MenuItem onClick={handlelog}>Logout</MenuItem>
                     </Menu>

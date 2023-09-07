@@ -20,6 +20,7 @@ import PagenotFound from "./Components/User/pages/PagenotFound";
 import Appointment from "./Components/User/pages/Doctor/Appointment";
 import Room from "./Components/User/pages/Doctor/Room";
 
+import AmbulanceBooking from "./Components/User/pages/Ambulance";
 
 function App() {
   const [is_admin, setIsAdmin] = useState(localStorage.getItem("is_admin"));
@@ -56,6 +57,7 @@ function App() {
               <Route path="/form/:id" Component={Form} />
                  <Route path="/appointment" Component={Appointment} />
                  <Route path="/room/:roomID" Component={Room} />
+                 <Route path="/ambulance-booking" Component={AmbulanceBooking} />
                 </Route>
 {/* scope of private routes */}
                 

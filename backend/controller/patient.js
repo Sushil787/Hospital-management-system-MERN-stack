@@ -2,6 +2,7 @@ const appointments = require("../model/appointments");
 const doctor = require("../model/doctor");
 const user = require("../model/user");
 const pquery = require("../model/patientmessage");
+const ambulance=require("../model/Abulance")
 
 const axios = require("axios");
 
@@ -83,43 +84,28 @@ const payment = async (req, res) => {
   }
 };
 
-// const payment_history = async(req,res)=>{
+const ambulance_booking=async (req,res)=>{
+  const {name,phone,address,accident_type}=req.body;
 
-//       const { token, amount } = req.body;
-//       const user=req.id
-//       console.log(user)
+  try {
+    
+    if(!name | !phone | !address | !accident_type){
+      return res.status(400).json({message:"invalid request"})
+    }
 
-//       try {
+    await ambulance.create({name, email,contact,message});
+      return res.status(200).json({message:"ambulance book successfully"});
 
-//       if (!user || !token || !amount) {
-// return res.status(400).json({ message: 'Invalid payment request' });
-//       }
-//       let config = {
-//         headers: {'Authorization': process.env.KHALTI_SECRET_KEY}
-//       };
 
-//       const khaltiResponse = await axios.post(
-//         'https://khalti.com/api/v2/payment/verify/',
-//         {
-//           token,amount
-//         },
-//        config
-//       );
-//       console.log(khaltiResponse)
+  } catch (error) {
+    return res.status(500).json({message:error.messager})
 
-//       if (khaltiResponse.data && khaltiResponse.data.state === 'Completed') {
+    
+  }
 
-//         return res.status(200).json({ message: 'Payment successful' });
-//       } else {
 
-//         return res.status(400).json({ message: 'Payment failed or pending' });
-//       }
-//     } catch (error) {
+}
 
-//       console.error('Error verifying payment:', error);
-//       return res.status(500).json({ message: 'Internal server error' });
-//     }
 
-// }
 
 module.exports = { all_appointments, create_appointments, payment,user_query };
