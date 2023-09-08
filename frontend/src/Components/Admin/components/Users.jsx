@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Button, TextField } from '@mui/material';
 import axios from 'axios';
+import moment from 'moment';
 
 export default function Users() {
   const [appointments, setAppointments] = useState([]);
@@ -69,7 +70,12 @@ export default function Users() {
   
     { field: 'disease', headerName: 'Disease', width: 100 },
     
-    { field: 'date', headerName: 'Date', width: 150 },
+    { field: 'date', headerName: 'Date', width: 150 ,
+  renderCell: (params) => {
+    const date = params.row.date;
+    return moment.utc(date).format('MM/DD/YYYY');
+  },
+},
     {
       field: 'status',
       headerName: 'Status',

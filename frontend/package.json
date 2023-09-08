@@ -28,6 +28,7 @@
     "react-admin": "^4.11.1",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
+    "react-multi-select-component": "^4.3.4",
     "react-pro-sidebar": "^0.7.1",
     "react-redux": "^8.0.7",
     "react-router-dom": "^6.11.2",

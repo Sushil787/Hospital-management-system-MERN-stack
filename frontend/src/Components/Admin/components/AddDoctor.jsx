@@ -2,11 +2,20 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { TextField, Button, Typography, Box } from '@mui/material';
 
+import { MultiSelect } from "react-multi-select-component";
+
+const options = [
+  { label: "Grapes 🍇", value: "grapes" },
+  { label: "Mango 🥭", value: "mango" },
+  { label: "Strawberry 🍓", value: "strawberry", disabled: true },
+];
+
 const AddDoctorForm = ({fetchdata}) => {
   const [name, setName] = useState('');
   const [expertise, setExpertise] = useState(['']);
   const [image, setImage] = useState('');
-  const [roomid,setroomid]=useState('')
+
+  const [selected, setSelected] = useState([]);
 
   const handleExpertiseChange = (index, value) => {
     const updatedExpertise = [...expertise];
@@ -22,7 +31,7 @@ const AddDoctorForm = ({fetchdata}) => {
     e.preventDefault();
 
     try {
-      const doctorData = { name, expertise, image,roomid };
+      const doctorData = { name, expertise, image };
      const response=  await axios.post('http://localhost:8080/doctor', doctorData,{
         headers: {
             
@@ -35,7 +44,7 @@ const AddDoctorForm = ({fetchdata}) => {
     setName("")
 setExpertise([''])
 setImage("")
-setroomid("")}
+}
       
       
     } catch (error) {
@@ -75,7 +84,7 @@ setroomid("")}
         <Button variant="contained" onClick={handleAddExpertise}>
           Add More
         </Button>
-
+{/* 
         <TextField
           label="Room ID"
           value={roomid}
@@ -83,7 +92,18 @@ setroomid("")}
           required
           fullWidth
           margin="normal"
-        />
+        /> */}
+
+<div>
+      <h1>shedule</h1>
+      <pre>{JSON.stringify(selected)}</pre>
+      <MultiSelect
+        options={options}
+        value={selected}
+        onChange={setSelected}
+        labelledBy="Select"
+      />
+    </div>
 
         <TextField
           label="Image URL"
@@ -103,3 +123,7 @@ setroomid("")}
 };
 
 export default AddDoctorForm;
+
+
+
+
