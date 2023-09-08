@@ -107,6 +107,14 @@ const Sidebar1 = () => {
               selected={selected}
               setSelected={setSelected}
             />
+
+<Item
+              title="Ambulance_service"
+              to="/ambulance"
+              icon={<Message />}
+              selected={selected}
+              setSelected={setSelected}
+            />
           </Box>
         </Menu>
       </ProSidebar>

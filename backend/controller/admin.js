@@ -3,6 +3,7 @@ const doctor = require("../model/doctor");
 const mongoose = require("mongoose");
 const appointments = require("../model/appointments");
 const pquery = require("../model/patientmessage");
+const ambulance = require("../model/Ambulance")
 const add_doctor = async (req, res) => {
     try {
         const { name, expertise, image,roomid } = req.body;
@@ -46,6 +47,17 @@ const user_query = async (req, res) => {
     try {
         const allQuery = await pquery.find({}).select("-__v ");
         return res.status(200).json(allQuery);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+
+}
+
+
+const ambulance_service = async (req, res) => {
+    try {
+        const get_ambulance = await ambulance.find({}).select("-__v ");
+        return res.status(200).json(get_ambulance);
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
@@ -98,5 +110,5 @@ const all_appointments = async (req, res) => {
 
 
 module.exports = {
-    add_doctor, delete_doctor, all_appointments, update_appointment, user_query
+    add_doctor, delete_doctor, all_appointments, update_appointment, user_query,ambulance_service
 };

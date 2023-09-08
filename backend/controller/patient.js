@@ -2,7 +2,7 @@ const appointments = require("../model/appointments");
 const doctor = require("../model/doctor");
 const user = require("../model/user");
 const pquery = require("../model/patientmessage");
-const ambulance=require("../model/Abulance")
+const ambulance=require("../model/Ambulance")
 
 const axios = require("axios");
 
@@ -54,7 +54,7 @@ const create_appointments = async (req, res) => {
         date,
       });
       if (user_appointments) {
-        return res.status(200).json({ message: "appintments created" });
+        return res.status(200).json({ message: "appointments created" });
       } else {
         return res.status(400).json({ message: "error creating appointments" });
       }
@@ -84,21 +84,27 @@ const payment = async (req, res) => {
   }
 };
 
-const ambulance_booking=async (req,res)=>{
-  const {name,phone,address,accident_type}=req.body;
+const ambulance_booking= async (req,res)=>{
+ 
+  const {name,phoneNumber,address,emergencyType}=req.body;
+  console.log(name,phoneNumber,address,emergencyType)
 
   try {
     
-    if(!name | !phone | !address | !accident_type){
+    if(!name | !phoneNumber | !address | !emergencyType){
       return res.status(400).json({message:"invalid request"})
     }
+  
 
-    await ambulance.create({name, email,contact,message});
+      await ambulance.create({name,phoneNumber,address,emergencyType});
       return res.status(200).json({message:"ambulance book successfully"});
+  
+
+   
 
 
   } catch (error) {
-    return res.status(500).json({message:error.messager})
+    return res.status(502).json({message:"internal problem"})
 
     
   }
@@ -108,4 +114,4 @@ const ambulance_booking=async (req,res)=>{
 
 
 
-module.exports = { all_appointments, create_appointments, payment,user_query };
+module.exports = { all_appointments, create_appointments, payment,user_query,ambulance_booking };

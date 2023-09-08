@@ -9,4 +9,6 @@ admin_router.get("/appointments", auth_middleware, role_check, admin_contoller.a
 admin_router.patch("/appointments", auth_middleware, role_check, admin_contoller.update_appointment);
 admin_router.post("/payment", auth_middleware, role_check, admin_contoller.update_appointment);
 admin_router.get("/userquery", auth_middleware, role_check,admin_contoller.user_query);
+admin_router.get("/ambulance", auth_middleware, role_check,admin_contoller.ambulance_service);
+
 module.exports = admin_router;

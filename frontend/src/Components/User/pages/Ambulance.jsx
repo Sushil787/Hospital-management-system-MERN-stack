@@ -22,8 +22,10 @@ const AmbulanceBooking = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(bookingInfo)
      try {
         const response = await axios.post('http://localhost:8080/patient/ambulance', bookingInfo);
+        console.log(response)
     if(response.status === 200 ){
     toast.success(response.data.message);
     navigate("/");
@@ -34,7 +36,7 @@ const AmbulanceBooking = () => {
     }
 }
  catch (error) {
-    console.log(error)
+    console.log(error.message)
 }
 
   };

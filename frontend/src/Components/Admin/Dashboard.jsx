@@ -7,6 +7,7 @@ import Doctors from './components/Doctors';
 import Users from './components/Users';
 import {Routes,Route} from 'react-router-dom'
 import Enquery from './components/Enquiry';
+import Ambulance from './components/Ambulance';
 
 const Dashboard = () => {
   const [theme, colorMode] = useMode();
@@ -38,6 +39,7 @@ const Dashboard = () => {
                 <Route path="/" element={<Doctors />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/enquery" element={<Enquery />} />
+                <Route path="/ambulance" element={<Ambulance />} />
 
                 
               </Routes>
