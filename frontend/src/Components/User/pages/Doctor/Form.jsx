@@ -174,15 +174,23 @@ const AppointmentForm = () => {
 
           {/* create a input filed for room id for video call  */}
            <Typography variant="h6" sx={{ textAlign: "center" }}>
-            Room Id
+            Available Time
           </Typography>
-          <TextField
-            
-            value={doctor?.roomid}
-            required
-          /> 
+          <List
+            sx={{
+              listStyleType: "disc",
+              pl: 2,
+              "& .MuiListItem-root": {
+                display: "list-item",
+              },
+            }}
+          >
+            {doctor?.date?.map((item) => {
+              return <ListItem>{item}</ListItem>;
+            })}
+          </List>
             {/* BUTTON FOR VIDEO CALL */}
-            <Button
+            {/* <Button
               textAlign="center"
               variant="contained"
               color="primary"
@@ -193,7 +201,7 @@ const AppointmentForm = () => {
              
             >
               Join
-            </Button>
+            </Button> */}
 
 
         </Grid>

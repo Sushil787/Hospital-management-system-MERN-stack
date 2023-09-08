@@ -3,19 +3,26 @@ import axios from 'axios';
 import { TextField, Button, Typography, Box } from '@mui/material';
 
 import { MultiSelect } from "react-multi-select-component";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import "./doctor.css"
 
 const options = [
-  { label: "Grapes 🍇", value: "grapes" },
-  { label: "Mango 🥭", value: "mango" },
-  { label: "Strawberry 🍓", value: "strawberry", disabled: true },
+  { label: "10AM-12PM", value: "10PM-12PM" },
+  { label: "12.30PM-2.30PM", value: "12.30PM-2.30PM" },
+  { label: "3PM-5PM", value: "3PM-5PM" },
 ];
+
+
+const theme = createTheme(); // Create a theme
 
 const AddDoctorForm = ({fetchdata}) => {
   const [name, setName] = useState('');
   const [expertise, setExpertise] = useState(['']);
   const [image, setImage] = useState('');
 
-  const [selected, setSelected] = useState([]);
+  const [selectdate, setSelectDate] = useState([]);
+
+  const date = selectdate.map(option => option.value);
 
   const handleExpertiseChange = (index, value) => {
     const updatedExpertise = [...expertise];
@@ -31,7 +38,8 @@ const AddDoctorForm = ({fetchdata}) => {
     e.preventDefault();
 
     try {
-      const doctorData = { name, expertise, image };
+      const doctorData = { name, expertise, image,date };
+      console.log(doctorData)
      const response=  await axios.post('http://localhost:8080/doctor', doctorData,{
         headers: {
             
@@ -44,6 +52,7 @@ const AddDoctorForm = ({fetchdata}) => {
     setName("")
 setExpertise([''])
 setImage("")
+setSelectDate([])
 }
       
       
@@ -53,6 +62,7 @@ setImage("")
   };
 
   return (
+   
     <Box sx={{ maxWidth: 400, margin: '0 auto' }}>
       <Typography variant="h4" gutterBottom>
         Add Doctor
@@ -84,26 +94,8 @@ setImage("")
         <Button variant="contained" onClick={handleAddExpertise}>
           Add More
         </Button>
-{/* 
-        <TextField
-          label="Room ID"
-          value={roomid}
-          onChange={(e) => setroomid(e.target.value)}
-          required
-          fullWidth
-          margin="normal"
-        /> */}
 
-<div>
-      <h1>shedule</h1>
-      <pre>{JSON.stringify(selected)}</pre>
-      <MultiSelect
-        options={options}
-        value={selected}
-        onChange={setSelected}
-        labelledBy="Select"
-      />
-    </div>
+
 
         <TextField
           label="Image URL"
@@ -114,11 +106,31 @@ setImage("")
           margin="normal"
         />
 
+
+   
+      <MultiSelect
+     
+   
+        options={options}
+        value={selectdate}
+        onChange={setSelectDate}
+        labelledBy="Choose Date"
+
+
+       className='select'
+
+     
+
+      />
+   
+
+
         <Button type="submit" variant="contained" color="primary">
           Submit
         </Button>
       </form>
     </Box>
+  
   );
 };
 

@@ -31,23 +31,21 @@ function SignUpForm() {
   };
   const validationSchema = yup.object({
     username: yup.string().required("Username must be required"),
-    email: yup
-      .string()
-      .email("Invalid email!")
-      .required("email must be required"),
+    email: yup.string().email("Invalid email!").required("Email must be required"),
     password: yup
       .string()
       .required("Password must be required")
-      .min(8, "Password must be greater then 8 character"),
-      sex:yup.string().required("required"),
-      age:yup.string().required("required"),
-      location:yup.string().required("required"),
-      phone:yup.string().required("required"),
+      .min(8, "Password must be greater than 8 characters"),
+    gender: yup.string().required("Gender is required"),
+    age: yup.string().required("Age is required"),
+    location: yup.string().required("Location is required"),
+    phone: yup.string().required("Phone is required"),
   });
+  
 
   const onSubmit = async (values) => {
     console.log(values)
-    console.log("niroj satyal")
+
     try {
       const response = await axios.post(
         "http://localhost:8080/signup",

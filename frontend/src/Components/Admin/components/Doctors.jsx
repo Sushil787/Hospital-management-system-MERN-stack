@@ -19,6 +19,16 @@ const columns = [
       return expertise.join(", ");
     },
   },
+  {
+    field: "date",
+    headerName: "Available Date",
+    width: 400,
+    renderCell: (params) => {
+      const date = params.value || [];
+      return date.join(", ");
+    },
+  },
+
 
   {
     field: "actions",
