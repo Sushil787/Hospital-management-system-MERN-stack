@@ -2,6 +2,7 @@ import { Grid, Box} from "@mui/material";
 import Navbar from "./Components/User/Navbar/Navbar";
 import { Routes, Route } from "react-router-dom";
 import Footer from "./Components/User/Footer/Footer";
+import Report from "./Components/User/pages/Report";
 
 import "./App.css";
 import LoginForm from "./Components/User/Login/Login";
@@ -14,7 +15,7 @@ import Doctor from "./Components/User/pages/Doctor/Doctor";
 import PrivateRoutes from "./Privateroutes";
 import Form from "./Components/User/pages/Doctor/Form";
 
-import {Component, useState} from "react";
+import { useState} from "react";
 import Dashboard from "./Components/Admin/Dashboard";
 import PagenotFound from "./Components/User/pages/PagenotFound";
 import Appointment from "./Components/User/pages/Doctor/Appointment";
@@ -58,6 +59,7 @@ function App() {
                  <Route path="/appointment" Component={Appointment} />
                  <Route path="/room/:roomID" Component={Room} />
                  <Route path="/ambulance-booking" Component={AmbulanceBooking} />
+                 <Route path="/report/:id" Component={Report} />
                 </Route>
 {/* scope of private routes */}
                 

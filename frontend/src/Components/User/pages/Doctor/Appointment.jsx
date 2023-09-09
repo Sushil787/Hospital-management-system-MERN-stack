@@ -12,11 +12,13 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import KhaltiCheckout from "khalti-checkout-web";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 import toast from "react-hot-toast";
 
 import { Box } from "@mui/system";
 import { Grid, Typography } from "@mui/material";
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -39,6 +41,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function Cart() {
+  const navigate=useNavigate()
   const [id, setId] = React.useState(null);
 
   const [selectedInvoice, setSelectedInvoice] = React.useState(null);
@@ -188,34 +191,39 @@ export default function Cart() {
                   )}
                 </StyledTableCell>
                 <StyledTableCell align="left">
-                  {item?.status !== "checked" && item?.payment !== "paid"
+                  { item?.payment === "paid"
                      ? (
-                      <Typography>pending....</Typography>
-                    ) : (
+
                       <Box
-                        sx={{
-                          display: "inline-block",
-                          backgroundColor: "purple",
-                          padding: "10px",
-                          color: "white",
-                          cursor: "pointer",
-                          fontWeight: "bold",
-                          border: "1px solid white",
+                      sx={{
+                        display: "inline-block",
+                        backgroundColor: "purple",
+                        padding: "10px",
+                        color: "white",
+                        cursor: "pointer",
+                        fontWeight: "bold",
+                        border: "1px solid white",
+                      }}
+                    >
+                      <button
+
+                       onClickCapture={() => navigate(`/report/${item._id}`)
+                      }
+                        
+                        style={{
+                          backgroundColor: "transparent",
+                          border: "none",
+                          color: "inherit",
+                          cursor: "inherit",
+                          padding: 0,
                         }}
                       >
-                        <button
-                          
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "inherit",
-                            cursor: "inherit",
-                            padding: 0,
-                          }}
-                        >
-                          Report
-                        </button>
-                      </Box>
+                        Report
+                      </button>
+                    </Box>
+                      
+                    ) : (
+                      <Typography>pending....</Typography>
                     )
                    }
                 </StyledTableCell>
