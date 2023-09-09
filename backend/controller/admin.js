@@ -102,6 +102,33 @@ const update_appointment = async (req, res) => {
 
 }
 
+
+const update_medicine = async (req, res) => {
+    const { _id, medicine, about } = req.body;
+        console.log(_id, medicine, about);
+    try {
+        
+        // const { id, medicine, about } = req.body;
+        // console.log(id, medicine, about);
+        if (!_id | !medicine | !about) {
+            return res.status(202).json({ message: "incomplete-content" });
+        } else {
+            const appointment = await appointments.findOne({_id});
+            console.log(appointment)
+            if (!appointment) {
+                return res.status(401).json({ message: "no appointment exist" });
+            } else {
+                await appointments.findByIdAndUpdate({ _id }, { medicine, about });
+                return res.status(200).json({ message: "appointment updated" });
+            }
+
+        }
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+
+}
+
 const all_appointments = async (req, res) => {
     try {
 
@@ -122,10 +149,36 @@ const all_appointments = async (req, res) => {
 
 
 
+const single_appointments = async (req, res) => {
+    try {
+        const {id} = req.params;
+        console.log(id)
+
+        // const validId = mongoose.Types.ObjectId.isValid(id);
+
+        const appointment = await appointments.findById(id).populate("doctor").populate("user");
+        console.log(appointment)
+
+        if (!appointment) {
+            return res
+                .status(401)
+                .json({ message: "no appointments found" });
+        } else {
+            return res.json({ appointment });
+        }
+
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
+
+
+
 
 
 
 
 module.exports = {
-    add_doctor, delete_doctor, all_appointments, update_appointment, user_query, ambulance_service,change_date
+    add_doctor, delete_doctor, all_appointments, update_appointment, user_query, ambulance_service,change_date,single_appointments,update_medicine
 };

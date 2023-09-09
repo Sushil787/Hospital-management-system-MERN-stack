@@ -18,6 +18,33 @@ const user_query = async (req, res) => {
   }
 }
 
+const single_appointments = async (req, res) => {
+  const {id} = req.params;
+  console.log(id)
+  try {
+     
+
+      // const validId = mongoose.Types.ObjectId.isValid(id);
+
+      const appointment = await appointments.findById(id).populate("doctor").populate("user");
+      console.log(appointment)
+
+      if (!appointment) {
+          return res
+              .status(401)
+              .json({ message: "no appointments found" });
+      } else {
+          return res.json({ appointment });
+      }
+
+
+  } catch (error) {
+      return res.status(500).json({ message: error.message });
+  }
+}
+
+
+
 const all_appointments = async (req, res) => {
   try {
     const id = req.id;
@@ -114,4 +141,4 @@ const ambulance_booking= async (req,res)=>{
 
 
 
-module.exports = { all_appointments, create_appointments, payment,user_query,ambulance_booking };
+module.exports = { all_appointments, create_appointments, payment,user_query,ambulance_booking,single_appointments };

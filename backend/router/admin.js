@@ -11,5 +11,8 @@ admin_router.post("/payment", auth_middleware, role_check, admin_contoller.updat
 admin_router.get("/userquery", auth_middleware, role_check,admin_contoller.user_query);
 admin_router.get("/ambulance", auth_middleware, role_check,admin_contoller.ambulance_service);
 admin_router.post("/date",auth_middleware, role_check, admin_contoller.change_date);
+admin_router.get("/single/:id",auth_middleware, role_check, admin_contoller.single_appointments);
+
+admin_router.patch("/update-medicine", auth_middleware, role_check, admin_contoller.update_medicine);
 
 module.exports = admin_router;

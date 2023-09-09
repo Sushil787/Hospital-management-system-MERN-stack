@@ -8,5 +8,6 @@ patient_router.post("/patient/payment", auth_middleware, patient_controller.paym
 patient_router.post("/patient/appointment",auth_middleware,patient_controller.create_appointments);
 patient_router.post("/patient/patientmessage", patient_controller.user_query);
 patient_router.post("/patient/ambulance",patient_controller.ambulance_booking);
+patient_router.get("/patient/single-appointment/:id",patient_controller.single_appointments);
 
 module.exports = patient_router;
