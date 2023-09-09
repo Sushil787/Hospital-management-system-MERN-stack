@@ -44,28 +44,33 @@ const signin = async (req, res) => {
 
 const signup = async (req, res) => {
     try {
-        const { username, password, email } = req.body;
-        if (!username | !password | !email ) {
-            return res.status(204).json({ message: "incomplete content" });
+      const { username, password, email, gender, age, location, phone } =
+        req.body;
+      if (!username | !password | !email) {
+        return res.status(204).json({ message: "incomplete content" });
+      } else {
+        const new_user = await user.findOne({ username, email });
+        if (!new_user) {
+          hashed_password = await bcryptjs.hash(password, 8);
+          await user.create({
+            username,
+            password: hashed_password,
+            email,
+            gender,
+            age,
+            location,
+            phone,
+          });
+          return res.status(200).json({ message: "user created" });
         } else {
-            const new_user = await user.findOne({ username, email });
-            if (!new_user) {
-                hashed_password = await bcryptjs.hash(password, 8);
-                await user.create({ username, password: hashed_password, email});
-                return res.status(200).json({message:'user created'});
-            } else {
-                return res.status(409).json({message:"user already exist"});
-            }
-
+          return res.status(409).json({ message: "user already exist" });
         }
-
+      }
     } catch (e) {
-        return res.status(500).json({ message: e.message });
+      return res.status(500).json({ message: e.message });
     }
-
-
-}
-
+  };
+  
 module.exports = {
     signin, signup
 }
