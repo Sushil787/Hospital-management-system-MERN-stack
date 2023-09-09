@@ -4,8 +4,11 @@ import { Button, TextField } from '@mui/material';
 import axios from 'axios';
 import moment from 'moment';
 import { useEffect,useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Users() {
+
+  const navigate = useNavigate();
   const [appointments, setAppointments] = useState([]);
 
   const tomorrow = new Date();
@@ -99,12 +102,16 @@ export default function Users() {
       );
       console.log(response);
 
+     
+
+
       fetchData();
     } catch (error) {
       console.log(error);
     }
   };
 
+ 
   const columns = [
     { field: '_id', headerName: 'ID', width: 150 },
     {
@@ -178,6 +185,24 @@ export default function Users() {
           (
             <span>
               Clear
+            </span>
+          )
+      ),
+    },
+
+
+    {
+      field: 'Report',
+      headerName: 'Generate Report',
+      width: 100,
+      renderCell: (params) => (
+        params.row.status == "checked" ? (
+          <Button onClick={() => navigate(`/report/${params.row._id}`)} style={{ color: 'white' }}>
+            Generate
+          </Button>):
+          (
+            <span>
+              pending.....
             </span>
           )
       ),

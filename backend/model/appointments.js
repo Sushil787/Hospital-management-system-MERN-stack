@@ -32,6 +32,13 @@ const appintments_schema = mongoose.Schema({
         type: Date,
         required: true,
     },
+    about:{
+        type:String,
+
+    },
+    medicine:{
+        type:[String]
+    }
 
 });
 

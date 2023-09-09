@@ -132,6 +132,7 @@ export default function Cart() {
               <StyledTableCell align="left">Status</StyledTableCell>
               <StyledTableCell align="left">Invoice</StyledTableCell>
               <StyledTableCell align="left">Pay Now</StyledTableCell>
+              <StyledTableCell align="left">Report</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -185,6 +186,38 @@ export default function Cart() {
                   ) : (
                     <Typography>Pending</Typography>
                   )}
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  {item?.status !== "checked" && item?.payment !== "paid"
+                     ? (
+                      <Typography>pending....</Typography>
+                    ) : (
+                      <Box
+                        sx={{
+                          display: "inline-block",
+                          backgroundColor: "purple",
+                          padding: "10px",
+                          color: "white",
+                          cursor: "pointer",
+                          fontWeight: "bold",
+                          border: "1px solid white",
+                        }}
+                      >
+                        <button
+                          
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "inherit",
+                            cursor: "inherit",
+                            padding: 0,
+                          }}
+                        >
+                          Report
+                        </button>
+                      </Box>
+                    )
+                   }
                 </StyledTableCell>
               </StyledTableRow>
             ))}
