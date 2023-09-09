@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
+
 import { DataGrid } from '@mui/x-data-grid';
 import { Button, TextField } from '@mui/material';
 import axios from 'axios';
+import moment from 'moment';
+import { useEffect,useState } from 'react';
 
 export default function Users() {
   const [appointments, setAppointments] = useState([]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
   const fetchData = async () => {
     try {
@@ -18,13 +19,66 @@ export default function Users() {
           authorization: localStorage.getItem('jwt'),
         },
       });
-      
+
       setAppointments(response.data.all_appointments);
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(appointments)
+
+
+  const handleDateChange = async (params, newDate) => {
+    try {
+      const tokens = localStorage.getItem('jwt');
+      const response = await axios.post(
+        'http://localhost:8080/date',
+        {
+          _id: params._id,
+          date: newDate,
+        },
+        {
+          headers: {
+            authorization: tokens,
+          },
+        }
+      );
+      if (response.status === 200) {
+        console.log('Date updated successfully');
+        // Update the date in the local state
+        const updatedAppointments = appointments.map((appointment) => {
+          if (appointment._id === params._id) {
+            return {
+              ...appointment,
+              date: newDate,
+            };
+          }
+          return appointment;
+        });
+        setAppointments(updatedAppointments);
+        
+      } else {
+        console.log('Failed to update date');
+      }
+    } catch (error) {
+      console.error('Error updating date:', error);
+    }
+  };
+ 
+  useEffect(() => {
+    fetchData();
+  }, [appointments]);
+  const handleInvoiceChange = (row, value) => {
+    const updatedAppointments = appointments.map((appointment) => {
+      if (appointment._id === row._id) {
+        return {
+          ...appointment,
+          invoice: value,
+        };
+      }
+      return appointment;
+    });
+    setAppointments(updatedAppointments);
+  };
 
   const handleSave = async (appointment) => {
     try {
@@ -52,8 +106,7 @@ export default function Users() {
   };
 
   const columns = [
-
-{field:'_id', headerName:"ID", width:150},
+    { field: '_id', headerName: 'ID', width: 150 },
     {
       field: 'user',
       headerName: 'User Name',
@@ -61,15 +114,22 @@ export default function Users() {
       renderCell: (params) => {
         const userName = params.row.user.username;
         return userName;
-      }
+      },
     },
-  
-  
-   
-  
     { field: 'disease', headerName: 'Disease', width: 100 },
-    
-    { field: 'date', headerName: 'Date', width: 150 },
+    {
+      field: 'date',
+      headerName: 'Date',
+      width: 150,
+      renderCell: (params) => (
+        <input
+          type="date"
+          value={moment(params.row.date).format('YYYY-MM-DD')}
+          onChange={(e) => handleDateChange(params.row, e.target.value)}
+          min={tomorrow.toISOString().split('T')[0]}
+        />
+      ),
+    },
     {
       field: 'status',
       headerName: 'Status',
@@ -86,7 +146,7 @@ export default function Users() {
       width: 100,
       renderCell: (params) => (
         <span>
-          {params.row.payment === 'paid' ? 'paid' : 'unpaid'}
+          {params.row.payment === 'paid' ? 'Paid' : 'Unpaid'}
         </span>
       ),
     },
@@ -98,13 +158,12 @@ export default function Users() {
         <>
           {params.row.status === 'checked' ? params.value :  <TextField
               value={params.value}
-              onChange={(e) => handleChange(params.row, e.target.value)}
+              onChange={(e) => handleInvoiceChange(params.row, e.target.value)}
               variant="outlined"
               size="small"
               style={{ color: 'inherit', width: '90%' }}
             />}
-            </>
-        
+        </>
       ),
     },
     {
@@ -118,32 +177,25 @@ export default function Users() {
           </Button>):
           (
             <span>
-          clear
-        </span>
+              Clear
+            </span>
           )
-
-       
-        
-      )
+      ),
     },
   ];
 
-  const handleChange = (row, value) => {
-    const updatedAppointments = appointments.map((appointment) => {
-      if (appointment._id === row._id) {
-        return {
-          ...appointment,
-          invoice: value,
-        };
-      }
-      return appointment;
-    });
-    setAppointments(updatedAppointments);
-  };
-
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid rows={appointments} columns={columns} getRowId={(row) => row._id} />
-    </div>
+    <>
+      <div style={{ marginLeft: 20, height: 400, width: '100%' }}>
+        <DataGrid rows={appointments} columns={columns} getRowId={(row) => row._id} />
+      </div>
+    </>
   );
 }
+
+
+
+
+
+
+

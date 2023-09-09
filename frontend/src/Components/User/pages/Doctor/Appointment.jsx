@@ -11,6 +11,7 @@ import { getpatient } from "../../slices/patientSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import KhaltiCheckout from "khalti-checkout-web";
+import moment from "moment";
 
 import toast from "react-hot-toast";
 
@@ -140,7 +141,7 @@ export default function Cart() {
                   {item?.doctor?.name}
                 </StyledTableCell>
                 <StyledTableCell align="left">{item?.disease}</StyledTableCell>
-                <StyledTableCell align="left">{item?.date}</StyledTableCell>
+                <StyledTableCell align="left">{moment.utc(item?.date).format('MM/DD/YYYY')}</StyledTableCell>
                 <StyledTableCell align="left">{item?.status}</StyledTableCell>
                 <StyledTableCell align="left">{item?.invoice}</StyledTableCell>
                 <StyledTableCell align="left">

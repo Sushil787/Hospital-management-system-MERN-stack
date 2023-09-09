@@ -100,7 +100,7 @@ const Sidebar1 = () => {
               selected={selected}
               setSelected={setSelected}
             />
-             <Item
+            <Item
               title="Enqiry"
               to="/Enquery"
               icon={<Message />}
@@ -108,8 +108,8 @@ const Sidebar1 = () => {
               setSelected={setSelected}
             />
 
-<Item
-              title="Ambulance_service"
+            <Item
+              title="Ambulance Service"
               to="/ambulance"
               icon={<Message />}
               selected={selected}

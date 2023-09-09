@@ -6,14 +6,14 @@ const pquery = require("../model/patientmessage");
 const ambulance = require("../model/Ambulance")
 const add_doctor = async (req, res) => {
     try {
-        const { name, expertise, image,roomid } = req.body;
+        const { name, expertise, image, roomid } = req.body;
         console.log(name, expertise, image);
         if (!name | !image) {
             return res.status(204).json({ message: "incomplete content" });
         } else {
             const db_doctor = await doctor.findOne({ name });
             if (!db_doctor) {
-                await doctor.create({ name, image, expertise ,roomid});
+                await doctor.create({ name, image, expertise, roomid });
                 return res.json({ message: "doctor added" });
             }
             return res.status(409).json({ message: "doctor adlready exists" });
@@ -27,7 +27,7 @@ const add_doctor = async (req, res) => {
 const delete_doctor = async (req, res) => {
     try {
         const _id = req.params.id;
-       
+
         if (!_id) {
             return res.status(204).json({ message: "no id sent" });
         } else {
@@ -50,6 +50,23 @@ const user_query = async (req, res) => {
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
+
+}
+
+const change_date = async (req, res) => {
+
+    try {
+        const {_id, date} = req.body;
+        const new_date = await appointments.findByIdAndUpdate({ _id }, { date });
+        
+        console.log(req.body);
+        console.log(new_date);
+        return res.status(200);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+
+
 
 }
 
@@ -110,5 +127,5 @@ const all_appointments = async (req, res) => {
 
 
 module.exports = {
-    add_doctor, delete_doctor, all_appointments, update_appointment, user_query,ambulance_service
+    add_doctor, delete_doctor, all_appointments, update_appointment, user_query, ambulance_service,change_date
 };
