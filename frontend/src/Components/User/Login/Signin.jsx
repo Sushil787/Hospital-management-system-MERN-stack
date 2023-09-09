@@ -45,7 +45,6 @@ function SignUpForm() {
 
   const onSubmit = async (values) => {
     console.log(values)
-
     try {
       const response = await axios.post(
         "http://localhost:8080/signup",
