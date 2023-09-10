@@ -21,6 +21,11 @@ const AddDoctorForm = ({fetchdata}) => {
   const [image, setImage] = useState('');
 
   const [selectdate, setSelectDate] = useState([]);
+  const [contact, setContact] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [desc, setDesc] = useState('');
+
 
   const date = selectdate.map(option => option.value);
 
@@ -38,7 +43,7 @@ const AddDoctorForm = ({fetchdata}) => {
     e.preventDefault();
 
     try {
-      const doctorData = { name, expertise, image,date };
+      const doctorData = { name, expertise, image,date,contact,email,password,desc };
       console.log(doctorData)
      const response=  await axios.post('http://localhost:8080/doctor', doctorData,{
         headers: {
@@ -48,7 +53,7 @@ const AddDoctorForm = ({fetchdata}) => {
           },
       });
       if(response)
-      { fetchdata()
+      { 
     setName("")
 setExpertise([''])
 setImage("")
@@ -63,8 +68,10 @@ setSelectDate([])
 
   return (
    
-    <Box sx={{ maxWidth: 400, margin: '0 auto' }}>
-      <Typography variant="h4" gutterBottom>
+    <Box  sx={{ maxWidth: 500, margin: '0 auto' }}>
+      <Typography variant="h4" sx={{
+        textAlign: 'center',
+      }} gutterBottom>
         Add Doctor
       </Typography>
       <form onSubmit={handleSubmit}>
@@ -72,6 +79,41 @@ setSelectDate([])
           label="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          required
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          fullWidth
+          margin="normal"
+        />
+
+        <TextField
+          label="Contact"
+          value={contact}
+          onChange={(e) => setContact(e.target.value)}
+          required
+          fullWidth
+          margin="normal"
+        />
+
+        <TextField
+          label="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          fullWidth
+          margin="normal"
+        />
+
+        <TextField
+          label="Description"
+          value={desc}
+          onChange={(e) => setDesc(e.target.value)}
           required
           fullWidth
           margin="normal"

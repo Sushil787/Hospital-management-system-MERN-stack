@@ -8,7 +8,7 @@ import { LightModeOutlined } from "@mui/icons-material";
 import { DarkModeOutlined } from "@mui/icons-material";
 
 import { PersonOutline } from "@mui/icons-material";
-import logo from "../../../User/assets/logo.png";
+
 
 const Topbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -29,7 +29,7 @@ const Topbar = () => {
   return (
     <Box sx={{ display: "flex", justifyContent: "space-between", p: 2 }}>
       <Typography as="h4">
-        Admin DashBoard
+        
       </Typography>
 
       <Box sx={{ display: "flex" }}>

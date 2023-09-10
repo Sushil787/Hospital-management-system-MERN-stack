@@ -3,13 +3,16 @@ import Box from "@mui/material/Box";
 import { DataGrid, GridOverlay } from "@mui/x-data-grid";
 import axios from "axios";
 import { useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 import AddDoctorForm from "./AddDoctor";
 import { Grid, Typography } from "@mui/material";
 
+
+
 const columns = [
-  { field: "_id", headerName: "ID", width: 200 },
+
   { field: "name", headerName: "Name", width: 200 },
+ 
   {
     field: "expertise",
     headerName: "Expertise",
@@ -22,7 +25,7 @@ const columns = [
   {
     field: "date",
     headerName: "Available Date",
-    width: 400,
+    width: 200,
     renderCell: (params) => {
       const date = params.value || [];
       return date.join(", ");
@@ -33,7 +36,7 @@ const columns = [
   {
     field: "actions",
     headerName: "Actions",
-    width: 120,
+    width: 70,
     renderCell: (params) => {
       const handleDelete = async () => {
         const token = localStorage.getItem("jwt");
@@ -57,10 +60,29 @@ const columns = [
       return <button onClick={handleDelete}>Delete</button>;
     },
   },
+
+  {
+    field: "seeMore",
+    headerName: "More Info",
+    width: 70,
+    renderCell: (params) => {
+      const handleDetails = async () => {
+      //  navigate(`/doctordetails/${params.row._id}`)
+
+      console.log(params.row._id)
+       
+      
+      };
+
+      return <button onClick={handleDetails}>See More</button>;
+    },
+  },
 ];
 
 export default function DataGridDemo() {
   const [data, setData] = React.useState([]);
+  const navigate = useNavigate();
+  
 
   const fetchData = async () => {
     try {
@@ -88,18 +110,16 @@ export default function DataGridDemo() {
   const CustomNoRowsOverlay = () => {
     return (
       <GridOverlay>
-        <div>No doctors</div>
+        <div>loading....</div>
       </GridOverlay>
     );
   };
   return (
-    <Grid container spacing={1}>
-      <Grid item xs={12} sm={6}>
-        <AddDoctorForm fetchdata={fetchData} />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <Box sx={{ height: "400px", width: "90%" }}>
-          <Grid container xs={12}>
+    <Grid container >
+      
+      <Grid item xs={12} sm={12}>
+        <Box sx={{ height: "400px", maxWidth: "90%" }}>
+          <Grid container sx={{justifyContent:"center"}} xs={10}>
             <Typography
               variant="h4"
               sx={{

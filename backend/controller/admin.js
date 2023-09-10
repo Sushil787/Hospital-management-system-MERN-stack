@@ -4,16 +4,18 @@ const mongoose = require("mongoose");
 const appointments = require("../model/appointments");
 const pquery = require("../model/patientmessage");
 const ambulance = require("../model/Ambulance")
+const bcryptjs = require('bcryptjs');
 const add_doctor = async (req, res) => {
     try {
-        const { name, expertise, image, roomid } = req.body;
+        const { name, expertise, image,date,email,password,desc,contact} = req.body;
         console.log(name, expertise, image);
-        if (!name | !image) {
+        if (!name | !image | !expertise | !date | !email | !password | !desc | !contact) {
             return res.status(204).json({ message: "incomplete content" });
         } else {
-            const db_doctor = await doctor.findOne({ name });
+            const db_doctor = await doctor.findOne({ name,email });
             if (!db_doctor) {
-                await doctor.create({ name, image, expertise, roomid });
+                const hashed_password = await bcryptjs.hash(password, 8);
+                await doctor.create({ name, image, expertise, date, email, password:hashed_password, desc, contact });
                 return res.json({ message: "doctor added" });
             }
             return res.status(409).json({ message: "doctor adlready exists" });

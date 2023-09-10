@@ -9,6 +9,7 @@ import {Routes,Route} from 'react-router-dom'
 import Enquery from './components/Enquiry';
 import Ambulance from './components/Ambulance';
 import Report from './components/Report';
+import AddDoctor from './components/AddDoctor';
 
 const Dashboard = () => {
   const [theme, colorMode] = useMode();
@@ -42,6 +43,7 @@ const Dashboard = () => {
                 <Route path="/enquery" element={<Enquery />} />
                 <Route path="/ambulance" element={<Ambulance />} />
                 <Route path="/report/:id" element={<Report />} />
+                <Route path="/AddDoctor" element={< AddDoctor/>} />
 
                 
               </Routes>
