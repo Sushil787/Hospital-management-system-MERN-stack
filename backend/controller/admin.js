@@ -8,17 +8,17 @@ const bcryptjs = require('bcryptjs');
 const add_doctor = async (req, res) => {
     try {
         const { name, expertise, image,date,email,password,desc,contact,ammount} = req.body;
-        console.log(name, expertise, image);
+        console.log(name, expertise, image,date,email,password,desc,contact,ammount);
         if (!name | !image | !expertise | !date | !email | !password | !desc | !contact | !ammount) {
             return res.status(204).json({ message: "incomplete content" });
         } else {
             const db_doctor = await doctor.findOne({ name,email });
             if (!db_doctor) {
                 const hashed_password = await bcryptjs.hash(password, 8);
-                await doctor.create({ name, image, expertise, date, email, password:hashed_password, desc, contact });
-                return res.json({ message: "doctor added" });
+                await doctor.create({ name, image, expertise, date, email, password:hashed_password, desc, contact ,ammount});
+                return res.status(200).json({ message: "doctor added" });
             }
-            return res.status(409).json({ message: "doctor adlready exists" });
+            return res.status(409).json({ message: "doctor already exists" });
         }
 
     } catch (e) {

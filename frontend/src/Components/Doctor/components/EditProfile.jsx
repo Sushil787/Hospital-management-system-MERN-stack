@@ -16,22 +16,58 @@ const options = [
 const theme = createTheme(); // Create a theme
 
 
-const user=JSON.parse(localStorage.getItem("user"))
+
 
 const AddDoctorForm = () => {
-  const [name, setName] = useState(user.name);
-
-  const [image, setImage] = useState(user.image);
 
 
-  const [contact, setContact] = useState(user.contact);
-  const [email, setEmail] = useState(user.email);
 
-  const [desc, setDesc] = useState(user.desc);
-  const [ammount, seAmmount] = useState(user.ammount);
+    const [user,setUser]=useState({})
+    
+
+  const [name, setName] = useState(user?.name);
+
+  const [image, setImage] = useState(user?.image);
 
 
-  
+  const [contact, setContact] = useState(user?.contact);
+  const [email, setEmail] = useState(user?.email);
+
+  const [desc, setDesc] = useState(user?.desc);
+  const [ammount, seAmmount] = useState(user?.ammount);
+
+
+  const fetchdoctor=async()=>{
+    try {
+        const response= await axios.get('http://localhost:8080/doctor-single',{
+            headers: {
+
+                "authorization": localStorage.getItem("jwt")
+            }})
+
+            console.log(response.data.data)
+            if(response)
+            {
+                setUser(response.data.data)
+            }
+        }
+        catch(error)
+        {
+            console.log(error.message)
+        }   
+    }
+        
+
+
+    React.useEffect(() => {
+        fetchdoctor()
+    }, [])
+
+    console.log(user)
+    console.log(user.name)
+    
+
+
 
   
   const handleSubmit = async (e) => {
@@ -72,7 +108,7 @@ seAmmount("")
       <Typography variant="h4" sx={{
         textAlign: 'center',
       }} gutterBottom>
-        Add Doctor
+        Edit Profile
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField

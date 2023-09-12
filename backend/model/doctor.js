@@ -46,7 +46,7 @@ const doctor_schema = mongoose.Schema({
     
 });
 
-// name, expertise, image,date,contact,email,password,desc
+// name, expertise, image,date,contact,email,password,desc,ammount
 
 
 

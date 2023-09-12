@@ -1,4 +1,5 @@
 const appointments=require("../model/appointments")
+const doctor=require("../model/doctor")
 
 const all_appointments = async (req, res) => {
     const id = req.id;
@@ -24,9 +25,11 @@ const all_appointments = async (req, res) => {
 
 
 const get_single_doctor=async(req,res)=>{
-    const {id}=req.id
+    const id=req.id
+   
     try{
         const data=await doctor.findById(id)
+        console.log(data)
         if(!data)
         {
           return res.status(401).json({
