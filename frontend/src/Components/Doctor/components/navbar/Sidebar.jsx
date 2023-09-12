@@ -75,7 +75,7 @@ const Sidebar1 = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  admin
+                 Doctor Pannel
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlined />
@@ -85,13 +85,13 @@ const Sidebar1 = () => {
           </MenuItem>
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
+            {/* <Item
               title="Doctors"
               to="/"
               icon={<HomeOutlined />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
 
             <Item
               title="Users"
@@ -100,29 +100,37 @@ const Sidebar1 = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            {/* <Item
               title="Enqiry"
               to="/Enquery"
               icon={<Message />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
 
-            <Item
+            {/* <Item
               title="Ambulance Service"
               to="/ambulance"
               icon={<Message />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
 
-<Item
+{/* <Item
               title="Add Doctor"
               to="/AddDoctor"
               icon={<Message />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
+
+             <Item
+              title="Profile"
+              to="/editprofile"
+              icon={<Message />}
+              selected={selected}
+              setSelected={setSelected}
+            /> 
 
 
 

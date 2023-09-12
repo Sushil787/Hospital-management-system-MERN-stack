@@ -7,10 +7,11 @@ const auth_middleware = async (req, res, next) => {
 
     const bearer = token.split(" ");
     const verify = jwt.verify(bearer[1], process.env.SECRET_KEY);
+    console.log(verify)
     
     if (verify) {
       req.id = verify.auth_user._id;
-      req.is_admin = verify.auth_user.is_admin;
+      // req.is_admin = verify.auth_user.is_admin;
       next();
       return;
     } else {

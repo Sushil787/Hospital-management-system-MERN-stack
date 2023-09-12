@@ -4,19 +4,21 @@ const mongoose = require("mongoose");
 const appointments = require("../model/appointments");
 const pquery = require("../model/patientmessage");
 const ambulance = require("../model/Ambulance")
+const bcryptjs = require('bcryptjs');
 const add_doctor = async (req, res) => {
     try {
-        const { name, expertise, image, roomid } = req.body;
-        console.log(name, expertise, image);
-        if (!name | !image) {
+        const { name, expertise, image,date,email,password,desc,contact,ammount} = req.body;
+        console.log(name, expertise, image,date,email,password,desc,contact,ammount);
+        if (!name | !image | !expertise | !date | !email | !password | !desc | !contact | !ammount) {
             return res.status(204).json({ message: "incomplete content" });
         } else {
-            const db_doctor = await doctor.findOne({ name });
+            const db_doctor = await doctor.findOne({ name,email });
             if (!db_doctor) {
-                await doctor.create({ name, image, expertise, roomid });
-                return res.json({ message: "doctor added" });
+                const hashed_password = await bcryptjs.hash(password, 8);
+                await doctor.create({ name, image, expertise, date, email, password:hashed_password, desc, contact ,ammount});
+                return res.status(200).json({ message: "doctor added" });
             }
-            return res.status(409).json({ message: "doctor adlready exists" });
+            return res.status(409).json({ message: "doctor already exists" });
         }
 
     } catch (e) {
@@ -130,9 +132,12 @@ const update_medicine = async (req, res) => {
 }
 
 const all_appointments = async (req, res) => {
+    const id = req.id;
+  
     try {
 
-        const all_appointments = await appointments.find({}).populate("doctor").populate("user");
+        const all_appointments = await appointments.find({doctor:id}).populate("user");
+        console.log(all_appointments)
         if (!all_appointments) {
             return res
                 .status(401)

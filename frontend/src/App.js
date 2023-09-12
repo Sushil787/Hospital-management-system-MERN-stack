@@ -14,24 +14,37 @@ import About from "./Components/User/pages/About/About";
 import Doctor from "./Components/User/pages/Doctor/Doctor";
 import PrivateRoutes from "./Privateroutes";
 import Form from "./Components/User/pages/Doctor/Form";
+import Doctorlogin from "./Components/User/Login/Doctorlogin";
 
 import { useState} from "react";
 import Dashboard from "./Components/Admin/Dashboard";
 import PagenotFound from "./Components/User/pages/PagenotFound";
 import Appointment from "./Components/User/pages/Doctor/Appointment";
 import Room from "./Components/User/pages/Doctor/Room";
+import DDashboard from "./Components/Doctor/Dashboard";
 
 import AmbulanceBooking from "./Components/User/pages/Ambulance";
 
 function App() {
   const [is_admin, setIsAdmin] = useState(localStorage.getItem("is_admin"));
+  const [is_doctor,setIsdoctor]=useState(localStorage.getItem("is_doctor"))
+
+  console.log(is_doctor)
+
+
+
+
 
   return (
-   
+      
 
 
     <Grid container >
-      {is_admin === 'true' ? (
+       {is_doctor ? (
+        <Grid item xs={12}>
+         <DDashboard />
+        </Grid>
+      ):is_admin === 'true' ? (
         <Grid item xs={12}>
           <Dashboard />
         </Grid>
@@ -52,7 +65,8 @@ function App() {
 
 
                 <Route path="/login" Component={LoginForm} />
-
+                <Route path="/doctorlogin" Component={Doctorlogin} />
+ 
 {/* scope of private routes */}
                 <Route Component={PrivateRoutes}>
               <Route path="/form/:id" Component={Form} />
