@@ -184,6 +184,15 @@ const Navbar = () => {
                     >
                       Login
                     </Button>
+
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      component={Link}
+                      to="/doctorlogin"
+                    >
+                       Doctor Login
+                    </Button>
                     <Button
                       variant="outlined"
                       color="secondary"

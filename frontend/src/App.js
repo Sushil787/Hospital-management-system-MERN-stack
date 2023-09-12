@@ -14,6 +14,7 @@ import About from "./Components/User/pages/About/About";
 import Doctor from "./Components/User/pages/Doctor/Doctor";
 import PrivateRoutes from "./Privateroutes";
 import Form from "./Components/User/pages/Doctor/Form";
+import Doctorlogin from "./Components/User/Login/Doctorlogin";
 
 import { useState} from "react";
 import Dashboard from "./Components/Admin/Dashboard";
@@ -52,7 +53,8 @@ function App() {
 
 
                 <Route path="/login" Component={LoginForm} />
-
+                <Route path="/doctorlogin" Component={Doctorlogin} />
+ 
 {/* scope of private routes */}
                 <Route Component={PrivateRoutes}>
               <Route path="/form/:id" Component={Form} />
