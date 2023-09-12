@@ -13,6 +13,7 @@ const signin = async (req, res) => {
         } else {
             auth_user = await user.findOne({ username });
             console.log(auth_user);
+            console.log("hey....")
             if (!auth_user) {
                   return  res
                     .status(401)
@@ -26,7 +27,7 @@ const signin = async (req, res) => {
                 }else{
                     const token = jsonwebtoken.sign({auth_user},process.env.SECRET_KEY,{expiresIn:"5h"} );
                     res.cookie("authorization", `Bearer ${token}`);
-                    return res.status(200).json({ token:`Bearer ${token}`, user:auth_user});
+                    return res.status(200).json({ token:`Bearer ${token}`, user:auth_user,message:"login successfully"});
                 }
 
             }

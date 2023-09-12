@@ -19,10 +19,27 @@ function LoginForm() {
   };
 
   const onSubmit = async (values) => {
-    console.log(values);
+    // console.log(values);
     try {
         const response= await axios.post ("http://localhost:8080/doctorsignin",values)
         console.log(response.data)
+        
+        if(response.status===200){
+            localStorage.setItem("jwt",response.data.token)
+            localStorage.setItem("user",JSON.stringify(response.data.user))
+            localStorage.setItem("is_doctor",response.data.user.is_doctor)
+            if(response.data.user.is_doctor===true){
+                
+                navigate("/")
+                window.location.reload("true")
+            }
+
+        }
+        else{
+            toast.error(response.data.message)
+        }
+
+
     }
     catch(error){
         console.log(error.message)

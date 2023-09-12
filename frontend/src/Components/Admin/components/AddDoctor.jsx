@@ -25,6 +25,7 @@ const AddDoctorForm = ({fetchdata}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [desc, setDesc] = useState('');
+  const [ammount, seAmmount] = useState('');
 
 
   const date = selectdate.map(option => option.value);
@@ -43,7 +44,7 @@ const AddDoctorForm = ({fetchdata}) => {
     e.preventDefault();
 
     try {
-      const doctorData = { name, expertise, image,date,contact,email,password,desc };
+      const doctorData = { name, expertise, image,date,contact,email,password,desc,ammount };
       console.log(doctorData)
      const response=  await axios.post('http://localhost:8080/doctor', doctorData,{
         headers: {
@@ -58,6 +59,11 @@ const AddDoctorForm = ({fetchdata}) => {
 setExpertise([''])
 setImage("")
 setSelectDate([])
+setContact("")
+setEmail("")
+setPassword("")
+setDesc("")
+seAmmount("")
 }
       
       
@@ -105,6 +111,15 @@ setSelectDate([])
           label="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
+          fullWidth
+          margin="normal"
+        />
+
+<TextField
+          label="Total Amount"
+          value={ammount}
+          onChange={(e) => seAmmount(e.target.value)}
           required
           fullWidth
           margin="normal"

@@ -34,6 +34,11 @@ const doctor_schema = mongoose.Schema({
         type:[String],
         required:true
     },
+    ammount:{
+        type:Number,
+        required:true
+
+    },
     is_doctor:{
         type:Boolean,
         default:true

@@ -7,9 +7,9 @@ const ambulance = require("../model/Ambulance")
 const bcryptjs = require('bcryptjs');
 const add_doctor = async (req, res) => {
     try {
-        const { name, expertise, image,date,email,password,desc,contact} = req.body;
+        const { name, expertise, image,date,email,password,desc,contact,ammount} = req.body;
         console.log(name, expertise, image);
-        if (!name | !image | !expertise | !date | !email | !password | !desc | !contact) {
+        if (!name | !image | !expertise | !date | !email | !password | !desc | !contact | !ammount) {
             return res.status(204).json({ message: "incomplete content" });
         } else {
             const db_doctor = await doctor.findOne({ name,email });
@@ -132,9 +132,12 @@ const update_medicine = async (req, res) => {
 }
 
 const all_appointments = async (req, res) => {
+    const id = req.id;
+  
     try {
 
-        const all_appointments = await appointments.find({}).populate("doctor").populate("user");
+        const all_appointments = await appointments.find({doctor:id}).populate("user");
+        console.log(all_appointments)
         if (!all_appointments) {
             return res
                 .status(401)

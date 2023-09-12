@@ -3,15 +3,17 @@ import Topbar from "./components/navbar/Topbar";
 import Sidebar1 from "./components/navbar/Sidebar";
 import { ColorModeContext, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import Doctors from './components/Doctors';
+import EditProfile from './components/EditProfile';
+
 import Users from './components/Users';
 import {Routes,Route} from 'react-router-dom'
-import Enquery from './components/Enquiry';
-import Ambulance from './components/Ambulance';
-import Report from './components/Report';
-import AddDoctor from './components/AddDoctor';
 
-const Dashboard = () => {
+
+import Report from './components/Report';
+import Profile from './components/Profile';
+
+
+const DDashboard = () => {
   const [theme, colorMode] = useMode();
 
   return (
@@ -38,12 +40,13 @@ const Dashboard = () => {
             <Topbar />
             
             <Routes>
-                <Route path="/" element={<Doctors />} />
-                {/* <Route path="/users" element={<Users />} /> */}
-                <Route path="/enquery" element={<Enquery />} />
-                <Route path="/ambulance" element={<Ambulance />} />
+                <Route path="/" element={<Profile />} />
+                <Route path="/editprofile" element={<EditProfile />} />
+                <Route path="/users" element={<Users />} />
+                {/* <Route path="/enquery" element={<Enquery />} /> */}
+                {/* <Route path="/ambulance" element={<Ambulance />} /> */}
                 <Route path="/report/:id" element={<Report />} />
-                <Route path="/AddDoctor" element={< AddDoctor/>} />
+                {/* <Route path="/AddDoctor" element={< AddDoctor/>} /> */}
 
                 
               </Routes>
@@ -56,4 +59,4 @@ const Dashboard = () => {
   );
 }
 
-export default Dashboard;
+export default DDashboard;
