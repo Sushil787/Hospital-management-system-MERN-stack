@@ -137,7 +137,9 @@ const Report = () => {
     </Typography>
 
     <Container elevation={3} style={{ ...paperStyle, ...responsivePaperStyle }}>
-      <Typography variant="h5">Patient Name: {datas?.user?.username}</Typography>
+
+      <Typography variant="h5">Patient Details</Typography>
+      <Typography variant="subtitle1">Patient Name: {datas?.user?.username}</Typography>
       <Typography variant="subtitle1">Email: {datas?.user?.email}</Typography>
       <Typography variant="subtitle1">Phone: {datas?.user?.phone}</Typography>
       <Typography variant="subtitle1">Location: {datas?.user?.location}</Typography>
