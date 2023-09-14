@@ -113,100 +113,40 @@ export default function Users() {
 
  
   const columns = [
-    { field: '_id', headerName: 'ID', width: 150 },
+    { field: '_id', headerName: 'ID', width: 200 },
     {
       field: 'user',
       headerName: 'User Name',
-      width: 150,
+      width: 200,
       renderCell: (params) => {
         const userName = params.row.user.username;
         return userName;
       },
     },
-    { field: 'disease', headerName: 'Disease', width: 100 },
+    {
+      field: 'doctor',
+      headerName: 'Doctor Name',
+      width: 200,
+      renderCell: (params) => {
+        const userName = params.row.doctor.name;
+        return userName;
+      },
+    },
+    { field: 'disease', headerName: 'Disease', width: 200 },
     {
       field: 'date',
       headerName: 'Date',
-      width: 150,
-      renderCell: (params) => (
-        <input
-          type="date"
-          value={moment(params.row.date).format('YYYY-MM-DD')}
-          onChange={(e) => handleDateChange(params.row, e.target.value)}
-          min={tomorrow.toISOString().split('T')[0]}
-        />
-      ),
-    },
-    {
-      field: 'status',
-      headerName: 'Status',
-      width: 100,
-      renderCell: (params) => (
-        <span>
-          {params.row.status === 'checked' ? '✔️' : 'Pending'}
-        </span>
-      ),
-    },
-    {
-      field: 'payment',
-      headerName: 'Payment',
-      width: 100,
-      renderCell: (params) => (
-        <span>
-          {params.row.payment === 'paid' ? 'Paid' : 'Unpaid'}
-        </span>
-      ),
-    },
-    {
-      field: 'invoice',
-      headerName: 'Invoice',
       width: 200,
       renderCell: (params) => (
-        <>
-          {params.row.status === 'checked' ? params.value :  <TextField
-              value={params.value}
-              onChange={(e) => handleInvoiceChange(params.row, e.target.value)}
-              variant="outlined"
-              size="small"
-              style={{ color: 'inherit', width: '90%' }}
-            />}
-        </>
+        moment(params.row.date).format('YYYY-MM-DD')
       ),
     },
-    {
-      field: 'actions',
-      headerName: 'Actions',
-      width: 100,
-      renderCell: (params) => (
-        params.row.status !== "checked" ? (
-          <Button onClick={() => handleSave(params.row)} style={{ color: 'white' }}>
-            Add 
-          </Button>):
-          (
-            <span>
-              Clear
-            </span>
-          )
-      ),
-    },
+  
+    
+   
 
 
-    {
-      field: 'Report',
-      headerName: 'Generate Report',
-      width: 100,
-      renderCell: (params) => (
-        params.row.status == "checked" ? (
-          <Button onClick={() => navigate(`/report/${params.row._id}`)} style={{ color: 'white' }}>
-            Generate
-          </Button>):
-          (
-            <span>
-              pending.....
-            </span>
-          )
-      ),
-    },
+    
   ];
 
   return (

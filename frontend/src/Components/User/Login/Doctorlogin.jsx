@@ -37,7 +37,7 @@ function LoginForm() {
 
         }
         else{
-            toast.error(response.data.message)
+            toast.error("login failed")
         }
 
 

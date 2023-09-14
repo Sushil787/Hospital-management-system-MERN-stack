@@ -44,75 +44,123 @@ const Report = () => {
   }, []);
 
   const containerStyle = {
-    marginTop: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '20px',
   };
-
+  
   const titleStyle = {
     textAlign: 'center',
-    marginBottom: '20px',
   };
-
-  const avatarStyle = {
-    width: '100px',
-    height: '100px',
-    marginBottom: '16px',
-  };
-
+  
   const paperStyle = {
-    padding: '16px',
-    marginBottom: '16px',
-    textAlign: 'center',
-   
+    width: '100%',
+    maxWidth: '600px', // Adjust the maximum width as needed
+    margin: '10px',
+    padding: '20px',
+    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
   };
 
   const listItemStyle = {
-    padding: '8px',
+    border: '1px solid #ccc',
+    borderRadius: '5px',
+    marginBottom: '5px',
   };
+  
+  const responsiveContainerStyle = {
+    '@media (min-width: 768px)': {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+  };
+  
+  const responsivePaperStyle = {
+    flex: '1',
+    margin: '10px',
+  };
+  
+
+
+ 
 
   return (
-    <Paper style={containerStyle}>
-      <Typography variant="h4" style={titleStyle} gutterBottom>
-        Medical Report
-      </Typography>
+    // <Container style={containerStyle}>
+    //   <Typography variant="h4" style={titleStyle} gutterBottom>
+    //     Medical Report
+    //   </Typography>
     
-      <Container   elevation={3}  style={paperStyle}>
+    //   <Container   elevation={3}  style={paperStyle}>
        
-       <Typography variant="h5">Patient Name:{datas?.user?.username}</Typography>
-       <Typography variant="subtitle1">Email: {datas?.user?.email}</Typography>
-       <Typography variant="subtitle1">Phone: {datas?.user?.phone}</Typography>
-       <Typography variant="subtitle1">
-         Location: {datas?.user?.location}
-       </Typography>
-       <Typography variant="subtitle1">Age: {datas?.user?.age}</Typography>
-     </Container>
-     <Container    elevation={3}   style={paperStyle}>
-       <Typography variant="h5">Disease Details</Typography>
-       <Typography variant="subtitle1">
-         Date: {new Date(datas?.date).toLocaleDateString()}
-       </Typography>
-       <Typography variant="subtitle1">Disease: {datas?.disease}</Typography>
-       <Typography variant="subtitle1">
-         Doctor: {datas?.doctor?.name}
-       </Typography>
-       <Typography variant="subtitle1">
-         Invoice: {datas?.doctor?.ammount}
-       </Typography>
-       <Typography variant="subtitle1">
-         About Disease: {datas?.about}
-       </Typography>
-       <Typography variant="subtitle1">Medicine:</Typography>
-       <List>
-         {datas?.medicine?.map((med, index) => (
-           <ListItem key={index} style={listItemStyle}>
-             <ListItemText primary={med} />
-           </ListItem>
-         ))}
-       </List>
-       <Typography variant="subtitle1">Payment: {datas?.payment}</Typography>
-     </Container>
+    //    <Typography variant="h5">Patient Name:{datas?.user?.username}</Typography>
+    //    <Typography variant="subtitle1">Email: {datas?.user?.email}</Typography>
+    //    <Typography variant="subtitle1">Phone: {datas?.user?.phone}</Typography>
+    //    <Typography variant="subtitle1">
+    //      Location: {datas?.user?.location}
+    //    </Typography>
+    //    <Typography variant="subtitle1">Age: {datas?.user?.age}</Typography>
+    //  </Container>
+    //  <Container    elevation={3}   style={paperStyle}>
+    //    <Typography variant="h5">Disease Details</Typography>
+    //    <Typography variant="subtitle1">
+    //      Date: {new Date(datas?.date).toLocaleDateString()}
+    //    </Typography>
+    //    <Typography variant="subtitle1">Disease: {datas?.disease}</Typography>
+    //    <Typography variant="subtitle1">
+    //      Doctor: {datas?.doctor?.name}
+    //    </Typography>
+    //    <Typography variant="subtitle1">
+    //      Invoice: {datas?.doctor?.ammount}
+    //    </Typography>
+    //    <Typography variant="subtitle1">
+    //      About Disease: {datas?.about}
+    //    </Typography>
+    //    <Typography variant="subtitle1">Medicine:</Typography>
+    //    <List>
+    //      {datas?.medicine?.map((med, index) => (
+    //        <ListItem key={index} style={listItemStyle}>
+    //          <ListItemText primary={med} />
+    //        </ListItem>
+    //      ))}
+    //    </List>
+    //    <Typography variant="subtitle1">Payment: {datas?.payment}</Typography>
+    //  </Container>
      
      
-    </Paper>
+    // </Container>
+
+
+
+    <Container style={{ ...containerStyle, ...responsiveContainerStyle }}>
+    <Typography variant="h4" style={titleStyle} gutterBottom>
+      Medical Report
+    </Typography>
+
+    <Container elevation={3} style={{ ...paperStyle, ...responsivePaperStyle }}>
+      <Typography variant="h5">Patient Name: {datas?.user?.username}</Typography>
+      <Typography variant="subtitle1">Email: {datas?.user?.email}</Typography>
+      <Typography variant="subtitle1">Phone: {datas?.user?.phone}</Typography>
+      <Typography variant="subtitle1">Location: {datas?.user?.location}</Typography>
+      <Typography variant="subtitle1">Age: {datas?.user?.age}</Typography>
+    </Container>
+    <Container elevation={3} style={{ ...paperStyle, ...responsivePaperStyle }}>
+      <Typography variant="h5">Disease Details</Typography>
+      <Typography variant="subtitle1">Date: {new Date(datas?.date).toLocaleDateString()}</Typography>
+      <Typography variant="subtitle1">Disease: {datas?.disease}</Typography>
+      <Typography variant="subtitle1">Doctor: {datas?.doctor?.name}</Typography>
+      <Typography variant="subtitle1">Invoice: {datas?.doctor?.ammount}</Typography>
+      <Typography variant="subtitle1">About Disease: {datas?.about}</Typography>
+      <Typography variant="subtitle1">Medicine:</Typography>
+      <List>
+        {datas?.medicine?.map((med, index) => (
+          <ListItem key={index} style={listItemStyle}>
+            <ListItemText primary={med} />
+          </ListItem>
+        ))}
+      </List>
+      <Typography variant="subtitle1">Payment: {datas?.payment}</Typography>
+    </Container>
+  </Container>
   );
 };
 

@@ -92,11 +92,11 @@ const update_appointment = async (req, res) => {
 
 
 const all_appointments = async (req, res) => {
-    const id = req.id;
+    
   
     try {
 
-        const all_appointments = await appointments.find({doctor:id}).populate("user");
+        const all_appointments = await appointments.find().populate("user").populate("doctor");
         console.log(all_appointments)
         if (!all_appointments) {
             return res
