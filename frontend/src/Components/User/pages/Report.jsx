@@ -70,7 +70,7 @@ const Report = () => {
   };
 
   return (
-    <Container style={containerStyle}>
+    <Paper style={containerStyle}>
       <Typography variant="h4" style={titleStyle} gutterBottom>
         Medical Report
       </Typography>
@@ -112,7 +112,7 @@ const Report = () => {
      </Container>
      
      
-    </Container>
+    </Paper>
   );
 };
 

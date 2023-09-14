@@ -183,7 +183,7 @@ function SignUpForm() {
               <Grid item xs={12}>
                 <Field
                   as={TextField}
-                  type="password"
+                  type="text"
                   label="location"
                   variant="outlined"
                   name="location"
@@ -211,7 +211,7 @@ function SignUpForm() {
 
 
               <Grid item xs={12}>
-/                <Button
+               <Button
               type="submit"
               fullWidth
               variant="contained"

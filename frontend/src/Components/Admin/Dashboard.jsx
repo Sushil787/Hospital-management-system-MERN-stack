@@ -39,7 +39,7 @@ const Dashboard = () => {
             
             <Routes>
                 <Route path="/" element={<Doctors />} />
-                {/* <Route path="/users" element={<Users />} /> */}
+                <Route path="/users" element={<Users />} />
                 <Route path="/enquery" element={<Enquery />} />
                 <Route path="/ambulance" element={<Ambulance />} />
                 <Route path="/report/:id" element={<Report />} />

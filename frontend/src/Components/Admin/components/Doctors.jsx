@@ -61,22 +61,22 @@ const columns = [
     },
   },
 
-  {
-    field: "seeMore",
-    headerName: "More Info",
-    width: 70,
-    renderCell: (params) => {
-      const handleDetails = async () => {
-      //  navigate(`/doctordetails/${params.row._id}`)
+  // {
+  //   field: "seeMore",
+  //   headerName: "More Info",
+  //   width: 70,
+  //   renderCell: (params) => {
+  //     const handleDetails = async () => {
+  //     //  navigate(`/doctordetails/${params.row._id}`)
 
-      console.log(params.row._id)
+  //     console.log(params.row._id)
        
       
-      };
+  //     };
 
-      return <button onClick={handleDetails}>See More</button>;
-    },
-  },
+  //     return <button onClick={handleDetails}>See More</button>;
+  //   },
+  // },
 ];
 
 export default function DataGridDemo() {
