@@ -5,6 +5,7 @@ const pquery = require("../model/patientmessage");
 const ambulance=require("../model/Ambulance")
 
 const axios = require("axios");
+const bcryptjs = require("bcryptjs");
 
 const user_query = async (req, res) => {
   try {
@@ -140,5 +141,90 @@ const ambulance_booking= async (req,res)=>{
 }
 
 
+const single_user=async(req,res)=>{
+  const id=req.id
+  console.log(id)
+  try{
+      const data=await user.findById(id)
+      if(!data)
+      {
+        return res.status(401).json({
+          message:"cannot find user"
+         
+        })
+      }
 
-module.exports = { all_appointments, create_appointments, payment,user_query,ambulance_booking,single_appointments };
+      return  res.status(202).json({
+        message:"find user successfully",
+        data:data
+
+      })
+
+  }
+  catch(e){
+    return res.status(400).json({message:e.message})
+  }
+}
+
+const update_user=async(req,res)=>{
+  const id=req.id
+  console.log(id)
+  let {username,email,password,phone,gender,age,location}=req.body;
+  console.log(username,email,password,phone,gender,age,location)
+  let updateobject={}
+
+  if (password) { 
+    password = await bcryptjs.hash(password, 10);
+     updateobject={username,email,password,phone,gender,age,location}
+  }
+  else{
+    updateobject={username,email,phone,gender ,age,location}
+
+
+  }
+
+
+  try{
+    if(!username | !email  | ! phone | !gender | !age | !location){
+      return res.status(400).json({message:"invalid request"})
+    }
+
+    const data=await user.findById(id)
+   
+
+
+   
+    if(!data)
+    {
+      return res.status(401).json({
+        message:"cannot find user"
+       
+      })
+    }
+    else
+    {
+      
+      
+
+      const updateduser= await user.findByIdAndUpdate(id, updateobject)
+      
+    
+
+    return res.status(202).json({
+      message:"update successfully",
+      data:updateduser
+    })
+  }
+  }
+  catch(e){
+    return res.status(400).json({message:e.message})
+  }
+}
+
+
+  
+
+
+
+
+module.exports = { all_appointments, create_appointments, payment,user_query,ambulance_booking,single_appointments,single_user,update_user };

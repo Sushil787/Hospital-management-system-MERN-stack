@@ -171,7 +171,9 @@ const Navbar = () => {
                       <MenuItem as={NavLink} to="/appointment">
                         Appointment
                       </MenuItem>
+                      <MenuItem as={NavLink} to="/userprofile">profile</MenuItem>
                       <MenuItem onClick={handlelog}>Logout</MenuItem>
+                     
                     </Menu>
                   </>
                 ) : (

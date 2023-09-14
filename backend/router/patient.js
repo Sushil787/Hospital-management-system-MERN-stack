@@ -9,5 +9,7 @@ patient_router.post("/patient/appointment",auth_middleware,patient_controller.cr
 patient_router.post("/patient/patientmessage", patient_controller.user_query);
 patient_router.post("/patient/ambulance",patient_controller.ambulance_booking);
 patient_router.get("/patient/single-appointment/:id",patient_controller.single_appointments);
+patient_router.get("/userdetails",auth_middleware,patient_controller.single_user);
+patient_router.put("/updatepatient",auth_middleware,patient_controller.update_user);
 
 module.exports = patient_router;

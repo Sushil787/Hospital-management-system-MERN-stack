@@ -22,6 +22,7 @@ import PagenotFound from "./Components/User/pages/PagenotFound";
 import Appointment from "./Components/User/pages/Doctor/Appointment";
 import Room from "./Components/User/pages/Doctor/Room";
 import DDashboard from "./Components/Doctor/Dashboard";
+import UserProfile from "./Components/User/pages/userProfile";
 
 import AmbulanceBooking from "./Components/User/pages/Ambulance";
 
@@ -74,6 +75,7 @@ function App() {
                  <Route path="/room/:roomID" Component={Room} />
                  <Route path="/ambulance-booking" Component={AmbulanceBooking} />
                  <Route path="/report/:id" Component={Report} />
+                  <Route path="/userprofile" Component={UserProfile} />
                 </Route>
 {/* scope of private routes */}
                 
