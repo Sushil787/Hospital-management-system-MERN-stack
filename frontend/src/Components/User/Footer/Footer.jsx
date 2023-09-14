@@ -30,7 +30,7 @@ function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Developed with 🖤 by '}
-            <strong><a className='text-style' href="#" target="_blank" rel="noreferrer noopener">ABC</a> </strong>{'Copyright ©'}
+            <strong><a className='text-style' href="#" target="_blank" rel="noreferrer noopener">bastolaronak</a> </strong>{'Copyright ©'}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
