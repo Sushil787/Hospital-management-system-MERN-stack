@@ -21,7 +21,7 @@ const appintments_schema = mongoose.Schema({
     },
     invoice: {
         type: String,
-        default: "0",
+        require: true,
     },
     disease: {
         type: String,
@@ -38,7 +38,9 @@ const appintments_schema = mongoose.Schema({
     },
     medicine:{
         type:[String]
-    }
+    },
+   
+    
 
 });
 

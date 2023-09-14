@@ -55,22 +55,7 @@ const user_query = async (req, res) => {
 
 }
 
-const change_date = async (req, res) => {
 
-    try {
-        const {_id, date} = req.body;
-        const new_date = await appointments.findByIdAndUpdate({ _id }, { date });
-        
-        console.log(req.body);
-        console.log(new_date);
-        return res.status(200);
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
-    }
-
-
-
-}
 
 
 const ambulance_service = async (req, res) => {
@@ -105,31 +90,6 @@ const update_appointment = async (req, res) => {
 }
 
 
-const update_medicine = async (req, res) => {
-    const { _id, medicine, about } = req.body;
-        console.log(_id, medicine, about);
-    try {
-        
-        // const { id, medicine, about } = req.body;
-        // console.log(id, medicine, about);
-        if (!_id | !medicine | !about) {
-            return res.status(202).json({ message: "incomplete-content" });
-        } else {
-            const appointment = await appointments.findOne({_id});
-            console.log(appointment)
-            if (!appointment) {
-                return res.status(401).json({ message: "no appointment exist" });
-            } else {
-                await appointments.findByIdAndUpdate({ _id }, { medicine, about });
-                return res.status(200).json({ message: "appointment updated" });
-            }
-
-        }
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
-    }
-
-}
 
 const all_appointments = async (req, res) => {
     const id = req.id;
@@ -185,5 +145,5 @@ const single_appointments = async (req, res) => {
 
 
 module.exports = {
-    add_doctor, delete_doctor, all_appointments, update_appointment, user_query, ambulance_service,change_date,single_appointments,update_medicine
+    add_doctor, delete_doctor, all_appointments, update_appointment, user_query, ambulance_service,single_appointments
 };

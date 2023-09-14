@@ -35,7 +35,7 @@ function Report() {
 
   useEffect(() => { 
     fetchdata();
-    }, []);
+    }, [data]);
 
 
   const handleAddDisease = () => {

@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { TextField, Button, Container, Grid, Typography } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
+import toast from 'react-hot-toast';
+
 
 function Report() {
+  const navigate = useNavigate();
+
+  const [isEditingDate, setIsEditingDate] = useState(false);
+const [selectedDate, setSelectedDate] = useState(new Date());
 
     const { id } = useParams();
     console.log(id)
@@ -14,6 +23,7 @@ function Report() {
   const [medicine, setmedicine] = useState([]);
   const [Medicine, setMedicine] = useState('');
  const [about, setAbout] = useState([]);
+ const [date,setDate]=useState(new Date())
 
  console.log(data)
 
@@ -35,9 +45,26 @@ function Report() {
 
   useEffect(() => { 
     fetchdata();
-    }, []);
+    }, [isEditingDate]);
 
+const handlesave=async()=>{
+  setIsEditingDate(!isEditingDate);
+  if(isEditingDate){
+  }
+  try {
 
+    const response = await axios.patch(`http://localhost:8080/update-date`, {_id:id,date:selectedDate}, {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem('jwt'),
+      },
+    });
+    console.log(response.date)
+  }
+  catch(error){
+    console.log(error)
+  }
+}
   const handleAddDisease = () => {
     if (Medicine !== '') {
         setmedicine([...medicine, Medicine]);
@@ -57,9 +84,10 @@ function Report() {
         });
   
         if (response.status === 200) {
-          console.log('Medicine updated successfully');
+          toast.success('Generate report successfully');
+          navigate("/")
         } else {
-            console.log('Failed to update medicine');
+          toast.error('Something went wrong');
             }
 
       } catch (error) {
@@ -71,9 +99,113 @@ function Report() {
   };
 
   return (
-    <Container maxWidth="sm">
+
+<>
+    <Container maxWidth="md">
+    <Typography variant="h2" sx={{
+      textAlign:"center", 
+      marginBottom:"60px" 
+    }}>Patient Information</Typography>
+
+
+      <Grid container spacing={2}>
+        
+        
+      
+
+        <Grid item xs={6} >
+          <Typography variant="h3">Patient Name</Typography>
+          <Typography variant="h6">{data?.user?.username}</Typography>
+        </Grid>
+          
+        <Grid item xs={6} md={6}>
+          <Typography variant="h3">Patient Email</Typography>
+          <Typography variant="h6">{data?.user?.email}</Typography>
+          </Grid>
+          <Grid item xs={6} md={6}>
+          <Typography variant="h3">Patient Phone</Typography>
+          <Typography variant="h6">{data?.user?.phone}</Typography>
+          </Grid>
+
+          <Grid item xs={6} md={6}>
+          <Typography variant="h3">Patient Address</Typography>
+          <Typography variant="h6">{data?.user?.location}</Typography>
+          </Grid>
+          <Grid item xs={6} md={6}>
+          <Typography variant="h3">Patient Age</Typography>
+          <Typography variant="h6">{data?.user?.age}</Typography>
+          </Grid>
+          <Grid item xs={6} md={6}>
+          <Typography variant="h3">Disease</Typography>
+          <Typography variant="h6">{data?.disease}</Typography>
+          </Grid>
+
+          <Grid item xs={3}  sx={{
+            display:"flex",
+            flexDirection:"column",
+            justifyContent:"center"
+          }}>
+        
+  <Typography variant="h3">Date </Typography>
+  {isEditingDate ? (
+   
+      <DatePicker
+        open
+       
+        value={moment(data?.date).format('DD/MM/YYYY')}
+        onChange={(newDate) => setSelectedDate(newDate)}
+        // renderInput={(params) => <TextField {...params} fullWidth />}
+        minDate={new Date() }
+        // You can customize the DatePicker appearance and behavior as needed
+      />
+  
+  ) : (
+    <Typography variant="h6">
+      {moment(data?.date).format('DD/MM/YYYY')}
+    </Typography>
+
+
+
+
+  )}
+
+
+
+
+
+</Grid>
+
+<Grid item xs={6} md={6}>
+  
+<Button
+  variant="contained"
+  color="primary"
+  onClick={handlesave}
+>
+  {isEditingDate ? 'Save Date' : 'Edit Date'}
+</Button>
+
+</Grid>
+
+
+
+
+
+
+
+
+
+      </Grid>
+
+    </Container>
+    <Container sx={{
+      marginTop:"60px"
+    }} maxWidth="sm">
       <form onSubmit={handleSubmit}>
-        <Typography variant="h4">Report Generator</Typography>
+        <Typography variant="h4" sx={{
+          textAlign:"center",
+          marginBottom:"60px"
+        }}>Report Generator</Typography>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
@@ -95,17 +227,11 @@ function Report() {
               disabled
             />
           </Grid>
+
+         
+          
           <Grid item xs={12}>
-            <TextField
-              fullWidth
-              
-              variant="outlined"
-              value={data?.invoice}
-              onChange={(e) => setTotalAmount(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant="h6">Disease Information</Typography>
+            <Typography variant="h6">Medicine Information</Typography>
             <TextField
               fullWidth
               label="Disease"
@@ -116,9 +242,7 @@ function Report() {
             <Button variant="contained" onClick={handleAddDisease}>
               Add Medicine
             </Button>
-            {/* {diseaseArray.map((about, index) => (
-              <div key={index}>{about}</div>
-            ))} */}
+           
           </Grid>
 
           <Grid item xs={12}>
@@ -141,6 +265,9 @@ function Report() {
         </Button>
       </form>
     </Container>
+
+
+    </>
   );
 }
 

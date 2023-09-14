@@ -88,7 +88,55 @@ const get_single_doctor=async(req,res)=>{
     }
 
 
+
 }
 
 
-module.exports={all_appointments,get_single_doctor,update_doctor}
+const change_date = async (req, res) => {
+
+    try {
+        const {_id, date} = req.body;
+        console.log(_id, date);
+        const new_date = await appointments.findByIdAndUpdate({ _id }, { date });
+
+        
+        // console.log(req.body);
+        console.log(new_date);
+        return res.status(200);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+
+
+
+}
+
+
+const update_medicine = async (req, res) => {
+    const { _id, medicine, about } = req.body;
+        console.log(_id, medicine, about);
+    try {
+        
+        // const { id, medicine, about } = req.body;
+        // console.log(id, medicine, about);
+        if (!_id | !medicine | !about) {
+            return res.status(202).json({ message: "incomplete-content" });
+        } else {
+            const appointment = await appointments.findOne({_id});
+            console.log(appointment)
+            if (!appointment) {
+                return res.status(401).json({ message: "no appointment exist" });
+            } else {
+                await appointments.findByIdAndUpdate({ _id }, { medicine, about });
+                return res.status(200).json({ message: "appointment updated" });
+            }
+
+        }
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+
+}
+
+
+module.exports={all_appointments,get_single_doctor,update_doctor,change_date,update_medicine}

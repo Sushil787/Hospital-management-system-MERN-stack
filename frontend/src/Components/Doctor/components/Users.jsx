@@ -131,12 +131,7 @@ export default function Users() {
       headerName: 'Date',
       width: 150,
       renderCell: (params) => (
-        <input
-          type="date"
-          value={moment(params.row.date).format('YYYY-MM-DD')}
-          onChange={(e) => handleDateChange(params.row, e.target.value)}
-          min={tomorrow.toISOString().split('T')[0]}
-        />
+       moment(params.row.date).format('DD/MM/YYYY')
       ),
     },
     // {
@@ -198,17 +193,14 @@ export default function Users() {
       headerName: 'Generate Report',
       width: 100,
       renderCell: (params) => (
-        params.row.payment == "paid" ? (
+        
           <Button onClick={() => navigate(`/report/${params.row._id}`)} style={{ color: 'white' }}>
-            Generate
-          </Button>):
-          (
-            <span>
-              pending.....
-            </span>
-          )
+            show more
+          </Button>
+          
       ),
     },
+
   ];
 
   return (
