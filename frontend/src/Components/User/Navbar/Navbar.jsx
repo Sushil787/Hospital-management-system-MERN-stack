@@ -177,24 +177,38 @@ const Navbar = () => {
                     </Menu>
                   </>
                 ) : (
-                  <>
-                    <Button
-                      variant="outlined"
-                      color="secondary"
-                      component={Link}
-                      to="/Login"
-                    >
-                      Login
-                    </Button>
+                  <Box sx={{
+                    display:"flex",
+                    flexDirection:"row",
+                    gap:"10px",
+                    justifyContent:"space-between",
+                    alignContent:"center"
+                  }}>
 
-                    <Button
-                      variant="outlined"
-                      color="secondary"
-                      component={Link}
-                      to="/doctorlogin"
-                    >
-                       Doctor Login
-                    </Button>
+                   <div>
+      <Button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+      >
+       login
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem as={NavLink} to="/login" onClick={handleClose}>login as user</MenuItem>
+        <MenuItem  as={NavLink} to="/doctorlogin" onClick={handleClose}>login as doctor</MenuItem>
+       
+      </Menu>
+    </div>
                     <Button
                       variant="outlined"
                       color="secondary"
@@ -204,7 +218,7 @@ const Navbar = () => {
                     >
                       Sign Up
                     </Button>
-                  </>
+                  </Box>
                 )}
               </Box>
             </>

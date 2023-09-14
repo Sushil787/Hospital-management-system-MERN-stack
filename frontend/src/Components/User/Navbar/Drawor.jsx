@@ -49,7 +49,13 @@ const Drawor = () => {
        <List>
     <ListItemButton component={Link} to='/login'>
         <ListItemText>
-            Login
+           User Login
+        </ListItemText>
+    </ListItemButton>
+
+    <ListItemButton component={Link} to='/doctorlogin'>
+        <ListItemText>
+           Doctor Login
         </ListItemText>
     </ListItemButton>
     <ListItemButton component={Link} to='/SignUp'>
