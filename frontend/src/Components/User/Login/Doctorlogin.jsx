@@ -29,6 +29,7 @@ function LoginForm() {
             localStorage.setItem("user",JSON.stringify(response.data.user))
             localStorage.setItem("is_doctor",response.data.user.is_doctor)
             if(response.data.user.is_doctor===true){
+                toast.success("login successfully")
                 
                 navigate("/")
                 window.location.reload("true")
@@ -45,29 +46,7 @@ function LoginForm() {
         console.log(error.message)
     }   
 
-    // try {
-    //   const data = await dispatch(loginAsync(values));
-
-    //   if (data.meta.requestStatus === "rejected") {
-    //     toast.error(data.payload.message);
-    //   }
-
-    //   const token = localStorage.getItem("jwt");
-    //   const is_admin = localStorage.getItem("is_admin");
-    //   if (token && is_admin === "false") {
-    //     navigate("/");
-    //     window.location.reload("true");
-    //     toast.success("login successfully");
-    //   }
-    //   if (token && is_admin === "true") {
-    //     navigate("/");
-    //     window.location.reload("true");
-
-    //     toast.success(" admin login successfully");
-    //   }
-    // } catch (error) {
-    //   toast.error(error);
-    // }
+    
   };
 
   const validationSchema = yup.object({

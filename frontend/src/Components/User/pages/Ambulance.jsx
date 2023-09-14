@@ -12,6 +12,9 @@ const AmbulanceBooking = () => {
     name: '',
     phoneNumber: '',
     address: '',
+    city: '',
+    state: '',
+    zip: '',
     emergencyType: '',
   });
 
@@ -75,12 +78,51 @@ const AmbulanceBooking = () => {
              
               fullWidth
               placeholder="Address"
+              variant="outlined"
               name="address"
               value={bookingInfo.address}
               onChange={handleChange}
               required
             />
           </Grid>
+          <Grid item xs={12}>
+            <TextField
+             
+              fullWidth
+              placeholder="city"
+              variant="outlined"
+              name="city"
+              value={bookingInfo.city}
+              onChange={handleChange}
+              required
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <TextField
+             
+              fullWidth
+              placeholder="state"
+              variant="outlined"
+              name="state"
+              value={bookingInfo.state}
+              onChange={handleChange}
+              required
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+             
+              fullWidth
+              placeholder="Zip Code"
+              variant="outlined"
+              name="zip"
+              value={bookingInfo.zip}
+              onChange={handleChange}
+              required
+            />
+          </Grid>
+
           <Grid item xs={12}>
             <FormControl fullWidth variant="outlined">
               <InputLabel htmlFor="emergencyType">Emergency Type</InputLabel>
@@ -98,7 +140,10 @@ const AmbulanceBooking = () => {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{
+            marginBottom: "20px"
+
+          }}>
             <Button type="submit" variant="contained" color="primary" onClick={handleSubmit} fullWidth>
               Book Ambulance
             </Button>

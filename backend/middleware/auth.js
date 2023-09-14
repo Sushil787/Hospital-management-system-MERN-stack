@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const auth_middleware = async (req, res, next) => {
   try {
     const token = req.headers["authorization"];
+   
     
 
     const bearer = token.split(" ");
@@ -11,6 +12,7 @@ const auth_middleware = async (req, res, next) => {
     
     if (verify) {
       req.id = verify.auth_user._id;
+      console.log(req.id)
       // req.is_admin = verify.auth_user.is_admin;
       next();
       return;

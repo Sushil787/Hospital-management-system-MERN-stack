@@ -2,10 +2,10 @@ import React from "react";
 import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
 import "react-pro-sidebar/dist/css/styles.css";
-import { HomeOutlined, Message } from "@mui/icons-material";
+import { Edit, HomeOutlined, Message } from "@mui/icons-material";
 
 import { HelpOutlined } from "@mui/icons-material";
 
@@ -30,6 +30,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 };
 
 const Sidebar1 = () => {
+  const Navigate=useNavigate()
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -74,7 +75,10 @@ const Sidebar1 = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.grey[100]}>
+                <Typography variant="h3" onClick={()=>{
+                  Navigate("/")
+
+                }} color={colors.grey[100]}>
                  Doctor Pannel
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
@@ -125,9 +129,9 @@ const Sidebar1 = () => {
             /> */}
 
              <Item
-              title="Profile"
+              title=" Edit Profile"
               to="/editprofile"
-              icon={<Message />}
+              icon={<Edit />}
               selected={selected}
               setSelected={setSelected}
             /> 

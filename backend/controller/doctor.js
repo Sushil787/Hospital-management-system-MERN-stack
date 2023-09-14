@@ -26,6 +26,7 @@ const all_appointments = async (req, res) => {
 
 const get_single_doctor=async(req,res)=>{
     const id=req.id
+    console.log(id)
    
     try{
         const data=await doctor.findById(id)

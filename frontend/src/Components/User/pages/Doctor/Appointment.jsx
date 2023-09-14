@@ -43,6 +43,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 export default function Cart() {
   const navigate=useNavigate()
   const [id, setId] = React.useState(null);
+  const [report,setReport]=React.useState(false)
 
   const [selectedInvoice, setSelectedInvoice] = React.useState(null);
 
@@ -66,6 +67,7 @@ export default function Cart() {
 
       console.log(response.data);
       toast.success("payment successfull!!!");
+      setReport(true)
       setId(null);
     } catch (error) {
       console.log(error.message);
@@ -132,7 +134,7 @@ export default function Cart() {
 
               <StyledTableCell align="left">Disease</StyledTableCell>
               <StyledTableCell align="left">Date</StyledTableCell>
-              <StyledTableCell align="left">Status</StyledTableCell>
+              {/* <StyledTableCell align="left">Status</StyledTableCell> */}
               <StyledTableCell align="left">Invoice</StyledTableCell>
               <StyledTableCell align="left">Pay Now</StyledTableCell>
               <StyledTableCell align="left">Report</StyledTableCell>
@@ -146,49 +148,49 @@ export default function Cart() {
                 </StyledTableCell>
                 <StyledTableCell align="left">{item?.disease}</StyledTableCell>
                 <StyledTableCell align="left">{moment.utc(item?.date).format('MM/DD/YYYY')}</StyledTableCell>
-                <StyledTableCell align="left">{item?.status}</StyledTableCell>
-                <StyledTableCell align="left">{item?.invoice}</StyledTableCell>
+                {/* <StyledTableCell align="left">{item?.status}</StyledTableCell> */}
+                <StyledTableCell align="left">{item?.doctor?.ammount}</StyledTableCell>
                 <StyledTableCell align="left">
-                  {item?.status === "checked" ? (
-                    item?.payment === "paid" ? (
-                      <Typography>Paid</Typography>
-                    ) : (
+                
                       <Box
                         sx={{
                           display: "inline-block",
                           backgroundColor: "purple",
-                          padding: "10px",
+                          padding: " 0px 10px",
                           color: "white",
                           cursor: "pointer",
                           fontWeight: "bold",
                           border: "1px solid white",
                         }}
                       >
-                        <button
-                          onClick={() => {
-                            // setId(item._id)
-                            // if(id)
-                            // {
-                            //   checkout.show({ amount: item.invoice * 100})
-                            // }
-                            setId(item?._id);
-                            setSelectedInvoice(item.invoice);
-                          }}
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "inherit",
-                            cursor: "inherit",
-                            padding: 0,
-                          }}
-                        >
-                          Pay Via Khalti
-                        </button>
+
+                { item?.payment !== "paid"
+                     ? (
+                           <button
+                           onClick={() => {
+                             // setId(item._id)
+                             // if(id)
+                             // {
+                             //   checkout.show({ amount: item.invoice * 100})
+                             // }
+                             setId(item?._id);
+                             setSelectedInvoice(item?.doctor?.ammount);
+                           }}
+                           style={{
+                             backgroundColor: "transparent",
+                             border: "none",
+                             color: "inherit",
+                             cursor: "inherit",
+                             padding: 0,
+                           }}
+                         >
+                           Pay Via Khalti
+                         </button>
+                        )  :( <Typography>paid</Typography>)
+                          }
+                       
                       </Box>
-                    )
-                  ) : (
-                    <Typography>Pending</Typography>
-                  )}
+                  
                 </StyledTableCell>
                 <StyledTableCell align="left">
                   { item?.payment === "paid"

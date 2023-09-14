@@ -27,9 +27,12 @@ export default function Enquery() {
   
     const columns = [
       { field: 'name', headerName: 'Name', width: 200 },
-      { field: 'phoneNumber', headerName: 'phoneNumber', width: 200 },
-      { field: 'address', headerName: 'Address', width: 200 },
-      { field: 'emergencyType', headerName: 'EmergenctType', width: 400 },
+      { field: 'phoneNumber', headerName: 'phoneNumber', width: 150},
+      { field: 'address', headerName: 'Address', width: 150 },
+      {field:"state",headerName:"state",width:150},
+      {field:"city",headerName:"city",width:150},
+      {field:"zip",headerName:"Zip Code",width:150},
+      { field: 'emergencyType', headerName: 'EmergenctType', width: 200 },
     ];
   
     return (

@@ -1,0 +1,18 @@
+.form-control{
+
+    max-width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+    transition: .3s;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    &:focus{
+        border-color: #6c63ff;
+    }
+
+}

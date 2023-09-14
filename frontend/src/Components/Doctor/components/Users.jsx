@@ -98,7 +98,7 @@ export default function Users() {
         {
           headers: {
             'Content-Type': 'application/json',
-            authorization: localStorage.getItem('djwt'),
+            authorization: localStorage.getItem('jwt'),
           },
         }
       );
@@ -149,16 +149,16 @@ export default function Users() {
     //     </span>
     //   ),
     // },
-    // {
-    //   field: 'payment',
-    //   headerName: 'Payment',
-    //   width: 100,
-    //   renderCell: (params) => (
-    //     <span>
-    //       {params.row.payment === 'paid' ? 'Paid' : 'Unpaid'}
-    //     </span>
-    //   ),
-    // },
+    {
+      field: 'payment',
+      headerName: 'Payment',
+      width: 100,
+      renderCell: (params) => (
+        <span>
+          {params.row.payment === 'paid' ? 'clear' : 'pending'}
+        </span>
+      ),
+    },
     // {
     //   field: 'invoice',
     //   headerName: 'Invoice',
@@ -175,22 +175,22 @@ export default function Users() {
     //     </>
     //   ),
     // },
-    {
-      field: 'actions',
-      headerName: 'Actions',
-      width: 100,
-      renderCell: (params) => (
-        params.row.status !== "checked" ? (
-          <Button onClick={() => handleSave(params.row)} style={{ color: 'white' }}>
-            Add 
-          </Button>):
-          (
-            <span>
-              Clear
-            </span>
-          )
-      ),
-    },
+    // {
+    //   field: 'actions',
+    //   headerName: 'Actions',
+    //   width: 100,
+    //   renderCell: (params) => (
+    //     params.row.status !== "checked" ? (
+    //       <Button onClick={() => handleSave(params.row)} style={{ color: 'white' }}>
+    //         Add 
+    //       </Button>):
+    //       (
+    //         <span>
+    //           Clear
+    //         </span>
+    //       )
+    //   ),
+    // },
 
 
     {
@@ -198,7 +198,7 @@ export default function Users() {
       headerName: 'Generate Report',
       width: 100,
       renderCell: (params) => (
-        params.row.status == "checked" ? (
+        params.row.payment == "paid" ? (
           <Button onClick={() => navigate(`/report/${params.row._id}`)} style={{ color: 'white' }}>
             Generate
           </Button>):

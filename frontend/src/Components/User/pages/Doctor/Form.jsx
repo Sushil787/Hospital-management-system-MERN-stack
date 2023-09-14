@@ -15,9 +15,15 @@ import { useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import axios from "axios";
 import toast from 'react-hot-toast'
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
+import "./Form.css"
 
 const AppointmentForm = () => {
   const [doctor,setDoctor]=useState()
+
+  // const tomorrow = new Date();
+  // tomorrow.setDate(tomorrow.getDate() + 1);
  
   const { id } = useParams();
   const Navigate=useNavigate()
@@ -151,10 +157,30 @@ const AppointmentForm = () => {
             alignItems: "center",
           }}
         >
-          <Typography variant="h6" sx={{ textAlign: "center" }}>
+          <Typography variant="h4" sx={{ textAlign: "center" }}>
             Name: {doctor?.name}
           </Typography>
           <Divider />
+          <Typography variant="h6" sx={{ textAlign: "center" }}>
+            {doctor?.desc}
+          </Typography>
+          <Divider />
+          <Typography variant="h6" sx={{ textAlign: "center" }}>
+            Email: {doctor?.email}
+          </Typography>
+          <Divider />
+          <Typography variant="h6" sx={{ textAlign: "center" }}>
+            Phone: {doctor?.contact}
+          </Typography>
+          <Divider />
+          <Typography variant="h6" sx={{ textAlign: "center" }}>
+            Fee:{doctor?.ammount}
+          </Typography>
+        
+
+
+
+
           <Typography variant="h6" sx={{ textAlign: "center",paddingTop:"30px" }}>
             Expertise
           </Typography>
@@ -261,7 +287,7 @@ const AppointmentForm = () => {
             />
         </Grid> */}
           <Grid item xs={12}>
-            <TextField
+            {/* <TextField
               name="date"
               label="Date"
               type="date"
@@ -272,7 +298,23 @@ const AppointmentForm = () => {
               InputLabelProps={{
                 shrink: true,
               }}
-            />
+            
+            /> */}
+
+<DatePicker
+
+className="form-control"
+
+      selected={appointmentData.date}
+      onChange={(date) => setAppointmentData({...appointmentData,date:date})}
+      placeholderText="Select a date"
+
+      minDate={new Date()}
+      
+     
+      required
+
+    />
           </Grid>
           <Grid item xs={12}>
             <Button

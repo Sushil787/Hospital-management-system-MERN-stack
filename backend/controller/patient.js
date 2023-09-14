@@ -113,17 +113,17 @@ const payment = async (req, res) => {
 
 const ambulance_booking= async (req,res)=>{
  
-  const {name,phoneNumber,address,emergencyType}=req.body;
+  const {name,phoneNumber,address,emergencyType,city,state,zip}=req.body;
   console.log(name,phoneNumber,address,emergencyType)
 
   try {
     
-    if(!name | !phoneNumber | !address | !emergencyType){
+    if(!name | !phoneNumber | !address | !emergencyType| !city | !state | !zip){
       return res.status(400).json({message:"invalid request"})
     }
   
 
-      await ambulance.create({name,phoneNumber,address,emergencyType});
+      await ambulance.create({name,phoneNumber,address,emergencyType,city,state,zip});
       return res.status(200).json({message:"ambulance book successfully"});
   
 

@@ -5,6 +5,7 @@ import { TextField, Button, Typography, Box } from '@mui/material';
 import { MultiSelect } from "react-multi-select-component";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import "./doctor.css"
+import toast from 'react-hot-toast';
 
 const options = [
   { label: "10AM-12PM", value: "10PM-12PM" },
@@ -64,6 +65,7 @@ setEmail("")
 setPassword("")
 setDesc("")
 seAmmount("")
+toast.success("Doctor Added Successfully")
 }
       
       

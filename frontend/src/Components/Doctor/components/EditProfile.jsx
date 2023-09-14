@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import { TextField, Button, Typography, Box } from '@mui/material';
 
 import { MultiSelect } from "react-multi-select-component";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import toast from 'react-hot-toast';
 // import "./doctor.css"
 
 const options = [
@@ -25,16 +26,16 @@ const AddDoctorForm = () => {
     const [user,setUser]=useState({})
     
 
-  const [name, setName] = useState(user?.name);
+  const [name, setName] = useState();
 
-  const [image, setImage] = useState(user?.image);
+  const [image, setImage] = useState();
 
 
-  const [contact, setContact] = useState(user?.contact);
-  const [email, setEmail] = useState(user?.email);
+  const [contact, setContact] = useState();
+  const [email, setEmail] = useState();
 
-  const [desc, setDesc] = useState(user?.desc);
-  const [ammount, seAmmount] = useState(user?.ammount);
+  const [desc, setDesc] = useState();
+  const [ammount, setAmmount] = useState();
 
 
   const fetchdoctor=async()=>{
@@ -62,6 +63,16 @@ const AddDoctorForm = () => {
     React.useEffect(() => {
         fetchdoctor()
     }, [])
+
+
+    useEffect(() => {
+        setName(user.name || '');
+        setImage(user.image || '');
+        setContact(user.contact || '');
+        setEmail(user.email || '');
+        setDesc(user.desc || '');
+        setAmmount(user.ammount || '');
+      }, [user]);
 
     console.log(user)
     console.log(user.name)
@@ -93,7 +104,9 @@ setContact("")
 setEmail("")
 
 setDesc("")
-seAmmount("")
+setAmmount("")
+toast.success("Doctor Updated Successfully")
+
 }
       
       
@@ -111,16 +124,19 @@ seAmmount("")
         Edit Profile
       </Typography>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="name">name:</label>
+      
         <TextField
-          label="Name"
+        //   label="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
           fullWidth
           margin="normal"
         />
+        <label htmlFor="email">email:</label>
         <TextField
-          label="Email"
+        //   label="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -128,8 +144,9 @@ seAmmount("")
           margin="normal"
         />
 
+<label htmlFor="contact">Contact</label>
         <TextField
-          label="Contact"
+        //   label="Contact"
           value={contact}
           onChange={(e) => setContact(e.target.value)}
           required
@@ -137,18 +154,20 @@ seAmmount("")
           margin="normal"
         />
 
+<label htmlFor="ammount">Ammount</label>
 
 <TextField
-          label="Total Amount"
+        //   label="Total Amount"
           value={ammount}
-          onChange={(e) => seAmmount(e.target.value)}
+          onChange={(e) => setAmmount(e.target.value)}
           required
           fullWidth
           margin="normal"
         />
 
+<label htmlFor="desc">Description</label>
         <TextField
-          label="Description"
+        //   label="Description"
           value={desc}
           onChange={(e) => setDesc(e.target.value)}
           required
@@ -159,9 +178,10 @@ seAmmount("")
       
 
 
+<label htmlFor="image">Image</label>
 
-        <TextField
-          label="Image URL"
+         <TextField
+        //   label="Image URL" 
           value={image}
           onChange={(e) => setImage(e.target.value)}
           required

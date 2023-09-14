@@ -6,6 +6,7 @@ const ambulance_schema = mongoose.Schema({
        
         required: true,
     },
+
     phoneNumber:{
         type:String,
         required:true
@@ -15,6 +16,22 @@ const ambulance_schema = mongoose.Schema({
         required:true
 
     },
+    city:{
+        type:String,
+        required:true
+
+    },
+    state:{
+        type:String,
+        required:true
+
+    },
+    zip:{
+        type:String,
+        required:true
+
+    }, 
+
     emergencyType:{
         type:String,
         required:true
