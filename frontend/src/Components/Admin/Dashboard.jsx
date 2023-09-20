@@ -10,6 +10,7 @@ import Enquery from './components/Enquiry';
 import Ambulance from './components/Ambulance';
 import Report from './components/Report';
 import AddDoctor from './components/AddDoctor';
+import ChatDashboard from './components/chat/ChatDashboard';
 
 const Dashboard = () => {
   const [theme, colorMode] = useMode();
@@ -44,6 +45,8 @@ const Dashboard = () => {
                 <Route path="/ambulance" element={<Ambulance />} />
                 <Route path="/report/:id" element={<Report />} />
                 <Route path="/AddDoctor" element={< AddDoctor/>} />
+
+                <Route path="/chat" element={<ChatDashboard/>} />
 
                 
               </Routes>

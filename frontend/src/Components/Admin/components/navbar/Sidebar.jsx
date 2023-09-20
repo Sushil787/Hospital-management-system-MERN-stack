@@ -123,7 +123,13 @@ const Sidebar1 = () => {
               selected={selected}
               setSelected={setSelected}
             />
-
+<Item
+              title="Chat"
+              to="/chat"
+              icon={<Message />}
+              selected={selected}
+              setSelected={setSelected}
+            />
 
 
           </Box>
